@@ -7,12 +7,12 @@
 
 import React, { useEffect } from 'react';
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
-  useColorScheme,
   View,
-  NativeModules
+  useColorScheme
 } from 'react-native';
 
 import {
@@ -23,6 +23,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { TextSection } from './src/components';
+import { DownloadMediaModule, TestNativeModule } from './src/native_module';
 import { Title } from './src/utils';
 
 function App(): React.JSX.Element {
@@ -33,9 +34,13 @@ function App(): React.JSX.Element {
   };
 
   useEffect(() => {
-    const {DownloadMediaModule} = NativeModules;
-    console.log("DownloadMediaModule", DownloadMediaModule);
-    
+    if (Platform.OS == "android") {
+      const downloadMedia = DownloadMediaModule;
+      console.log("DownloadMediaModule", downloadMedia);
+    } else {
+      const TestIOSNativeModule = TestNativeModule;
+      console.log("TestNativeModule", TestIOSNativeModule);
+    }
   });
 
   return (

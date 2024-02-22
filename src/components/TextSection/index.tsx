@@ -4,17 +4,24 @@ import { useColorScheme, View, Text } from "react-native";
 import { styles } from "./style";
 import { SectionProps } from "../../types";
 
-export const TextSection = ({ children, title, viewStyle, textStyle }: SectionProps) => {
-  const isDarkMode = useColorScheme() === 'dark';
+export const TextSection = ({
+  children,
+  title,
+  viewStyle,
+  textStyle,
+}: SectionProps) => {
+  const isDarkMode = useColorScheme() === "dark";
   return (
     <View style={[styles.sectionContainer, viewStyle]}>
       <Text
         style={[
-          styles.sectionTitle, textStyle,
+          styles.sectionTitle,
+          textStyle,
           {
             color: isDarkMode ? Colors.white : Colors.black,
           },
-        ]}>
+        ]}
+      >
         {title}
       </Text>
       <Text
@@ -23,9 +30,10 @@ export const TextSection = ({ children, title, viewStyle, textStyle }: SectionPr
           {
             color: isDarkMode ? Colors.light : Colors.dark,
           },
-        ]}>
+        ]}
+      >
         {children}
       </Text>
     </View>
   );
-}
+};

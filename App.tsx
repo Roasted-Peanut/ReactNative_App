@@ -1,30 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, { useEffect } from 'react';
 import {
   Platform,
-  SafeAreaView,
-  ScrollView,
   StatusBar,
-  View,
   useColorScheme
 } from 'react-native';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
+  Colors
 } from 'react-native/Libraries/NewAppScreen';
-import { TextSection } from './src/components';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import MainLayout from './src/MainLayout';
 import { DownloadMediaModule, TestNativeModule } from './src/native_module';
-import { Title } from './src/utils';
+import { persistor, store } from './src/store/store';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -44,33 +33,13 @@ function App(): React.JSX.Element {
   });
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <TextSection title={Title}>
-            <ReloadInstructions />
-          </TextSection>
-          <TextSection title="Debug">
-            <DebugInstructions />
-          </TextSection>
-          <TextSection title="Learn More">
-            {}
-            Read the docs to discover what to do next:
-          </TextSection>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider>
+          <MainLayout />
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   );
 }
 

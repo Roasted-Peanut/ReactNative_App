@@ -10,8 +10,9 @@ export type SectionProps = PropsWithChildren<{
 export type OutlinedButtonProps = PropsWithChildren<{
   title: string;
   onPress?(): void;
-  style?: ViewStyle
+  style?: ViewStyle;
 }>;
+
 export type DownLoadMeidaProps = {
   dataBase64: any;
   mime?: any;

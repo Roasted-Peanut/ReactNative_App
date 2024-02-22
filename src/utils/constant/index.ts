@@ -1,1 +1,1 @@
-export const Title = "Welcome To React Native"
+export const Title = "Welcome To React Native";

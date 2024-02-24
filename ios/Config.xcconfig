@@ -1,0 +1,10 @@
+//
+//  Config.xcconfig
+//  RN_App
+//
+//  Created by TCOM on 24/02/2024.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include? "tmp.xcconfig"

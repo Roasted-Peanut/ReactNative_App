@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1210"
+   LastUpgradeVersion = "1520"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -10,13 +10,13 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.prod&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;echo &#x201c;.env.prod&#x201d; &gt; /tmp/envfile&#10;&#10;touch &quot;${PROJECT_DIR}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb&quot;&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.stag&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;echo &#x201c;.env.stag&#x201d; &gt; /tmp/envfile&#10;&#10;touch &quot;${PROJECT_DIR}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-                     BuildableName = "RN_App.app"
-                     BlueprintName = "RN_App"
+                     BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+                     BuildableName = "RN_App-Stag.app"
+                     BlueprintName = "RN_App-Stag"
                      ReferencedContainer = "container:RN_App.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -32,9 +32,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RN_App.app"
-               BlueprintName = "RN_App"
+               BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+               BuildableName = "RN_App-Stag.app"
+               BlueprintName = "RN_App-Stag"
                ReferencedContainer = "container:RN_App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,19 +44,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RN_AppTests.xctest"
-               BlueprintName = "RN_AppTests"
-               ReferencedContainer = "container:RN_App.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -73,13 +62,13 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.prod&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;echo &#x201c;.env.prod&#x201d; &gt; /tmp/envfile&#10;&#10;touch &quot;${PROJECT_DIR}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb&quot;&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.stag&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;echo &#x201c;.env.stag&#x201d; &gt; /tmp/envfile&#10;&#10;touch &quot;${PROJECT_DIR}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-                     BuildableName = "RN_App.app"
-                     BlueprintName = "RN_App"
+                     BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+                     BuildableName = "RN_App-Stag.app"
+                     BlueprintName = "RN_App-Stag"
                      ReferencedContainer = "container:RN_App.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -90,15 +79,15 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RN_App.app"
-            BlueprintName = "RN_App"
+            BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+            BuildableName = "RN_App-Stag.app"
+            BlueprintName = "RN_App-Stag"
             ReferencedContainer = "container:RN_App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -107,9 +96,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RN_App.app"
-            BlueprintName = "RN_App"
+            BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+            BuildableName = "RN_App-Stag.app"
+            BlueprintName = "RN_App-Stag"
             ReferencedContainer = "container:RN_App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -125,13 +114,13 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.prod&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;&#10;echo &#x201c;.env.prod&#x201d; &gt; /tmp/envfile&#10;&#10;touch &quot;${PROJECT_DIR}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildDotenvConfig.rb&quot;&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;echo &quot;.env.stag&quot; &gt; /tmp/envfile&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-                     BuildableName = "RN_App.app"
-                     BlueprintName = "RN_App"
+                     BlueprintIdentifier = "6D8DFBA62B89D6810039A805"
+                     BuildableName = "RN_App-Stag.app"
+                     BlueprintName = "RN_App-Stag"
                      ReferencedContainer = "container:RN_App.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>

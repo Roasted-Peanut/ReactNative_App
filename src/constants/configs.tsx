@@ -8,6 +8,7 @@ const AppEnv = {
   STAGING: 'staging',
   PRODUCTION: 'production',
 }
+console.log("RNConfig", RNConfig);
 
 const configs = {
   appBundleID: getBundleId(),

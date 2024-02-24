@@ -17,7 +17,7 @@ prepare_react_native_project!
 #   dependencies: {
 #     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
 # ```
-flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+# flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled(['DebugDev', 'DebugStg', 'DebugProd', 'ReleaseDev', 'ReleaseStg', 'ReleaseProd'])
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
@@ -41,12 +41,20 @@ target 'RN_App' do
     #
     # Note that if you have use_frameworks! enabled, Flipper will not work and
     # you should disable the next line.
-    :flipper_configuration => flipper_config,
+    # :flipper_configuration => flipper_config,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'RN_AppTests' do
+  # target 'RN_AppTests' do
+  #   inherit! :complete
+  #   # Pods for testing
+  # end
+  target 'RN_App-Dev' do
+    inherit! :complete
+    # Pods for testing
+  end
+  target 'RN_App-Stag' do
     inherit! :complete
     # Pods for testing
   end

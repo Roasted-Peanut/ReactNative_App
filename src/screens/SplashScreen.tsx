@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 // import CodePush from 'react-native-code-push'
 import * as Progress from "react-native-progress";
 import { ScreenContainer } from "../components";
-// import configs from '../constants/configs'
+import configs from '../constants/configs'
 // import {appActions} from '../store/reducers/app'
 import { useAppDispatch } from "../store/store";
 import { colors, deviceWidth, responsiveHeight } from "../themes";
@@ -40,6 +40,8 @@ const SplashScreen = () => {
   // }, [dispatch])
 
   useEffect(() => {
+    console.log("configs", configs);
+    
     let interval: ReturnType<typeof setInterval>;
     const timer = setTimeout(() => {
       setIndeterminate(false);

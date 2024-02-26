@@ -5,6 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "ios-run-debug-dev": "react-native run-ios --scheme RN_App-Dev --mode Debug",
+    "ios-run-debug-staging" : "react-native run-ios --scheme RN_App-Stag --configuration Debug",
+    "ios-run-debug-production" : "react-native run-ios --scheme RN_App --configuration Debug",
+
+    "android-run-debug-dev": "react-native run-android --mode=devDebug --appIdSuffix=dev",
+    "android-run-debug-staging": "react-native run-android --mode=stagDebug --appIdSuffix=stag",
+    "android-run-debug-product": "react-native run-android --mode=prodDebug --appIdSuffix=prod",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"

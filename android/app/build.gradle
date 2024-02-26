@@ -1,6 +1,16 @@
+
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+
+project.ext.envConfigFiles = [
+    dev: ".env.dev",
+    stag: ".env.stag",
+    prod: ".env.prod",
+    anothercustombuild: ".env",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -76,11 +86,13 @@ android {
 
     namespace "com.rn_app"
     defaultConfig {
-        applicationId "com.rn_app"
+        // applicationId "com.rn_app"
+        applicationId env.get("ANDROID_APP_ID")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        resValue "string", "build_config_package", "com.rn-app"
     }
     signingConfigs {
         debug {
@@ -88,6 +100,24 @@ android {
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
+        }
+        development {
+            storeFile file('RN_dev-key.keystore')
+            storePassword '123456'
+            keyAlias 'RN_dev-alias'
+            keyPassword '123456'
+        }
+        staging {
+            storeFile file('RN_stag-key.keystore')
+            storePassword '123456'
+            keyAlias 'RN_stag-alias'
+            keyPassword '123456'
+        }
+        product {
+            storeFile file('RN_prod-key.keystore')
+            storePassword '123456'
+            keyAlias 'RN_prod-alias'
+            keyPassword '123456'
         }
     }
     buildTypes {
@@ -102,6 +132,24 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    flavorDimensions "enviroment"
+    productFlavors {
+      dev {
+          dimension "enviroment"
+          resValue "string", "app_name", project.env.get("APP_NAME")
+          signingConfig signingConfigs.development
+      }
+      stag {
+          dimension "enviroment"
+          resValue "string", "app_name", project.env.get("APP_NAME")
+          signingConfig signingConfigs.staging
+      }
+      prod {
+          dimension "enviroment"
+          resValue "string", "app_name", project.env.get("APP_NAME")
+          signingConfig signingConfigs.product
+      }
+  }
 }
 
 dependencies {

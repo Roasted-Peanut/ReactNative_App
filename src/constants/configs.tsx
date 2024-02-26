@@ -13,7 +13,7 @@ console.log("RNConfig", RNConfig);
 const configs = {
   appBundleID: getBundleId(),
   appVersion: packageJSON.version,
-  APP_ENV: RNConfig.APP_ENV || 'dev',
+  APP_ENV: RNConfig.APP_ENV || 'empty',
   DEBUG_ENABLED: RNConfig.APP_ENV !== AppEnv.PRODUCTION,
   API_URL: RNConfig.API_URL,
   buildEvn: RNConfig.APP_ENV,

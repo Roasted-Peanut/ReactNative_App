@@ -12,7 +12,7 @@
     "android-run-debug-staging": "react-native run-android --mode=stagDebug --appIdSuffix=stag",
     "android-run-debug-product": "react-native run-android --mode=prodDebug --appIdSuffix=prod",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx",
-    "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
+    "prettier": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "start": "react-native start",
     "test": "jest",
     "prepare": "husky",

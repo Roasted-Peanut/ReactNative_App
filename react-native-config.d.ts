@@ -1,3 +1,4 @@
+// Create class interface env
 // declare module 'react-native-config' {
 //   export interface NativeConfig {
 //       HOSTNAME?: string;

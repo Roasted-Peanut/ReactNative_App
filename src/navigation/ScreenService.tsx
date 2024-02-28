@@ -1,6 +1,6 @@
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack'
-import RouteKey from './RouteKey'
-import {HomeNavigator} from './StackNavigation'
+import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import RouteKey from "./RouteKey";
+import { HomeNavigator } from "./StackNavigation";
 
 export const optionsMatch = (screen: string): NativeStackNavigationOptions => {
   switch (screen) {
@@ -8,17 +8,17 @@ export const optionsMatch = (screen: string): NativeStackNavigationOptions => {
     case RouteKey.HomeStack:
       return {
         headerLeft: undefined,
-      }
+      };
     default:
-      return {}
+      return {};
   }
-}
+};
 
 export const componentMatch = (stackName: string): Element | string => {
   switch (stackName) {
     case RouteKey.HomeStack:
-      return HomeNavigator
+      return HomeNavigator;
     default:
-      return ''
+      return "";
   }
-}
+};

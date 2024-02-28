@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { IUser } from '../types'
+import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../types";
 
 export const userInitialState: IUser = {
   userInfo: {},
   isEndUser: false,
   tokenData: {},
-  contentFlagged: '',
-}
+  contentFlagged: "",
+};
 
 export const userSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: userInitialState,
   reducers: {
     userLogin: () => {
@@ -22,11 +22,11 @@ export const userSlice = createSlice({
       // TODO: add action when user logout
     },
   },
-})
+});
 
 // export const userActions = {
 //   ...userSlice.actions,
 // }
-export const userActions = userSlice.actions
+export const userActions = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

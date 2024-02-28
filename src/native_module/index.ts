@@ -1,5 +1,3 @@
-import {
-  NativeModules
-} from 'react-native';
+import { NativeModules } from "react-native";
 
-export const {DownloadMediaModule, TestNativeModule} = NativeModules;
+export const { DownloadMediaModule, TestNativeModule } = NativeModules;

@@ -1,12 +1,12 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import React from 'react'
-import {LoginScreen, SignUpScreen} from '../screens'
-import RouteKey from './RouteKey'
-import {optionsMatch} from './ScreenService'
-import {AppStackParamList} from './types'
-import HomeScreen from '../screens/HomeComponent'
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { LoginScreen, SignUpScreen } from "../screens";
+import RouteKey from "./RouteKey";
+import { optionsMatch } from "./ScreenService";
+import { AppStackParamList } from "./types";
+import HomeScreen from "../screens/HomeComponent";
 
-const Stack = createNativeStackNavigator<AppStackParamList>()
+const Stack = createNativeStackNavigator<AppStackParamList>();
 
 export const HomeNavigator = () => (
   <Stack.Navigator>
@@ -16,7 +16,7 @@ export const HomeNavigator = () => (
       options={optionsMatch(RouteKey.HomeScreen)}
     />
   </Stack.Navigator>
-)
+);
 
 export const AuthNavigator = () => (
   <Stack.Navigator>
@@ -31,4 +31,4 @@ export const AuthNavigator = () => (
       options={optionsMatch(RouteKey.SignUpScreen)}
     />
   </Stack.Navigator>
-)
+);

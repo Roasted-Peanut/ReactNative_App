@@ -1,61 +1,67 @@
-import {EmitterListener} from './types'
+import { EmitterListener } from "./types";
 
 class EventRegister {
   static _Listeners: EmitterListener = {
     count: 0,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    refs: {key: {eventName: '', callback: () => {}}},
-  }
+    refs: { key: { eventName: "", callback: () => {} } },
+  };
 
-  static addEventListener(eventName: string, callback: (param: any) => void): string {
-    EventRegister._Listeners.count += 1
-    const eventId = `l${EventRegister._Listeners.count}`
+  static addEventListener(
+    eventName: string,
+    callback: (param: any) => void
+  ): string {
+    EventRegister._Listeners.count += 1;
+    const eventId = `l${EventRegister._Listeners.count}`;
     EventRegister._Listeners.refs[eventId] = {
       eventName: eventName,
       callback,
-    }
-    return eventId
+    };
+    return eventId;
   }
 
   static removeEventListener(id: string): boolean {
-    return delete EventRegister._Listeners.refs[id]
+    return delete EventRegister._Listeners.refs[id];
   }
 
   static removeAllListeners(): boolean {
-    let removeError = false
-    Object.keys(EventRegister._Listeners.refs).forEach(_id => {
-      const removed = delete EventRegister._Listeners.refs[_id]
-      removeError = !removeError ? !removed : removeError
-    })
-    return !removeError
+    let removeError = false;
+    Object.keys(EventRegister._Listeners.refs).forEach((_id) => {
+      const removed = delete EventRegister._Listeners.refs[_id];
+      removeError = !removeError ? !removed : removeError;
+    });
+    return !removeError;
   }
 
   static emitEvent(eventName: string, param: any): void {
-    Object.keys(EventRegister._Listeners.refs).forEach(_id => {
-      if (EventRegister._Listeners.refs[_id] && eventName === EventRegister._Listeners.refs[_id].eventName) {
-        EventRegister._Listeners.refs[_id].callback(param)
+    Object.keys(EventRegister._Listeners.refs).forEach((_id) => {
+      if (
+        EventRegister._Listeners.refs[_id] &&
+        eventName === EventRegister._Listeners.refs[_id].eventName
+      ) {
+        EventRegister._Listeners.refs[_id].callback(param);
       }
-    })
+    });
   }
 
   /*
    * Shorten
    */
   static on(eventName: string, callback: (param: any) => void): string {
-    return EventRegister.addEventListener(eventName, callback)
+    return EventRegister.addEventListener(eventName, callback);
   }
 
   static rm(eventName: string): boolean {
-    return EventRegister.removeEventListener(eventName)
+    return EventRegister.removeEventListener(eventName);
   }
 
   static rmAll(): boolean {
-    return EventRegister.removeAllListeners()
+    return EventRegister.removeAllListeners();
   }
 
   static emit(eventName: string, param: any): void {
-    EventRegister.emitEvent(eventName, param)
+    EventRegister.emitEvent(eventName, param);
   }
 }
 
-export default EventRegister
+export default EventRegister;

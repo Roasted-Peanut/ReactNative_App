@@ -36,7 +36,7 @@ enum EToastType {
 
 export class Toast extends React.PureComponent<IToastProps, IToastState> {
   frameID(frameID: any) {
-    throw new Error("Method not implemented.");
+    throw new Error(`Method not implemented. ${frameID}`);
   }
   offset: Animated.Value;
   opacity: Animated.Value;
@@ -57,11 +57,11 @@ export class Toast extends React.PureComponent<IToastProps, IToastState> {
     Emitter.emit("SHOW_TOAST_INFO", { message: text, type: "info" });
   }
 
-  constructor(props: IToastProps, IState: IToastState, offset: any) {
+  constructor(props: IToastProps, IState: IToastState) {
     super(props);
     this.state = {
-      message: "",
-      type: "success",
+      message: IState.message,
+      type: IState.type,
     };
     this.offset = new Animated.Value(-HEIGHT);
     this.opacity = new Animated.Value(0);

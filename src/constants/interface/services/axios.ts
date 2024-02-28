@@ -1,40 +1,44 @@
-import {AxiosRequestHeaders, HeadersDefaults, RawAxiosRequestHeaders} from 'axios'
+import {
+  AxiosRequestHeaders,
+  HeadersDefaults,
+  RawAxiosRequestHeaders,
+} from "axios";
 
 export interface IToken {
-  token: string
-  refreshToken: string
+  token: string;
+  refreshToken: string;
 }
 
 export interface IResponseCode {
-  success: number[]
-  unauthorized: number[]
+  success: number[];
+  unauthorized: number[];
 }
 
 export interface ITokenType {
-  Bearer: string
-  Basic: string
+  Bearer: string;
+  Basic: string;
 }
 
 export interface IAxiosHeaders extends HeadersDefaults {
-  Authorization: string
-  baseURL: string
+  Authorization: string;
+  baseURL: string;
 }
 
 export interface IAxiosMethod {
-  get: string
-  post: string
-  put: string
-  delete: string
-  patch: string
+  get: string;
+  post: string;
+  put: string;
+  delete: string;
+  patch: string;
 }
 
 export interface IAxiosError {
-  error: string | undefined
+  error: string | undefined;
 }
 
 export interface IParams<T = undefined> {
-  url: string
-  method?: string
-  body?: T | string
-  config?: AxiosRequestHeaders | RawAxiosRequestHeaders
+  url: string;
+  method?: string;
+  body?: T | string;
+  config?: AxiosRequestHeaders | RawAxiosRequestHeaders;
 }

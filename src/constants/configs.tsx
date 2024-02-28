@@ -1,19 +1,19 @@
-import {Platform} from 'react-native'
-import RNConfig from 'react-native-config'
-import packageJSON from '../../package.json'
-import {getBundleId} from 'react-native-device-info'
+import { Platform } from "react-native";
+import RNConfig from "react-native-config";
+import packageJSON from "../../package.json";
+import { getBundleId } from "react-native-device-info";
 
 const AppEnv = {
-  DEV: 'dev',
-  STAGING: 'staging',
-  PRODUCTION: 'production',
-}
+  DEV: "dev",
+  STAGING: "staging",
+  PRODUCTION: "production",
+};
 console.log("RNConfig", RNConfig);
 
 const configs = {
   appBundleID: getBundleId(),
   appVersion: packageJSON.version,
-  APP_ENV: RNConfig.APP_ENV || 'empty',
+  APP_ENV: RNConfig.APP_ENV || "empty",
   DEBUG_ENABLED: RNConfig.APP_ENV !== AppEnv.PRODUCTION,
   API_URL: RNConfig.API_URL,
   buildEvn: RNConfig.APP_ENV,
@@ -21,45 +21,47 @@ const configs = {
     ios: RNConfig.CODEPUSH_KEY_IOS,
     android: RNConfig.CODEPUSH_KEY_ANDROID,
   }),
-}
+};
 
 export const BOTTOM_SHEET_TYPE = {
-  env: '0',
-  codePush: '1',
-}
+  env: "0",
+  codePush: "1",
+};
 
 export const EXTRA_QA_ENVS =
-  configs.APP_ENV === AppEnv.DEV ? ['https://qa1.com/api/', 'https://qa2.com/api/'] : []
+  configs.APP_ENV === AppEnv.DEV
+    ? ["https://qa1.com/api/", "https://qa2.com/api/"]
+    : [];
 
 export const CODEPUSH_KEYS =
   configs.APP_ENV === AppEnv.DEV
     ? [
         {
-          dev: 'Dev',
+          dev: "Dev",
           key: configs.codePushKey,
         },
 
         {
-          dev: 'Phung',
+          dev: "Phung",
           key: Platform.select({
-            android: '',
-            ios: '',
+            android: "",
+            ios: "",
           }),
         },
       ]
     : [
         {
-          dev: '',
-          key: '',
+          dev: "",
+          key: "",
         },
 
         {
-          dev: '',
+          dev: "",
           key: Platform.select({
-            android: '',
-            ios: '',
+            android: "",
+            ios: "",
           }),
         },
-      ]
+      ];
 
-export default configs
+export default configs;

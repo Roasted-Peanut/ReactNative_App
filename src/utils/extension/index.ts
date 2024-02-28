@@ -1,8 +1,15 @@
 import _ from "lodash";
 import moment from "moment";
-import { Dimensions, NativeModules, Platform, StatusBar } from "react-native";
-import { DownLoadMeidaProps } from "../../types";
+import { useLayoutEffect } from "react";
+import {
+  Dimensions,
+  NativeModules,
+  Platform,
+  StatusBar,
+  useWindowDimensions,
+} from "react-native";
 import { isIOS } from "../../themes";
+import { DownLoadMeidaProps } from "../../types";
 
 const getFontSizeDimensions = (value: number) => {
   const fontSizeWindow = Dimensions.get("window").width * value;
@@ -17,8 +24,8 @@ const handleDownLoadMeida = ({
   callBackSuccess,
 }: DownLoadMeidaProps) => {
   const timeNow = moment().format("YYYYMMDDHHmmss");
-  var Base64Code = dataBase64.split(","); //base64Image is my image base64 string
-  var mimeType = mime?.split("/");
+  const Base64Code = dataBase64.split(","); //base64Image is my image base64 string
+  const mimeType = mime?.split("/") ?? "";
   const type = ImageType.find((el) => el == mimeType[1]);
   if (!_.isNil(type)) {
     const { DownloadMediaNativeModule } = NativeModules;
@@ -87,6 +94,15 @@ function isObject<T>(val: T): boolean {
     typeof val === "object" && val?.constructor !== FormData && val !== null
   );
 }
+
+export default () => {
+  const { width, height } = useWindowDimensions();
+  useLayoutEffect(() => {
+    console.log("==========");
+    // KDims.width = width;
+    // KDims.height = height;
+  }, [width, height]);
+};
 
 export {
   getFontSizeDimensions,

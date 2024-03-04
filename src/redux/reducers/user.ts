@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../types";
+import { fetchUserById } from "../slices/userSlice";
 
 export const userInitialState: IUser = {
   userInfo: {},
@@ -9,7 +10,7 @@ export const userInitialState: IUser = {
 };
 
 export const userSlice = createSlice({
-  name: "auth",
+  name: "user",
   initialState: userInitialState,
   reducers: {
     userLogin: () => {
@@ -21,6 +22,13 @@ export const userSlice = createSlice({
     logout: () => {
       // TODO: add action when user logout
     },
+  },
+  // add slice create thunk
+  extraReducers(builder) {
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      // Add user to the state array
+      state.userInfo = action.payload;
+    })
   },
 });
 

@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import MainLayout from "./src/MainLayout";
 import { DownloadMediaModule, TestNativeModule } from "./src/native_module";
-import { persistor, store } from "./src/store/store";
+import {  store, persistor } from "./src/redux/store";
 
 function App(): React.JSX.Element {
   useEffect(() => {

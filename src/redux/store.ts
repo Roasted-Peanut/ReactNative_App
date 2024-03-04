@@ -1,26 +1,36 @@
-import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector as useReduxSelector } from "react-redux";
 import { persistReducer, persistStore } from "redux-persist";
-import createSagaMiddleware from "redux-saga";
 import reducers, { persistConfig } from "./reducers";
-import rootSaga from "./saga";
+import { pokemonApi } from "./slices/userSlice";
 
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 
-const middlewareEnhancer = applyMiddleware(sagaMiddleware);
+// const middlewareEnhancer = applyMiddleware(sagaMiddleware);
 
 const persistedReducer = persistReducer<any, any>(persistConfig, reducers);
 
+//add middleware saga
+// const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({ serializableCheck: false, thunk: false }),
+//   enhancers: (getDefaultEnhancers) =>
+//     getDefaultEnhancers().concat(middlewareEnhancer),
+// });
+
+// default use thunk
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false, thunk: false }),
-  enhancers: (getDefaultEnhancers) =>
-    getDefaultEnhancers().concat(middlewareEnhancer),
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false
+    }).concat(pokemonApi.middleware), 
 });
 
-sagaMiddleware.run(rootSaga);
+// sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 

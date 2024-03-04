@@ -5,12 +5,15 @@ import { useSelector } from "react-redux";
 import { IndicatorDialog, Toast } from "./components";
 import AppNavigation from "./navigation/AppNavigator";
 import RouteKey from "./navigation/RouteKey";
-import { getAppStackState, getLoadingIndicator } from "./store/selectors";
+import { getAppStackState, getLoadingIndicator } from "./redux/selectors";
+import { useGetPokemonByNameQuery } from "./redux/slices";
 
 function MainLayout() {
   const appState = useSelector(getAppStackState);
   const appStateRef = useRef(AppState.currentState);
   const showGlobalIndicator = useSelector(getLoadingIndicator);
+
+  const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
 
   const handleAppState = useCallback(() => {
     AppState.addEventListener("change", (nextAppState) => {

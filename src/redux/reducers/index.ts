@@ -7,6 +7,7 @@ import user, { userInitialState } from "./user";
 import { persistReducer } from "redux-persist";
 import INITIAL_STATE from "../initialState";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { pokemonApi } from "../slices/userSlice";
 
 // Reducer Export
 export * from "./app";
@@ -33,5 +34,6 @@ export default combineReducers({
   user: persistReducer(userPersistConfig, user),
   app,
   loading,
+  [pokemonApi.reducerPath] : pokemonApi.reducer,
 });
 // export type RootReducer = ReturnType<typeof rootReducer>;

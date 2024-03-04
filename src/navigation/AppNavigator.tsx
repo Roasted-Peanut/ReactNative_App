@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { useSelector } from "react-redux";
 import SplashScreen from "../screens/SplashScreen";
-import { getAppStackState } from "../store/selectors";
+import { getAppStackState } from "../redux/selectors";
 import { navigationRef } from "./NavigationService";
 import RouteKey from "./RouteKey";
 import { AuthNavigator, HomeNavigator } from "./StackNavigation";

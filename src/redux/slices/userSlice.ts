@@ -14,13 +14,11 @@ export const fetchUserById = createAsyncThunk(
 
 // second, create the Redux tookit query
 export const pokemonApi = createApi({
-  reducerPath: 'pokemonApi',
+  reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query<any, string>({
       query: (name) => `pokemon/${name}`,
     }),
   }),
-})
-
-
+});

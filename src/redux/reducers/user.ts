@@ -28,7 +28,7 @@ export const userSlice = createSlice({
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       // Add user to the state array
       state.userInfo = action.payload;
-    })
+    });
   },
 });
 

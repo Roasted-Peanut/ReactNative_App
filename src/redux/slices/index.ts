@@ -1,3 +1,3 @@
 import { pokemonApi } from "./userSlice";
 
-export const { useGetPokemonByNameQuery } = pokemonApi
+export const { useGetPokemonByNameQuery } = pokemonApi;

@@ -10,6 +10,6 @@ export const getAppStackState = (state: IInitialState): string =>
 
 export const getCodePushKey = (state: IInitialState) =>
   getAppData(state).codePushKey;
-  
+
 export const getApiUrl = (state: IInitialState) =>
   getAppData(state).apiUrl || "";

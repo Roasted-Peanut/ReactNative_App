@@ -13,7 +13,7 @@ function MainLayout() {
   const appStateRef = useRef(AppState.currentState);
   const showGlobalIndicator = useSelector(getLoadingIndicator);
 
-  const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
+  const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
 
   const handleAppState = useCallback(() => {
     AppState.addEventListener("change", (nextAppState) => {

@@ -34,6 +34,6 @@ export default combineReducers({
   user: persistReducer(userPersistConfig, user),
   app,
   loading,
-  [pokemonApi.reducerPath] : pokemonApi.reducer,
+  [pokemonApi.reducerPath]: pokemonApi.reducer,
 });
 // export type RootReducer = ReturnType<typeof rootReducer>;

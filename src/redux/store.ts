@@ -23,11 +23,11 @@ const persistedReducer = persistReducer<any, any>(persistConfig, reducers);
 // default use thunk
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-      immutableCheck: false
-    }).concat(pokemonApi.middleware), 
+      immutableCheck: false,
+    }).concat(pokemonApi.middleware),
 });
 
 // sagaMiddleware.run(rootSaga);

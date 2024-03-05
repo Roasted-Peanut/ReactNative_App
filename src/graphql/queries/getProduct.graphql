@@ -1,0 +1,15 @@
+query GetProductList{
+  product(id:1){
+    id
+    name
+    ...Detail
+  }
+}
+
+fragment Detail on Product {
+  slug
+  description
+}
+
+
+

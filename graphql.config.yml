@@ -1,0 +1,14 @@
+schema:
+  - 'http://115.146.127.172:8185/shop-api'
+documents:
+  - './src/**/*.graphql'
+  # - './src/**/*.ts'
+generates:
+  ./src/graphql/queries/__generated__/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+      - typescript-resolvers
+    config: 
+      - useIndexSignature: true

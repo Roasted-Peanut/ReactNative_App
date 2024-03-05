@@ -1,111 +1,141 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from "graphql";
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
+    };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]-?: NonNullable<T[P]>;
+};
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  Money: { input: any; output: any; }
-  Upload: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
+  JSON: { input: any; output: any };
+  Money: { input: any; output: any };
+  Upload: { input: any; output: any };
 };
 
 export type ActiveOrderResult = NoActiveOrderError | Order;
 
-export type AddPaymentToOrderResult = IneligiblePaymentMethodError | NoActiveOrderError | Order | OrderPaymentStateError | OrderStateTransitionError | PaymentDeclinedError | PaymentFailedError;
+export type AddPaymentToOrderResult =
+  | IneligiblePaymentMethodError
+  | NoActiveOrderError
+  | Order
+  | OrderPaymentStateError
+  | OrderStateTransitionError
+  | PaymentDeclinedError
+  | PaymentFailedError;
 
 export type Address = Node & {
-  __typename?: 'Address';
-  city?: Maybe<Scalars['String']['output']>;
-  company?: Maybe<Scalars['String']['output']>;
+  __typename?: "Address";
+  city?: Maybe<Scalars["String"]["output"]>;
+  company?: Maybe<Scalars["String"]["output"]>;
   country: Country;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  defaultBillingAddress?: Maybe<Scalars['Boolean']['output']>;
-  defaultShippingAddress?: Maybe<Scalars['Boolean']['output']>;
-  fullName?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  phoneNumber?: Maybe<Scalars['String']['output']>;
-  postalCode?: Maybe<Scalars['String']['output']>;
-  province?: Maybe<Scalars['String']['output']>;
-  streetLine1: Scalars['String']['output'];
-  streetLine2?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  defaultBillingAddress?: Maybe<Scalars["Boolean"]["output"]>;
+  defaultShippingAddress?: Maybe<Scalars["Boolean"]["output"]>;
+  fullName?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
+  postalCode?: Maybe<Scalars["String"]["output"]>;
+  province?: Maybe<Scalars["String"]["output"]>;
+  streetLine1: Scalars["String"]["output"];
+  streetLine2?: Maybe<Scalars["String"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type Adjustment = {
-  __typename?: 'Adjustment';
-  adjustmentSource: Scalars['String']['output'];
-  amount: Scalars['Money']['output'];
-  data?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
+  __typename?: "Adjustment";
+  adjustmentSource: Scalars["String"]["output"];
+  amount: Scalars["Money"]["output"];
+  data?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
   type: AdjustmentType;
 };
 
 export enum AdjustmentType {
-  DistributedOrderPromotion = 'DISTRIBUTED_ORDER_PROMOTION',
-  Other = 'OTHER',
-  Promotion = 'PROMOTION'
+  DistributedOrderPromotion = "DISTRIBUTED_ORDER_PROMOTION",
+  Other = "OTHER",
+  Promotion = "PROMOTION",
 }
 
 export type Admin = {
-  __typename?: 'Admin';
-  emailAddress: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
-  lastName: Scalars['String']['output'];
+  __typename?: "Admin";
+  emailAddress: Scalars["String"]["output"];
+  firstName: Scalars["String"]["output"];
+  lastName: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to set the Customer for an Order when already logged in. */
 export type AlreadyLoggedInError = ErrorResult & {
-  __typename?: 'AlreadyLoggedInError';
+  __typename?: "AlreadyLoggedInError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
-export type ApplyCouponCodeResult = CouponCodeExpiredError | CouponCodeInvalidError | CouponCodeLimitError | Order;
+export type ApplyCouponCodeResult =
+  | CouponCodeExpiredError
+  | CouponCodeInvalidError
+  | CouponCodeLimitError
+  | Order;
 
 export type Asset = Node & {
-  __typename?: 'Asset';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  fileSize: Scalars['Int']['output'];
+  __typename?: "Asset";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  fileSize: Scalars["Int"]["output"];
   focalPoint?: Maybe<Coordinate>;
-  height: Scalars['Int']['output'];
-  id: Scalars['ID']['output'];
-  mimeType: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  preview: Scalars['String']['output'];
-  source: Scalars['String']['output'];
+  height: Scalars["Int"]["output"];
+  id: Scalars["ID"]["output"];
+  mimeType: Scalars["String"]["output"];
+  name: Scalars["String"]["output"];
+  preview: Scalars["String"]["output"];
+  source: Scalars["String"]["output"];
   tags: Array<Tag>;
   type: AssetType;
-  updatedAt: Scalars['DateTime']['output'];
-  width: Scalars['Int']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
+  width: Scalars["Int"]["output"];
 };
 
 export type AssetList = PaginatedList & {
-  __typename?: 'AssetList';
+  __typename?: "AssetList";
   items: Array<Asset>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export enum AssetType {
-  Binary = 'BINARY',
-  Image = 'IMAGE',
-  Video = 'VIDEO'
+  Binary = "BINARY",
+  Image = "IMAGE",
+  Video = "VIDEO",
 }
 
 export type AuthenticationInput = {
@@ -113,36 +143,39 @@ export type AuthenticationInput = {
 };
 
 export type AuthenticationMethod = Node & {
-  __typename?: 'AuthenticationMethod';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  strategy: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  __typename?: "AuthenticationMethod";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
+  strategy: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
-export type AuthenticationResult = CurrentUser | InvalidCredentialsError | NotVerifiedError;
+export type AuthenticationResult =
+  | CurrentUser
+  | InvalidCredentialsError
+  | NotVerifiedError;
 
 export type AutoLinkOperationDefinition = {
-  __typename?: 'AutoLinkOperationDefinition';
+  __typename?: "AutoLinkOperationDefinition";
   args: Array<ConfigArgDefinition>;
-  code: Scalars['String']['output'];
-  description?: Maybe<Scalars['String']['output']>;
+  code: Scalars["String"]["output"];
+  description?: Maybe<Scalars["String"]["output"]>;
   eventTypes?: Maybe<Array<Maybe<EventType>>>;
   fields?: Maybe<Array<Maybe<Field>>>;
 };
 
 export type Benefit = Node & {
-  __typename?: 'Benefit';
+  __typename?: "Benefit";
   benefitRanks?: Maybe<Array<Maybe<BenefitRank>>>;
   condition: ConfigurableOperation;
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  position: Scalars['Int']['output'];
-  title: Scalars['String']['output'];
+  position: Scalars["Int"]["output"];
+  title: Scalars["String"]["output"];
   translations: Array<BenefitTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
-  valueType?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars["DateTime"]["output"];
+  valueType?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type BenefitFilterParameter = {
@@ -156,9 +189,9 @@ export type BenefitFilterParameter = {
 };
 
 export type BenefitList = PaginatedList & {
-  __typename?: 'BenefitList';
+  __typename?: "BenefitList";
   items: Array<Benefit>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type BenefitListOptions = {
@@ -167,21 +200,21 @@ export type BenefitListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<BenefitSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type BenefitRank = Node & {
-  __typename?: 'BenefitRank';
+  __typename?: "BenefitRank";
   benefit: Benefit;
-  benefitId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
+  benefitId: Scalars["ID"]["output"];
+  id: Scalars["ID"]["output"];
   rank: Rank;
-  rankId: Scalars['ID']['output'];
-  value: Scalars['String']['output'];
+  rankId: Scalars["ID"]["output"];
+  value: Scalars["String"]["output"];
 };
 
 export type BenefitSortParameter = {
@@ -194,29 +227,29 @@ export type BenefitSortParameter = {
 };
 
 export type BenefitTranslation = Node & {
-  __typename?: 'BenefitTranslation';
+  __typename?: "BenefitTranslation";
   base?: Maybe<Benefit>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode?: Maybe<LanguageCode>;
-  title: Scalars['String']['output'];
+  title: Scalars["String"]["output"];
 };
 
 export type Blog = Node & {
-  __typename?: 'Blog';
+  __typename?: "Blog";
   assets?: Maybe<Array<Maybe<Asset>>>;
   channels: Array<Channel>;
-  content: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  enabled: Scalars['Boolean']['output'];
+  content: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  enabled: Scalars["Boolean"]["output"];
   facetValues?: Maybe<Array<Maybe<FacetValue>>>;
   featuredAsset?: Maybe<Asset>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
   products?: Maybe<Array<Maybe<Product>>>;
-  startsAt?: Maybe<Scalars['DateTime']['output']>;
-  title: Scalars['String']['output'];
+  startsAt?: Maybe<Scalars["DateTime"]["output"]>;
+  title: Scalars["String"]["output"];
   translations: Array<BlogTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type BlogFilterParameter = {
@@ -234,9 +267,9 @@ export type BlogFilterParameter = {
 };
 
 export type BlogList = PaginatedList & {
-  __typename?: 'BlogList';
+  __typename?: "BlogList";
   items: Array<Blog>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type BlogListOptions = {
@@ -245,11 +278,11 @@ export type BlogListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<BlogSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type BlogSortParameter = {
@@ -262,94 +295,93 @@ export type BlogSortParameter = {
 };
 
 export type BlogTranslation = Node & {
-  __typename?: 'BlogTranslation';
+  __typename?: "BlogTranslation";
   base: Blog;
-  content: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  content: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  title: Scalars['ID']['output'];
+  title: Scalars["ID"]["output"];
 };
 
 export type BooleanCustomFieldConfig = CustomField & {
-  __typename?: 'BooleanCustomFieldConfig';
+  __typename?: "BooleanCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 /** Operators for filtering on a list of Boolean fields */
 export type BooleanListOperators = {
-  inList: Scalars['Boolean']['input'];
+  inList: Scalars["Boolean"]["input"];
 };
 
 /** Operators for filtering on a Boolean field */
 export type BooleanOperators = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  eq?: InputMaybe<Scalars["Boolean"]["input"]>;
+  isNull?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type Channel = Node & {
-  __typename?: 'Channel';
+  __typename?: "Channel";
   availableCurrencyCodes: Array<CurrencyCode>;
   availableLanguageCodes?: Maybe<Array<LanguageCode>>;
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
   /** @deprecated Use defaultCurrencyCode instead */
   currencyCode: CurrencyCode;
-  customFields?: Maybe<Scalars['JSON']['output']>;
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
   defaultCurrencyCode: CurrencyCode;
   defaultLanguageCode: LanguageCode;
   defaultShippingZone?: Maybe<Zone>;
   defaultTaxZone?: Maybe<Zone>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   /** Not yet used - will be implemented in a future release. */
-  outOfStockThreshold?: Maybe<Scalars['Int']['output']>;
-  pricesIncludeTax: Scalars['Boolean']['output'];
+  outOfStockThreshold?: Maybe<Scalars["Int"]["output"]>;
+  pricesIncludeTax: Scalars["Boolean"]["output"];
   seller?: Maybe<Seller>;
-  token: Scalars['String']['output'];
+  token: Scalars["String"]["output"];
   /** Not yet used - will be implemented in a future release. */
-  trackInventory?: Maybe<Scalars['Boolean']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  trackInventory?: Maybe<Scalars["Boolean"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type Collection = Node & {
-  __typename?: 'Collection';
+  __typename?: "Collection";
   assets: Array<Asset>;
   breadcrumbs: Array<CollectionBreadcrumb>;
   children?: Maybe<Array<Collection>>;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
   featuredAsset?: Maybe<Asset>;
   filters: Array<ConfigurableOperation>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode?: Maybe<LanguageCode>;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   parent?: Maybe<Collection>;
-  parentId: Scalars['ID']['output'];
-  position: Scalars['Int']['output'];
+  parentId: Scalars["ID"]["output"];
+  position: Scalars["Int"]["output"];
   productVariants: ProductVariantList;
-  slug: Scalars['String']['output'];
+  slug: Scalars["String"]["output"];
   translations: Array<CollectionTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
-
 
 export type CollectionProductVariantsArgs = {
   options?: InputMaybe<ProductVariantListOptions>;
 };
 
 export type CollectionBreadcrumb = {
-  __typename?: 'CollectionBreadcrumb';
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
+  __typename?: "CollectionBreadcrumb";
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  slug: Scalars["String"]["output"];
 };
 
 export type CollectionFilterParameter = {
@@ -365,9 +397,9 @@ export type CollectionFilterParameter = {
 };
 
 export type CollectionList = PaginatedList & {
-  __typename?: 'CollectionList';
+  __typename?: "CollectionList";
   items: Array<Collection>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type CollectionListOptions = {
@@ -376,12 +408,12 @@ export type CollectionListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<CollectionSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
-  topLevelOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
+  topLevelOnly?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 /**
@@ -389,9 +421,9 @@ export type CollectionListOptions = {
  * by the search, and in what quantity.
  */
 export type CollectionResult = {
-  __typename?: 'CollectionResult';
+  __typename?: "CollectionResult";
   collection: Collection;
-  count: Scalars['Int']['output'];
+  count: Scalars["Int"]["output"];
 };
 
 export type CollectionSortParameter = {
@@ -406,139 +438,140 @@ export type CollectionSortParameter = {
 };
 
 export type CollectionTranslation = {
-  __typename?: 'CollectionTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "CollectionTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  slug: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ConfigArg = {
-  __typename?: 'ConfigArg';
-  name: Scalars['String']['output'];
-  value: Scalars['String']['output'];
+  __typename?: "ConfigArg";
+  name: Scalars["String"]["output"];
+  value: Scalars["String"]["output"];
 };
 
 export type ConfigArgDefinition = {
-  __typename?: 'ConfigArgDefinition';
-  defaultValue?: Maybe<Scalars['JSON']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  required: Scalars['Boolean']['output'];
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  __typename?: "ConfigArgDefinition";
+  defaultValue?: Maybe<Scalars["JSON"]["output"]>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  label?: Maybe<Scalars["String"]["output"]>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  required: Scalars["Boolean"]["output"];
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type ConfigArgInput = {
-  name: Scalars['String']['input'];
+  name: Scalars["String"]["input"];
   /** A JSON stringified representation of the actual value */
-  value: Scalars['String']['input'];
+  value: Scalars["String"]["input"];
 };
 
 export type ConfigurableOperation = {
-  __typename?: 'ConfigurableOperation';
+  __typename?: "ConfigurableOperation";
   args: Array<ConfigArg>;
-  code: Scalars['String']['output'];
+  code: Scalars["String"]["output"];
 };
 
 export type ConfigurableOperationDefinition = {
-  __typename?: 'ConfigurableOperationDefinition';
+  __typename?: "ConfigurableOperationDefinition";
   args: Array<ConfigArgDefinition>;
-  code: Scalars['String']['output'];
-  description: Scalars['String']['output'];
+  code: Scalars["String"]["output"];
+  description: Scalars["String"]["output"];
 };
 
 export type ConfigurableOperationInput = {
   arguments: Array<ConfigArgInput>;
-  code: Scalars['String']['input'];
+  code: Scalars["String"]["input"];
 };
 
 export type Coordinate = {
-  __typename?: 'Coordinate';
-  x: Scalars['Float']['output'];
-  y: Scalars['Float']['output'];
+  __typename?: "Coordinate";
+  x: Scalars["Float"]["output"];
+  y: Scalars["Float"]["output"];
 };
 
-export type Country = Node & Region & {
-  __typename?: 'Country';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  parent?: Maybe<Region>;
-  parentId?: Maybe<Scalars['ID']['output']>;
-  translations: Array<RegionTranslation>;
-  type: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-};
+export type Country = Node &
+  Region & {
+    __typename?: "Country";
+    code: Scalars["String"]["output"];
+    createdAt: Scalars["DateTime"]["output"];
+    customFields?: Maybe<Scalars["JSON"]["output"]>;
+    enabled: Scalars["Boolean"]["output"];
+    id: Scalars["ID"]["output"];
+    languageCode: LanguageCode;
+    name: Scalars["String"]["output"];
+    parent?: Maybe<Region>;
+    parentId?: Maybe<Scalars["ID"]["output"]>;
+    translations: Array<RegionTranslation>;
+    type: Scalars["String"]["output"];
+    updatedAt: Scalars["DateTime"]["output"];
+  };
 
 export type CountryList = PaginatedList & {
-  __typename?: 'CountryList';
+  __typename?: "CountryList";
   items: Array<Country>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 /** Returned if the provided coupon code is invalid */
 export type CouponCodeExpiredError = ErrorResult & {
-  __typename?: 'CouponCodeExpiredError';
-  couponCode: Scalars['String']['output'];
+  __typename?: "CouponCodeExpiredError";
+  couponCode: Scalars["String"]["output"];
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned if the provided coupon code is invalid */
 export type CouponCodeInvalidError = ErrorResult & {
-  __typename?: 'CouponCodeInvalidError';
-  couponCode: Scalars['String']['output'];
+  __typename?: "CouponCodeInvalidError";
+  couponCode: Scalars["String"]["output"];
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned if the provided coupon code is invalid */
 export type CouponCodeLimitError = ErrorResult & {
-  __typename?: 'CouponCodeLimitError';
-  couponCode: Scalars['String']['output'];
+  __typename?: "CouponCodeLimitError";
+  couponCode: Scalars["String"]["output"];
   errorCode: ErrorCode;
-  limit: Scalars['Int']['output'];
-  message: Scalars['String']['output'];
+  limit: Scalars["Int"]["output"];
+  message: Scalars["String"]["output"];
 };
 
 export type CreateAddressInput = {
-  city?: InputMaybe<Scalars['String']['input']>;
-  company?: InputMaybe<Scalars['String']['input']>;
-  countryCode: Scalars['String']['input'];
-  customFields?: InputMaybe<Scalars['JSON']['input']>;
-  defaultBillingAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  defaultShippingAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  fullName?: InputMaybe<Scalars['String']['input']>;
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  postalCode?: InputMaybe<Scalars['String']['input']>;
-  province?: InputMaybe<Scalars['String']['input']>;
-  streetLine1: Scalars['String']['input'];
-  streetLine2?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars["String"]["input"]>;
+  company?: InputMaybe<Scalars["String"]["input"]>;
+  countryCode: Scalars["String"]["input"];
+  customFields?: InputMaybe<Scalars["JSON"]["input"]>;
+  defaultBillingAddress?: InputMaybe<Scalars["Boolean"]["input"]>;
+  defaultShippingAddress?: InputMaybe<Scalars["Boolean"]["input"]>;
+  fullName?: InputMaybe<Scalars["String"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  postalCode?: InputMaybe<Scalars["String"]["input"]>;
+  province?: InputMaybe<Scalars["String"]["input"]>;
+  streetLine1: Scalars["String"]["input"];
+  streetLine2?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type CreateCustomerCustomFieldsInput = {
-  avatarId?: InputMaybe<Scalars['ID']['input']>;
-  dateOfBirth?: InputMaybe<Scalars['DateTime']['input']>;
-  gender?: InputMaybe<Scalars['Int']['input']>;
+  avatarId?: InputMaybe<Scalars["ID"]["input"]>;
+  dateOfBirth?: InputMaybe<Scalars["DateTime"]["input"]>;
+  gender?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type CreateCustomerInput = {
   customFields?: InputMaybe<CreateCustomerCustomFieldsInput>;
-  emailAddress: Scalars['String']['input'];
-  firstName: Scalars['String']['input'];
-  lastName: Scalars['String']['input'];
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  emailAddress: Scalars["String"]["input"];
+  firstName: Scalars["String"]["input"];
+  lastName: Scalars["String"]["input"];
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /**
@@ -549,381 +582,389 @@ export type CreateCustomerInput = {
  */
 export enum CurrencyCode {
   /** United Arab Emirates dirham */
-  Aed = 'AED',
+  Aed = "AED",
   /** Afghan afghani */
-  Afn = 'AFN',
+  Afn = "AFN",
   /** Albanian lek */
-  All = 'ALL',
+  All = "ALL",
   /** Armenian dram */
-  Amd = 'AMD',
+  Amd = "AMD",
   /** Netherlands Antillean guilder */
-  Ang = 'ANG',
+  Ang = "ANG",
   /** Angolan kwanza */
-  Aoa = 'AOA',
+  Aoa = "AOA",
   /** Argentine peso */
-  Ars = 'ARS',
+  Ars = "ARS",
   /** Australian dollar */
-  Aud = 'AUD',
+  Aud = "AUD",
   /** Aruban florin */
-  Awg = 'AWG',
+  Awg = "AWG",
   /** Azerbaijani manat */
-  Azn = 'AZN',
+  Azn = "AZN",
   /** Bosnia and Herzegovina convertible mark */
-  Bam = 'BAM',
+  Bam = "BAM",
   /** Barbados dollar */
-  Bbd = 'BBD',
+  Bbd = "BBD",
   /** Bangladeshi taka */
-  Bdt = 'BDT',
+  Bdt = "BDT",
   /** Bulgarian lev */
-  Bgn = 'BGN',
+  Bgn = "BGN",
   /** Bahraini dinar */
-  Bhd = 'BHD',
+  Bhd = "BHD",
   /** Burundian franc */
-  Bif = 'BIF',
+  Bif = "BIF",
   /** Bermudian dollar */
-  Bmd = 'BMD',
+  Bmd = "BMD",
   /** Brunei dollar */
-  Bnd = 'BND',
+  Bnd = "BND",
   /** Boliviano */
-  Bob = 'BOB',
+  Bob = "BOB",
   /** Brazilian real */
-  Brl = 'BRL',
+  Brl = "BRL",
   /** Bahamian dollar */
-  Bsd = 'BSD',
+  Bsd = "BSD",
   /** Bhutanese ngultrum */
-  Btn = 'BTN',
+  Btn = "BTN",
   /** Botswana pula */
-  Bwp = 'BWP',
+  Bwp = "BWP",
   /** Belarusian ruble */
-  Byn = 'BYN',
+  Byn = "BYN",
   /** Belize dollar */
-  Bzd = 'BZD',
+  Bzd = "BZD",
   /** Canadian dollar */
-  Cad = 'CAD',
+  Cad = "CAD",
   /** Congolese franc */
-  Cdf = 'CDF',
+  Cdf = "CDF",
   /** Swiss franc */
-  Chf = 'CHF',
+  Chf = "CHF",
   /** Chilean peso */
-  Clp = 'CLP',
+  Clp = "CLP",
   /** Renminbi (Chinese) yuan */
-  Cny = 'CNY',
+  Cny = "CNY",
   /** Colombian peso */
-  Cop = 'COP',
+  Cop = "COP",
   /** Costa Rican colon */
-  Crc = 'CRC',
+  Crc = "CRC",
   /** Cuban convertible peso */
-  Cuc = 'CUC',
+  Cuc = "CUC",
   /** Cuban peso */
-  Cup = 'CUP',
+  Cup = "CUP",
   /** Cape Verde escudo */
-  Cve = 'CVE',
+  Cve = "CVE",
   /** Czech koruna */
-  Czk = 'CZK',
+  Czk = "CZK",
   /** Djiboutian franc */
-  Djf = 'DJF',
+  Djf = "DJF",
   /** Danish krone */
-  Dkk = 'DKK',
+  Dkk = "DKK",
   /** Dominican peso */
-  Dop = 'DOP',
+  Dop = "DOP",
   /** Algerian dinar */
-  Dzd = 'DZD',
+  Dzd = "DZD",
   /** Egyptian pound */
-  Egp = 'EGP',
+  Egp = "EGP",
   /** Eritrean nakfa */
-  Ern = 'ERN',
+  Ern = "ERN",
   /** Ethiopian birr */
-  Etb = 'ETB',
+  Etb = "ETB",
   /** Euro */
-  Eur = 'EUR',
+  Eur = "EUR",
   /** Fiji dollar */
-  Fjd = 'FJD',
+  Fjd = "FJD",
   /** Falkland Islands pound */
-  Fkp = 'FKP',
+  Fkp = "FKP",
   /** Pound sterling */
-  Gbp = 'GBP',
+  Gbp = "GBP",
   /** Georgian lari */
-  Gel = 'GEL',
+  Gel = "GEL",
   /** Ghanaian cedi */
-  Ghs = 'GHS',
+  Ghs = "GHS",
   /** Gibraltar pound */
-  Gip = 'GIP',
+  Gip = "GIP",
   /** Gambian dalasi */
-  Gmd = 'GMD',
+  Gmd = "GMD",
   /** Guinean franc */
-  Gnf = 'GNF',
+  Gnf = "GNF",
   /** Guatemalan quetzal */
-  Gtq = 'GTQ',
+  Gtq = "GTQ",
   /** Guyanese dollar */
-  Gyd = 'GYD',
+  Gyd = "GYD",
   /** Hong Kong dollar */
-  Hkd = 'HKD',
+  Hkd = "HKD",
   /** Honduran lempira */
-  Hnl = 'HNL',
+  Hnl = "HNL",
   /** Croatian kuna */
-  Hrk = 'HRK',
+  Hrk = "HRK",
   /** Haitian gourde */
-  Htg = 'HTG',
+  Htg = "HTG",
   /** Hungarian forint */
-  Huf = 'HUF',
+  Huf = "HUF",
   /** Indonesian rupiah */
-  Idr = 'IDR',
+  Idr = "IDR",
   /** Israeli new shekel */
-  Ils = 'ILS',
+  Ils = "ILS",
   /** Indian rupee */
-  Inr = 'INR',
+  Inr = "INR",
   /** Iraqi dinar */
-  Iqd = 'IQD',
+  Iqd = "IQD",
   /** Iranian rial */
-  Irr = 'IRR',
+  Irr = "IRR",
   /** Icelandic króna */
-  Isk = 'ISK',
+  Isk = "ISK",
   /** Jamaican dollar */
-  Jmd = 'JMD',
+  Jmd = "JMD",
   /** Jordanian dinar */
-  Jod = 'JOD',
+  Jod = "JOD",
   /** Japanese yen */
-  Jpy = 'JPY',
+  Jpy = "JPY",
   /** Kenyan shilling */
-  Kes = 'KES',
+  Kes = "KES",
   /** Kyrgyzstani som */
-  Kgs = 'KGS',
+  Kgs = "KGS",
   /** Cambodian riel */
-  Khr = 'KHR',
+  Khr = "KHR",
   /** Comoro franc */
-  Kmf = 'KMF',
+  Kmf = "KMF",
   /** North Korean won */
-  Kpw = 'KPW',
+  Kpw = "KPW",
   /** South Korean won */
-  Krw = 'KRW',
+  Krw = "KRW",
   /** Kuwaiti dinar */
-  Kwd = 'KWD',
+  Kwd = "KWD",
   /** Cayman Islands dollar */
-  Kyd = 'KYD',
+  Kyd = "KYD",
   /** Kazakhstani tenge */
-  Kzt = 'KZT',
+  Kzt = "KZT",
   /** Lao kip */
-  Lak = 'LAK',
+  Lak = "LAK",
   /** Lebanese pound */
-  Lbp = 'LBP',
+  Lbp = "LBP",
   /** Sri Lankan rupee */
-  Lkr = 'LKR',
+  Lkr = "LKR",
   /** Liberian dollar */
-  Lrd = 'LRD',
+  Lrd = "LRD",
   /** Lesotho loti */
-  Lsl = 'LSL',
+  Lsl = "LSL",
   /** Libyan dinar */
-  Lyd = 'LYD',
+  Lyd = "LYD",
   /** Moroccan dirham */
-  Mad = 'MAD',
+  Mad = "MAD",
   /** Moldovan leu */
-  Mdl = 'MDL',
+  Mdl = "MDL",
   /** Malagasy ariary */
-  Mga = 'MGA',
+  Mga = "MGA",
   /** Macedonian denar */
-  Mkd = 'MKD',
+  Mkd = "MKD",
   /** Myanmar kyat */
-  Mmk = 'MMK',
+  Mmk = "MMK",
   /** Mongolian tögrög */
-  Mnt = 'MNT',
+  Mnt = "MNT",
   /** Macanese pataca */
-  Mop = 'MOP',
+  Mop = "MOP",
   /** Mauritanian ouguiya */
-  Mru = 'MRU',
+  Mru = "MRU",
   /** Mauritian rupee */
-  Mur = 'MUR',
+  Mur = "MUR",
   /** Maldivian rufiyaa */
-  Mvr = 'MVR',
+  Mvr = "MVR",
   /** Malawian kwacha */
-  Mwk = 'MWK',
+  Mwk = "MWK",
   /** Mexican peso */
-  Mxn = 'MXN',
+  Mxn = "MXN",
   /** Malaysian ringgit */
-  Myr = 'MYR',
+  Myr = "MYR",
   /** Mozambican metical */
-  Mzn = 'MZN',
+  Mzn = "MZN",
   /** Namibian dollar */
-  Nad = 'NAD',
+  Nad = "NAD",
   /** Nigerian naira */
-  Ngn = 'NGN',
+  Ngn = "NGN",
   /** Nicaraguan córdoba */
-  Nio = 'NIO',
+  Nio = "NIO",
   /** Norwegian krone */
-  Nok = 'NOK',
+  Nok = "NOK",
   /** Nepalese rupee */
-  Npr = 'NPR',
+  Npr = "NPR",
   /** New Zealand dollar */
-  Nzd = 'NZD',
+  Nzd = "NZD",
   /** Omani rial */
-  Omr = 'OMR',
+  Omr = "OMR",
   /** Panamanian balboa */
-  Pab = 'PAB',
+  Pab = "PAB",
   /** Peruvian sol */
-  Pen = 'PEN',
+  Pen = "PEN",
   /** Papua New Guinean kina */
-  Pgk = 'PGK',
+  Pgk = "PGK",
   /** Philippine peso */
-  Php = 'PHP',
+  Php = "PHP",
   /** Pakistani rupee */
-  Pkr = 'PKR',
+  Pkr = "PKR",
   /** Polish złoty */
-  Pln = 'PLN',
+  Pln = "PLN",
   /** Paraguayan guaraní */
-  Pyg = 'PYG',
+  Pyg = "PYG",
   /** Qatari riyal */
-  Qar = 'QAR',
+  Qar = "QAR",
   /** Romanian leu */
-  Ron = 'RON',
+  Ron = "RON",
   /** Serbian dinar */
-  Rsd = 'RSD',
+  Rsd = "RSD",
   /** Russian ruble */
-  Rub = 'RUB',
+  Rub = "RUB",
   /** Rwandan franc */
-  Rwf = 'RWF',
+  Rwf = "RWF",
   /** Saudi riyal */
-  Sar = 'SAR',
+  Sar = "SAR",
   /** Solomon Islands dollar */
-  Sbd = 'SBD',
+  Sbd = "SBD",
   /** Seychelles rupee */
-  Scr = 'SCR',
+  Scr = "SCR",
   /** Sudanese pound */
-  Sdg = 'SDG',
+  Sdg = "SDG",
   /** Swedish krona/kronor */
-  Sek = 'SEK',
+  Sek = "SEK",
   /** Singapore dollar */
-  Sgd = 'SGD',
+  Sgd = "SGD",
   /** Saint Helena pound */
-  Shp = 'SHP',
+  Shp = "SHP",
   /** Sierra Leonean leone */
-  Sll = 'SLL',
+  Sll = "SLL",
   /** Somali shilling */
-  Sos = 'SOS',
+  Sos = "SOS",
   /** Surinamese dollar */
-  Srd = 'SRD',
+  Srd = "SRD",
   /** South Sudanese pound */
-  Ssp = 'SSP',
+  Ssp = "SSP",
   /** São Tomé and Príncipe dobra */
-  Stn = 'STN',
+  Stn = "STN",
   /** Salvadoran colón */
-  Svc = 'SVC',
+  Svc = "SVC",
   /** Syrian pound */
-  Syp = 'SYP',
+  Syp = "SYP",
   /** Swazi lilangeni */
-  Szl = 'SZL',
+  Szl = "SZL",
   /** Thai baht */
-  Thb = 'THB',
+  Thb = "THB",
   /** Tajikistani somoni */
-  Tjs = 'TJS',
+  Tjs = "TJS",
   /** Turkmenistan manat */
-  Tmt = 'TMT',
+  Tmt = "TMT",
   /** Tunisian dinar */
-  Tnd = 'TND',
+  Tnd = "TND",
   /** Tongan paʻanga */
-  Top = 'TOP',
+  Top = "TOP",
   /** Turkish lira */
-  Try = 'TRY',
+  Try = "TRY",
   /** Trinidad and Tobago dollar */
-  Ttd = 'TTD',
+  Ttd = "TTD",
   /** New Taiwan dollar */
-  Twd = 'TWD',
+  Twd = "TWD",
   /** Tanzanian shilling */
-  Tzs = 'TZS',
+  Tzs = "TZS",
   /** Ukrainian hryvnia */
-  Uah = 'UAH',
+  Uah = "UAH",
   /** Ugandan shilling */
-  Ugx = 'UGX',
+  Ugx = "UGX",
   /** United States dollar */
-  Usd = 'USD',
+  Usd = "USD",
   /** Uruguayan peso */
-  Uyu = 'UYU',
+  Uyu = "UYU",
   /** Uzbekistan som */
-  Uzs = 'UZS',
+  Uzs = "UZS",
   /** Venezuelan bolívar soberano */
-  Ves = 'VES',
+  Ves = "VES",
   /** Vietnamese đồng */
-  Vnd = 'VND',
+  Vnd = "VND",
   /** Vanuatu vatu */
-  Vuv = 'VUV',
+  Vuv = "VUV",
   /** Samoan tala */
-  Wst = 'WST',
+  Wst = "WST",
   /** CFA franc BEAC */
-  Xaf = 'XAF',
+  Xaf = "XAF",
   /** East Caribbean dollar */
-  Xcd = 'XCD',
+  Xcd = "XCD",
   /** CFA franc BCEAO */
-  Xof = 'XOF',
+  Xof = "XOF",
   /** CFP franc (franc Pacifique) */
-  Xpf = 'XPF',
+  Xpf = "XPF",
   /** Yemeni rial */
-  Yer = 'YER',
+  Yer = "YER",
   /** South African rand */
-  Zar = 'ZAR',
+  Zar = "ZAR",
   /** Zambian kwacha */
-  Zmw = 'ZMW',
+  Zmw = "ZMW",
   /** Zimbabwean dollar */
-  Zwl = 'ZWL'
+  Zwl = "ZWL",
 }
 
 export type CurrentUser = {
-  __typename?: 'CurrentUser';
+  __typename?: "CurrentUser";
   channels: Array<CurrentUserChannel>;
-  id: Scalars['ID']['output'];
-  identifier: Scalars['String']['output'];
+  id: Scalars["ID"]["output"];
+  identifier: Scalars["String"]["output"];
 };
 
 export type CurrentUserChannel = {
-  __typename?: 'CurrentUserChannel';
-  code: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "CurrentUserChannel";
+  code: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   permissions: Array<Permission>;
-  token: Scalars['String']['output'];
+  token: Scalars["String"]["output"];
 };
 
 export type CustomField = {
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
-export type CustomFieldConfig = BooleanCustomFieldConfig | DateTimeCustomFieldConfig | FloatCustomFieldConfig | IntCustomFieldConfig | LocaleStringCustomFieldConfig | LocaleTextCustomFieldConfig | RelationCustomFieldConfig | StringCustomFieldConfig | TextCustomFieldConfig;
+export type CustomFieldConfig =
+  | BooleanCustomFieldConfig
+  | DateTimeCustomFieldConfig
+  | FloatCustomFieldConfig
+  | IntCustomFieldConfig
+  | LocaleStringCustomFieldConfig
+  | LocaleTextCustomFieldConfig
+  | RelationCustomFieldConfig
+  | StringCustomFieldConfig
+  | TextCustomFieldConfig;
 
 export type Customer = Node & {
-  __typename?: 'Customer';
+  __typename?: "Customer";
   addresses?: Maybe<Array<Address>>;
-  createdAt: Scalars['DateTime']['output'];
+  createdAt: Scalars["DateTime"]["output"];
   customFields?: Maybe<CustomerCustomFields>;
-  emailAddress: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  lastName: Scalars['String']['output'];
+  emailAddress: Scalars["String"]["output"];
+  firstName: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  lastName: Scalars["String"]["output"];
   orders: OrderList;
-  phoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
   rank?: Maybe<Rank>;
-  rankId?: Maybe<Scalars['ID']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  rankId?: Maybe<Scalars["ID"]["output"]>;
+  title?: Maybe<Scalars["String"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
   user?: Maybe<User>;
 };
-
 
 export type CustomerOrdersArgs = {
   options?: InputMaybe<OrderListOptions>;
 };
 
 export type CustomerCustomFields = {
-  __typename?: 'CustomerCustomFields';
+  __typename?: "CustomerCustomFields";
   avatar?: Maybe<Asset>;
-  coinPoints?: Maybe<Scalars['Int']['output']>;
-  dateOfBirth?: Maybe<Scalars['DateTime']['output']>;
-  gender?: Maybe<Scalars['Int']['output']>;
-  memberPoints?: Maybe<Scalars['Int']['output']>;
-  unseenNoti?: Maybe<Scalars['Int']['output']>;
+  coinPoints?: Maybe<Scalars["Int"]["output"]>;
+  dateOfBirth?: Maybe<Scalars["DateTime"]["output"]>;
+  gender?: Maybe<Scalars["Int"]["output"]>;
+  memberPoints?: Maybe<Scalars["Int"]["output"]>;
+  unseenNoti?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type CustomerFilterParameter = {
@@ -944,24 +985,23 @@ export type CustomerFilterParameter = {
 };
 
 export type CustomerGroup = Node & {
-  __typename?: 'CustomerGroup';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
+  __typename?: "CustomerGroup";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
   customers: CustomerList;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
-
 
 export type CustomerGroupCustomersArgs = {
   options?: InputMaybe<CustomerListOptions>;
 };
 
 export type CustomerList = PaginatedList & {
-  __typename?: 'CustomerList';
+  __typename?: "CustomerList";
   items: Array<Customer>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type CustomerListOptions = {
@@ -970,11 +1010,11 @@ export type CustomerListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<CustomerSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type CustomerSortParameter = {
@@ -997,21 +1037,21 @@ export type CustomerSortParameter = {
 
 /** Operators for filtering on a list of Date fields */
 export type DateListOperators = {
-  inList: Scalars['DateTime']['input'];
+  inList: Scalars["DateTime"]["input"];
 };
 
 /** Operators for filtering on a DateTime field */
 export type DateOperators = {
-  after?: InputMaybe<Scalars['DateTime']['input']>;
-  before?: InputMaybe<Scalars['DateTime']['input']>;
+  after?: InputMaybe<Scalars["DateTime"]["input"]>;
+  before?: InputMaybe<Scalars["DateTime"]["input"]>;
   between?: InputMaybe<DateRange>;
-  eq?: InputMaybe<Scalars['DateTime']['input']>;
-  isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  eq?: InputMaybe<Scalars["DateTime"]["input"]>;
+  isNull?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type DateRange = {
-  end: Scalars['DateTime']['input'];
-  start: Scalars['DateTime']['input'];
+  end: Scalars["DateTime"]["input"];
+  start: Scalars["DateTime"]["input"];
 };
 
 /**
@@ -1019,127 +1059,126 @@ export type DateRange = {
  * See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local#Additional_attributes
  */
 export type DateTimeCustomFieldConfig = CustomField & {
-  __typename?: 'DateTimeCustomFieldConfig';
+  __typename?: "DateTimeCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  max?: Maybe<Scalars['String']['output']>;
-  min?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  step?: Maybe<Scalars['Int']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  max?: Maybe<Scalars["String"]["output"]>;
+  min?: Maybe<Scalars["String"]["output"]>;
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  step?: Maybe<Scalars["Int"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type DeletionResponse = {
-  __typename?: 'DeletionResponse';
-  message?: Maybe<Scalars['String']['output']>;
+  __typename?: "DeletionResponse";
+  message?: Maybe<Scalars["String"]["output"]>;
   result: DeletionResult;
 };
 
 export enum DeletionResult {
   /** The entity was successfully deleted */
-  Deleted = 'DELETED',
+  Deleted = "DELETED",
   /** Deletion did not take place, reason given in message */
-  NotDeleted = 'NOT_DELETED'
+  NotDeleted = "NOT_DELETED",
 }
 
 export type DeviceToken = Node & {
-  __typename?: 'DeviceToken';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  token: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  __typename?: "DeviceToken";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
+  token: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
   user?: Maybe<User>;
-  userId?: Maybe<Scalars['ID']['output']>;
+  userId?: Maybe<Scalars["ID"]["output"]>;
 };
 
 export type Discount = {
-  __typename?: 'Discount';
-  adjustmentSource: Scalars['String']['output'];
-  amount: Scalars['Money']['output'];
-  amountWithTax: Scalars['Money']['output'];
-  description: Scalars['String']['output'];
+  __typename?: "Discount";
+  adjustmentSource: Scalars["String"]["output"];
+  amount: Scalars["Money"]["output"];
+  amountWithTax: Scalars["Money"]["output"];
+  description: Scalars["String"]["output"];
   type: AdjustmentType;
 };
 
 /** Returned when attempting to create a Customer with an email address already registered to an existing User. */
 export type EmailAddressConflictError = ErrorResult & {
-  __typename?: 'EmailAddressConflictError';
+  __typename?: "EmailAddressConflictError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export enum ErrorCode {
-  AlreadyLoggedInError = 'ALREADY_LOGGED_IN_ERROR',
-  CouponCodeExpiredError = 'COUPON_CODE_EXPIRED_ERROR',
-  CouponCodeInvalidError = 'COUPON_CODE_INVALID_ERROR',
-  CouponCodeLimitError = 'COUPON_CODE_LIMIT_ERROR',
-  EmailAddressConflictError = 'EMAIL_ADDRESS_CONFLICT_ERROR',
-  GuestCheckoutError = 'GUEST_CHECKOUT_ERROR',
-  IdentifierChangeTokenExpiredError = 'IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR',
-  IdentifierChangeTokenInvalidError = 'IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR',
-  IneligiblePaymentMethodError = 'INELIGIBLE_PAYMENT_METHOD_ERROR',
-  IneligibleShippingMethodError = 'INELIGIBLE_SHIPPING_METHOD_ERROR',
-  InsufficientStockError = 'INSUFFICIENT_STOCK_ERROR',
-  InvalidCredentialsError = 'INVALID_CREDENTIALS_ERROR',
-  MissingPasswordError = 'MISSING_PASSWORD_ERROR',
-  NativeAuthStrategyError = 'NATIVE_AUTH_STRATEGY_ERROR',
-  NegativeQuantityError = 'NEGATIVE_QUANTITY_ERROR',
-  NotVerifiedError = 'NOT_VERIFIED_ERROR',
-  NoActiveOrderError = 'NO_ACTIVE_ORDER_ERROR',
-  OrderLimitError = 'ORDER_LIMIT_ERROR',
-  OrderModificationError = 'ORDER_MODIFICATION_ERROR',
-  OrderPaymentStateError = 'ORDER_PAYMENT_STATE_ERROR',
-  OrderStateTransitionError = 'ORDER_STATE_TRANSITION_ERROR',
-  PasswordAlreadySetError = 'PASSWORD_ALREADY_SET_ERROR',
-  PasswordResetTokenExpiredError = 'PASSWORD_RESET_TOKEN_EXPIRED_ERROR',
-  PasswordResetTokenInvalidError = 'PASSWORD_RESET_TOKEN_INVALID_ERROR',
-  PasswordValidationError = 'PASSWORD_VALIDATION_ERROR',
-  PaymentDeclinedError = 'PAYMENT_DECLINED_ERROR',
-  PaymentFailedError = 'PAYMENT_FAILED_ERROR',
-  UnknownError = 'UNKNOWN_ERROR',
-  VerificationTokenExpiredError = 'VERIFICATION_TOKEN_EXPIRED_ERROR',
-  VerificationTokenInvalidError = 'VERIFICATION_TOKEN_INVALID_ERROR'
+  AlreadyLoggedInError = "ALREADY_LOGGED_IN_ERROR",
+  CouponCodeExpiredError = "COUPON_CODE_EXPIRED_ERROR",
+  CouponCodeInvalidError = "COUPON_CODE_INVALID_ERROR",
+  CouponCodeLimitError = "COUPON_CODE_LIMIT_ERROR",
+  EmailAddressConflictError = "EMAIL_ADDRESS_CONFLICT_ERROR",
+  GuestCheckoutError = "GUEST_CHECKOUT_ERROR",
+  IdentifierChangeTokenExpiredError = "IDENTIFIER_CHANGE_TOKEN_EXPIRED_ERROR",
+  IdentifierChangeTokenInvalidError = "IDENTIFIER_CHANGE_TOKEN_INVALID_ERROR",
+  IneligiblePaymentMethodError = "INELIGIBLE_PAYMENT_METHOD_ERROR",
+  IneligibleShippingMethodError = "INELIGIBLE_SHIPPING_METHOD_ERROR",
+  InsufficientStockError = "INSUFFICIENT_STOCK_ERROR",
+  InvalidCredentialsError = "INVALID_CREDENTIALS_ERROR",
+  MissingPasswordError = "MISSING_PASSWORD_ERROR",
+  NativeAuthStrategyError = "NATIVE_AUTH_STRATEGY_ERROR",
+  NegativeQuantityError = "NEGATIVE_QUANTITY_ERROR",
+  NotVerifiedError = "NOT_VERIFIED_ERROR",
+  NoActiveOrderError = "NO_ACTIVE_ORDER_ERROR",
+  OrderLimitError = "ORDER_LIMIT_ERROR",
+  OrderModificationError = "ORDER_MODIFICATION_ERROR",
+  OrderPaymentStateError = "ORDER_PAYMENT_STATE_ERROR",
+  OrderStateTransitionError = "ORDER_STATE_TRANSITION_ERROR",
+  PasswordAlreadySetError = "PASSWORD_ALREADY_SET_ERROR",
+  PasswordResetTokenExpiredError = "PASSWORD_RESET_TOKEN_EXPIRED_ERROR",
+  PasswordResetTokenInvalidError = "PASSWORD_RESET_TOKEN_INVALID_ERROR",
+  PasswordValidationError = "PASSWORD_VALIDATION_ERROR",
+  PaymentDeclinedError = "PAYMENT_DECLINED_ERROR",
+  PaymentFailedError = "PAYMENT_FAILED_ERROR",
+  UnknownError = "UNKNOWN_ERROR",
+  VerificationTokenExpiredError = "VERIFICATION_TOKEN_EXPIRED_ERROR",
+  VerificationTokenInvalidError = "VERIFICATION_TOKEN_INVALID_ERROR",
 }
 
 export type ErrorResult = {
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export type EventType = {
-  __typename?: 'EventType';
-  description: Scalars['String']['output'];
-  name: Scalars['String']['output'];
+  __typename?: "EventType";
+  description: Scalars["String"]["output"];
+  name: Scalars["String"]["output"];
 };
 
 export type ExchangePoint = Node & {
-  __typename?: 'ExchangePoint';
-  channelId: Scalars['ID']['output'];
+  __typename?: "ExchangePoint";
+  channelId: Scalars["ID"]["output"];
   currencyCode: CurrencyCode;
-  id: Scalars['ID']['output'];
-  price: Scalars['Money']['output'];
+  id: Scalars["ID"]["output"];
+  price: Scalars["Money"]["output"];
 };
 
 export type Facet = Node & {
-  __typename?: 'Facet';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
+  __typename?: "Facet";
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   translations: Array<FacetTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
   /** Returns a paginated, sortable, filterable list of the Facet's values. Added in v2.1.0. */
   valueList: FacetValueList;
   values: Array<FacetValue>;
 };
-
 
 export type FacetValueListArgs = {
   options?: InputMaybe<FacetValueListOptions>;
@@ -1155,9 +1194,9 @@ export type FacetFilterParameter = {
 };
 
 export type FacetList = PaginatedList & {
-  __typename?: 'FacetList';
+  __typename?: "FacetList";
   items: Array<Facet>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type FacetListOptions = {
@@ -1166,11 +1205,11 @@ export type FacetListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<FacetSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type FacetSortParameter = {
@@ -1182,32 +1221,32 @@ export type FacetSortParameter = {
 };
 
 export type FacetTranslation = {
-  __typename?: 'FacetTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "FacetTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type FacetValue = Node & {
-  __typename?: 'FacetValue';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
+  __typename?: "FacetValue";
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
   customFields?: Maybe<FacetValueCustomFields>;
   facet: Facet;
-  facetId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
+  facetId: Scalars["ID"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   translations: Array<FacetValueTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type FacetValueCustomFields = {
-  __typename?: 'FacetValueCustomFields';
+  __typename?: "FacetValueCustomFields";
   asset?: Maybe<Asset>;
-  description?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars["String"]["output"]>;
 };
 
 /**
@@ -1219,8 +1258,8 @@ export type FacetValueCustomFields = {
  * * ID=1 AND (ID=2 OR ID=3): `{ facetValueFilters: [{ and: 1 }, { or: [2,3] }] }`
  */
 export type FacetValueFilterInput = {
-  and?: InputMaybe<Scalars['ID']['input']>;
-  or?: InputMaybe<Array<Scalars['ID']['input']>>;
+  and?: InputMaybe<Scalars["ID"]["input"]>;
+  or?: InputMaybe<Array<Scalars["ID"]["input"]>>;
 };
 
 export type FacetValueFilterParameter = {
@@ -1235,9 +1274,9 @@ export type FacetValueFilterParameter = {
 };
 
 export type FacetValueList = PaginatedList & {
-  __typename?: 'FacetValueList';
+  __typename?: "FacetValueList";
   items: Array<FacetValue>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type FacetValueListOptions = {
@@ -1246,11 +1285,11 @@ export type FacetValueListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<FacetValueSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /**
@@ -1258,8 +1297,8 @@ export type FacetValueListOptions = {
  * by the search, and in what quantity.
  */
 export type FacetValueResult = {
-  __typename?: 'FacetValueResult';
-  count: Scalars['Int']['output'];
+  __typename?: "FacetValueResult";
+  count: Scalars["Int"]["output"];
   facetValue: FacetValue;
 };
 
@@ -1275,29 +1314,29 @@ export type FacetValueSortParameter = {
 };
 
 export type FacetValueTranslation = {
-  __typename?: 'FacetValueTranslation';
-  createdAt: Scalars['DateTime']['output'];
+  __typename?: "FacetValueTranslation";
+  createdAt: Scalars["DateTime"]["output"];
   customFields?: Maybe<FacetValueTranslationCustomFields>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type FacetValueTranslationCustomFields = {
-  __typename?: 'FacetValueTranslationCustomFields';
-  description?: Maybe<Scalars['String']['output']>;
+  __typename?: "FacetValueTranslationCustomFields";
+  description?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Favorite = Node & {
-  __typename?: 'Favorite';
-  createdAt: Scalars['DateTime']['output'];
+  __typename?: "Favorite";
+  createdAt: Scalars["DateTime"]["output"];
   customer: Customer;
-  customerId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
+  customerId: Scalars["ID"]["output"];
+  id: Scalars["ID"]["output"];
   productVariant: ProductVariant;
-  productVariantId: Scalars['ID']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  productVariantId: Scalars["ID"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type FavoriteFilterParameter = {
@@ -1309,9 +1348,9 @@ export type FavoriteFilterParameter = {
 };
 
 export type FavoriteList = PaginatedList & {
-  __typename?: 'FavoriteList';
+  __typename?: "FavoriteList";
   items: Array<Favorite>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type FavoriteListOptions = {
@@ -1320,11 +1359,11 @@ export type FavoriteListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<FavoriteSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type FavoriteSortParameter = {
@@ -1336,71 +1375,71 @@ export type FavoriteSortParameter = {
 };
 
 export type Field = {
-  __typename?: 'Field';
-  description: Scalars['String']['output'];
-  name: Scalars['String']['output'];
+  __typename?: "Field";
+  description: Scalars["String"]["output"];
+  name: Scalars["String"]["output"];
 };
 
 export type FloatCustomFieldConfig = CustomField & {
-  __typename?: 'FloatCustomFieldConfig';
+  __typename?: "FloatCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  max?: Maybe<Scalars['Float']['output']>;
-  min?: Maybe<Scalars['Float']['output']>;
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  step?: Maybe<Scalars['Float']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  max?: Maybe<Scalars["Float"]["output"]>;
+  min?: Maybe<Scalars["Float"]["output"]>;
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  step?: Maybe<Scalars["Float"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type Fulfillment = Node & {
-  __typename?: 'Fulfillment';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
+  __typename?: "Fulfillment";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
   lines: Array<FulfillmentLine>;
-  method: Scalars['String']['output'];
-  state: Scalars['String']['output'];
+  method: Scalars["String"]["output"];
+  state: Scalars["String"]["output"];
   /** @deprecated Use the `lines` field instead */
   summary: Array<FulfillmentLine>;
-  trackingCode?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  trackingCode?: Maybe<Scalars["String"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type FulfillmentLine = {
-  __typename?: 'FulfillmentLine';
+  __typename?: "FulfillmentLine";
   fulfillment: Fulfillment;
-  fulfillmentId: Scalars['ID']['output'];
+  fulfillmentId: Scalars["ID"]["output"];
   orderLine: OrderLine;
-  orderLineId: Scalars['ID']['output'];
-  quantity: Scalars['Int']['output'];
+  orderLineId: Scalars["ID"]["output"];
+  quantity: Scalars["Int"]["output"];
 };
 
 export enum GlobalFlag {
-  False = 'FALSE',
-  Inherit = 'INHERIT',
-  True = 'TRUE'
+  False = "FALSE",
+  Inherit = "INHERIT",
+  True = "TRUE",
 }
 
 /** Returned when attempting to set the Customer on a guest checkout when the configured GuestCheckoutStrategy does not allow it. */
 export type GuestCheckoutError = ErrorResult & {
-  __typename?: 'GuestCheckoutError';
+  __typename?: "GuestCheckoutError";
   errorCode: ErrorCode;
-  errorDetail: Scalars['String']['output'];
-  message: Scalars['String']['output'];
+  errorDetail: Scalars["String"]["output"];
+  message: Scalars["String"]["output"];
 };
 
 export type HistoryEntry = Node & {
-  __typename?: 'HistoryEntry';
-  createdAt: Scalars['DateTime']['output'];
-  data: Scalars['JSON']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "HistoryEntry";
+  createdAt: Scalars["DateTime"]["output"];
+  data: Scalars["JSON"]["output"];
+  id: Scalars["ID"]["output"];
   type: HistoryEntryType;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type HistoryEntryFilterParameter = {
@@ -1411,9 +1450,9 @@ export type HistoryEntryFilterParameter = {
 };
 
 export type HistoryEntryList = PaginatedList & {
-  __typename?: 'HistoryEntryList';
+  __typename?: "HistoryEntryList";
   items: Array<HistoryEntry>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type HistoryEntryListOptions = {
@@ -1422,11 +1461,11 @@ export type HistoryEntryListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<HistoryEntrySortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type HistoryEntrySortParameter = {
@@ -1436,47 +1475,47 @@ export type HistoryEntrySortParameter = {
 };
 
 export enum HistoryEntryType {
-  CustomerAddedToGroup = 'CUSTOMER_ADDED_TO_GROUP',
-  CustomerAddressCreated = 'CUSTOMER_ADDRESS_CREATED',
-  CustomerAddressDeleted = 'CUSTOMER_ADDRESS_DELETED',
-  CustomerAddressUpdated = 'CUSTOMER_ADDRESS_UPDATED',
-  CustomerDetailUpdated = 'CUSTOMER_DETAIL_UPDATED',
-  CustomerEmailUpdateRequested = 'CUSTOMER_EMAIL_UPDATE_REQUESTED',
-  CustomerEmailUpdateVerified = 'CUSTOMER_EMAIL_UPDATE_VERIFIED',
-  CustomerGetCoinPoint = 'CUSTOMER_GET_COIN_POINT',
-  CustomerGetMemberPoint = 'CUSTOMER_GET_MEMBER_POINT',
-  CustomerNote = 'CUSTOMER_NOTE',
-  CustomerPasswordResetRequested = 'CUSTOMER_PASSWORD_RESET_REQUESTED',
-  CustomerPasswordResetVerified = 'CUSTOMER_PASSWORD_RESET_VERIFIED',
-  CustomerPasswordUpdated = 'CUSTOMER_PASSWORD_UPDATED',
-  CustomerRegistered = 'CUSTOMER_REGISTERED',
-  CustomerRemovedFromGroup = 'CUSTOMER_REMOVED_FROM_GROUP',
-  CustomerUseCoinPoint = 'CUSTOMER_USE_COIN_POINT',
-  CustomerVerified = 'CUSTOMER_VERIFIED',
-  OrderCancellation = 'ORDER_CANCELLATION',
-  OrderCouponApplied = 'ORDER_COUPON_APPLIED',
-  OrderCouponRemoved = 'ORDER_COUPON_REMOVED',
-  OrderFulfillment = 'ORDER_FULFILLMENT',
-  OrderFulfillmentTransition = 'ORDER_FULFILLMENT_TRANSITION',
-  OrderModified = 'ORDER_MODIFIED',
-  OrderNote = 'ORDER_NOTE',
-  OrderPaymentTransition = 'ORDER_PAYMENT_TRANSITION',
-  OrderRefundTransition = 'ORDER_REFUND_TRANSITION',
-  OrderStateTransition = 'ORDER_STATE_TRANSITION'
+  CustomerAddedToGroup = "CUSTOMER_ADDED_TO_GROUP",
+  CustomerAddressCreated = "CUSTOMER_ADDRESS_CREATED",
+  CustomerAddressDeleted = "CUSTOMER_ADDRESS_DELETED",
+  CustomerAddressUpdated = "CUSTOMER_ADDRESS_UPDATED",
+  CustomerDetailUpdated = "CUSTOMER_DETAIL_UPDATED",
+  CustomerEmailUpdateRequested = "CUSTOMER_EMAIL_UPDATE_REQUESTED",
+  CustomerEmailUpdateVerified = "CUSTOMER_EMAIL_UPDATE_VERIFIED",
+  CustomerGetCoinPoint = "CUSTOMER_GET_COIN_POINT",
+  CustomerGetMemberPoint = "CUSTOMER_GET_MEMBER_POINT",
+  CustomerNote = "CUSTOMER_NOTE",
+  CustomerPasswordResetRequested = "CUSTOMER_PASSWORD_RESET_REQUESTED",
+  CustomerPasswordResetVerified = "CUSTOMER_PASSWORD_RESET_VERIFIED",
+  CustomerPasswordUpdated = "CUSTOMER_PASSWORD_UPDATED",
+  CustomerRegistered = "CUSTOMER_REGISTERED",
+  CustomerRemovedFromGroup = "CUSTOMER_REMOVED_FROM_GROUP",
+  CustomerUseCoinPoint = "CUSTOMER_USE_COIN_POINT",
+  CustomerVerified = "CUSTOMER_VERIFIED",
+  OrderCancellation = "ORDER_CANCELLATION",
+  OrderCouponApplied = "ORDER_COUPON_APPLIED",
+  OrderCouponRemoved = "ORDER_COUPON_REMOVED",
+  OrderFulfillment = "ORDER_FULFILLMENT",
+  OrderFulfillmentTransition = "ORDER_FULFILLMENT_TRANSITION",
+  OrderModified = "ORDER_MODIFIED",
+  OrderNote = "ORDER_NOTE",
+  OrderPaymentTransition = "ORDER_PAYMENT_TRANSITION",
+  OrderRefundTransition = "ORDER_REFUND_TRANSITION",
+  OrderStateTransition = "ORDER_STATE_TRANSITION",
 }
 
 /** Operators for filtering on a list of ID fields */
 export type IdListOperators = {
-  inList: Scalars['ID']['input'];
+  inList: Scalars["ID"]["input"];
 };
 
 /** Operators for filtering on an ID field */
 export type IdOperators = {
-  eq?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<Scalars['String']['input']>>;
-  isNull?: InputMaybe<Scalars['Boolean']['input']>;
-  notEq?: InputMaybe<Scalars['String']['input']>;
-  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  eq?: InputMaybe<Scalars["String"]["input"]>;
+  in?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  isNull?: InputMaybe<Scalars["Boolean"]["input"]>;
+  notEq?: InputMaybe<Scalars["String"]["input"]>;
+  notIn?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
 /**
@@ -1484,9 +1523,9 @@ export type IdOperators = {
  * expired according to the `verificationTokenDuration` setting in the AuthOptions.
  */
 export type IdentifierChangeTokenExpiredError = ErrorResult & {
-  __typename?: 'IdentifierChangeTokenExpiredError';
+  __typename?: "IdentifierChangeTokenExpiredError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -1494,57 +1533,57 @@ export type IdentifierChangeTokenExpiredError = ErrorResult & {
  * invalid or does not match any expected tokens.
  */
 export type IdentifierChangeTokenInvalidError = ErrorResult & {
-  __typename?: 'IdentifierChangeTokenInvalidError';
+  __typename?: "IdentifierChangeTokenInvalidError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to add a Payment using a PaymentMethod for which the Order is not eligible. */
 export type IneligiblePaymentMethodError = ErrorResult & {
-  __typename?: 'IneligiblePaymentMethodError';
-  eligibilityCheckerMessage?: Maybe<Scalars['String']['output']>;
+  __typename?: "IneligiblePaymentMethodError";
+  eligibilityCheckerMessage?: Maybe<Scalars["String"]["output"]>;
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to set a ShippingMethod for which the Order is not eligible */
 export type IneligibleShippingMethodError = ErrorResult & {
-  __typename?: 'IneligibleShippingMethodError';
+  __typename?: "IneligibleShippingMethodError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to add more items to the Order than are available */
 export type InsufficientStockError = ErrorResult & {
-  __typename?: 'InsufficientStockError';
+  __typename?: "InsufficientStockError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
   order: Order;
-  quantityAvailable: Scalars['Int']['output'];
+  quantityAvailable: Scalars["Int"]["output"];
 };
 
 export type IntCustomFieldConfig = CustomField & {
-  __typename?: 'IntCustomFieldConfig';
+  __typename?: "IntCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  max?: Maybe<Scalars['Int']['output']>;
-  min?: Maybe<Scalars['Int']['output']>;
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  step?: Maybe<Scalars['Int']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  max?: Maybe<Scalars["Int"]["output"]>;
+  min?: Maybe<Scalars["Int"]["output"]>;
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  step?: Maybe<Scalars["Int"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 /** Returned if the user authentication credentials are not valid */
 export type InvalidCredentialsError = ErrorResult & {
-  __typename?: 'InvalidCredentialsError';
-  authenticationError: Scalars['String']['output'];
+  __typename?: "InvalidCredentialsError";
+  authenticationError: Scalars["String"]["output"];
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -1558,369 +1597,369 @@ export type InvalidCredentialsError = ErrorResult & {
  */
 export enum LanguageCode {
   /** Afrikaans */
-  Af = 'af',
+  Af = "af",
   /** Akan */
-  Ak = 'ak',
+  Ak = "ak",
   /** Amharic */
-  Am = 'am',
+  Am = "am",
   /** Arabic */
-  Ar = 'ar',
+  Ar = "ar",
   /** Assamese */
-  As = 'as',
+  As = "as",
   /** Azerbaijani */
-  Az = 'az',
+  Az = "az",
   /** Belarusian */
-  Be = 'be',
+  Be = "be",
   /** Bulgarian */
-  Bg = 'bg',
+  Bg = "bg",
   /** Bambara */
-  Bm = 'bm',
+  Bm = "bm",
   /** Bangla */
-  Bn = 'bn',
+  Bn = "bn",
   /** Tibetan */
-  Bo = 'bo',
+  Bo = "bo",
   /** Breton */
-  Br = 'br',
+  Br = "br",
   /** Bosnian */
-  Bs = 'bs',
+  Bs = "bs",
   /** Catalan */
-  Ca = 'ca',
+  Ca = "ca",
   /** Chechen */
-  Ce = 'ce',
+  Ce = "ce",
   /** Corsican */
-  Co = 'co',
+  Co = "co",
   /** Czech */
-  Cs = 'cs',
+  Cs = "cs",
   /** Church Slavic */
-  Cu = 'cu',
+  Cu = "cu",
   /** Welsh */
-  Cy = 'cy',
+  Cy = "cy",
   /** Danish */
-  Da = 'da',
+  Da = "da",
   /** German */
-  De = 'de',
+  De = "de",
   /** Austrian German */
-  DeAt = 'de_AT',
+  DeAt = "de_AT",
   /** Swiss High German */
-  DeCh = 'de_CH',
+  DeCh = "de_CH",
   /** Dzongkha */
-  Dz = 'dz',
+  Dz = "dz",
   /** Ewe */
-  Ee = 'ee',
+  Ee = "ee",
   /** Greek */
-  El = 'el',
+  El = "el",
   /** English */
-  En = 'en',
+  En = "en",
   /** Australian English */
-  EnAu = 'en_AU',
+  EnAu = "en_AU",
   /** Canadian English */
-  EnCa = 'en_CA',
+  EnCa = "en_CA",
   /** British English */
-  EnGb = 'en_GB',
+  EnGb = "en_GB",
   /** American English */
-  EnUs = 'en_US',
+  EnUs = "en_US",
   /** Esperanto */
-  Eo = 'eo',
+  Eo = "eo",
   /** Spanish */
-  Es = 'es',
+  Es = "es",
   /** European Spanish */
-  EsEs = 'es_ES',
+  EsEs = "es_ES",
   /** Mexican Spanish */
-  EsMx = 'es_MX',
+  EsMx = "es_MX",
   /** Estonian */
-  Et = 'et',
+  Et = "et",
   /** Basque */
-  Eu = 'eu',
+  Eu = "eu",
   /** Persian */
-  Fa = 'fa',
+  Fa = "fa",
   /** Dari */
-  FaAf = 'fa_AF',
+  FaAf = "fa_AF",
   /** Fulah */
-  Ff = 'ff',
+  Ff = "ff",
   /** Finnish */
-  Fi = 'fi',
+  Fi = "fi",
   /** Faroese */
-  Fo = 'fo',
+  Fo = "fo",
   /** French */
-  Fr = 'fr',
+  Fr = "fr",
   /** Canadian French */
-  FrCa = 'fr_CA',
+  FrCa = "fr_CA",
   /** Swiss French */
-  FrCh = 'fr_CH',
+  FrCh = "fr_CH",
   /** Western Frisian */
-  Fy = 'fy',
+  Fy = "fy",
   /** Irish */
-  Ga = 'ga',
+  Ga = "ga",
   /** Scottish Gaelic */
-  Gd = 'gd',
+  Gd = "gd",
   /** Galician */
-  Gl = 'gl',
+  Gl = "gl",
   /** Gujarati */
-  Gu = 'gu',
+  Gu = "gu",
   /** Manx */
-  Gv = 'gv',
+  Gv = "gv",
   /** Hausa */
-  Ha = 'ha',
+  Ha = "ha",
   /** Hebrew */
-  He = 'he',
+  He = "he",
   /** Hindi */
-  Hi = 'hi',
+  Hi = "hi",
   /** Croatian */
-  Hr = 'hr',
+  Hr = "hr",
   /** Haitian Creole */
-  Ht = 'ht',
+  Ht = "ht",
   /** Hungarian */
-  Hu = 'hu',
+  Hu = "hu",
   /** Armenian */
-  Hy = 'hy',
+  Hy = "hy",
   /** Interlingua */
-  Ia = 'ia',
+  Ia = "ia",
   /** Indonesian */
-  Id = 'id',
+  Id = "id",
   /** Igbo */
-  Ig = 'ig',
+  Ig = "ig",
   /** Sichuan Yi */
-  Ii = 'ii',
+  Ii = "ii",
   /** Icelandic */
-  Is = 'is',
+  Is = "is",
   /** Italian */
-  It = 'it',
+  It = "it",
   /** Japanese */
-  Ja = 'ja',
+  Ja = "ja",
   /** Javanese */
-  Jv = 'jv',
+  Jv = "jv",
   /** Georgian */
-  Ka = 'ka',
+  Ka = "ka",
   /** Kikuyu */
-  Ki = 'ki',
+  Ki = "ki",
   /** Kazakh */
-  Kk = 'kk',
+  Kk = "kk",
   /** Kalaallisut */
-  Kl = 'kl',
+  Kl = "kl",
   /** Khmer */
-  Km = 'km',
+  Km = "km",
   /** Kannada */
-  Kn = 'kn',
+  Kn = "kn",
   /** Korean */
-  Ko = 'ko',
+  Ko = "ko",
   /** Kashmiri */
-  Ks = 'ks',
+  Ks = "ks",
   /** Kurdish */
-  Ku = 'ku',
+  Ku = "ku",
   /** Cornish */
-  Kw = 'kw',
+  Kw = "kw",
   /** Kyrgyz */
-  Ky = 'ky',
+  Ky = "ky",
   /** Latin */
-  La = 'la',
+  La = "la",
   /** Luxembourgish */
-  Lb = 'lb',
+  Lb = "lb",
   /** Ganda */
-  Lg = 'lg',
+  Lg = "lg",
   /** Lingala */
-  Ln = 'ln',
+  Ln = "ln",
   /** Lao */
-  Lo = 'lo',
+  Lo = "lo",
   /** Lithuanian */
-  Lt = 'lt',
+  Lt = "lt",
   /** Luba-Katanga */
-  Lu = 'lu',
+  Lu = "lu",
   /** Latvian */
-  Lv = 'lv',
+  Lv = "lv",
   /** Malagasy */
-  Mg = 'mg',
+  Mg = "mg",
   /** Maori */
-  Mi = 'mi',
+  Mi = "mi",
   /** Macedonian */
-  Mk = 'mk',
+  Mk = "mk",
   /** Malayalam */
-  Ml = 'ml',
+  Ml = "ml",
   /** Mongolian */
-  Mn = 'mn',
+  Mn = "mn",
   /** Marathi */
-  Mr = 'mr',
+  Mr = "mr",
   /** Malay */
-  Ms = 'ms',
+  Ms = "ms",
   /** Maltese */
-  Mt = 'mt',
+  Mt = "mt",
   /** Burmese */
-  My = 'my',
+  My = "my",
   /** Norwegian Bokmål */
-  Nb = 'nb',
+  Nb = "nb",
   /** North Ndebele */
-  Nd = 'nd',
+  Nd = "nd",
   /** Nepali */
-  Ne = 'ne',
+  Ne = "ne",
   /** Dutch */
-  Nl = 'nl',
+  Nl = "nl",
   /** Flemish */
-  NlBe = 'nl_BE',
+  NlBe = "nl_BE",
   /** Norwegian Nynorsk */
-  Nn = 'nn',
+  Nn = "nn",
   /** Nyanja */
-  Ny = 'ny',
+  Ny = "ny",
   /** Oromo */
-  Om = 'om',
+  Om = "om",
   /** Odia */
-  Or = 'or',
+  Or = "or",
   /** Ossetic */
-  Os = 'os',
+  Os = "os",
   /** Punjabi */
-  Pa = 'pa',
+  Pa = "pa",
   /** Polish */
-  Pl = 'pl',
+  Pl = "pl",
   /** Pashto */
-  Ps = 'ps',
+  Ps = "ps",
   /** Portuguese */
-  Pt = 'pt',
+  Pt = "pt",
   /** Brazilian Portuguese */
-  PtBr = 'pt_BR',
+  PtBr = "pt_BR",
   /** European Portuguese */
-  PtPt = 'pt_PT',
+  PtPt = "pt_PT",
   /** Quechua */
-  Qu = 'qu',
+  Qu = "qu",
   /** Romansh */
-  Rm = 'rm',
+  Rm = "rm",
   /** Rundi */
-  Rn = 'rn',
+  Rn = "rn",
   /** Romanian */
-  Ro = 'ro',
+  Ro = "ro",
   /** Moldavian */
-  RoMd = 'ro_MD',
+  RoMd = "ro_MD",
   /** Russian */
-  Ru = 'ru',
+  Ru = "ru",
   /** Kinyarwanda */
-  Rw = 'rw',
+  Rw = "rw",
   /** Sanskrit */
-  Sa = 'sa',
+  Sa = "sa",
   /** Sindhi */
-  Sd = 'sd',
+  Sd = "sd",
   /** Northern Sami */
-  Se = 'se',
+  Se = "se",
   /** Sango */
-  Sg = 'sg',
+  Sg = "sg",
   /** Sinhala */
-  Si = 'si',
+  Si = "si",
   /** Slovak */
-  Sk = 'sk',
+  Sk = "sk",
   /** Slovenian */
-  Sl = 'sl',
+  Sl = "sl",
   /** Samoan */
-  Sm = 'sm',
+  Sm = "sm",
   /** Shona */
-  Sn = 'sn',
+  Sn = "sn",
   /** Somali */
-  So = 'so',
+  So = "so",
   /** Albanian */
-  Sq = 'sq',
+  Sq = "sq",
   /** Serbian */
-  Sr = 'sr',
+  Sr = "sr",
   /** Southern Sotho */
-  St = 'st',
+  St = "st",
   /** Sundanese */
-  Su = 'su',
+  Su = "su",
   /** Swedish */
-  Sv = 'sv',
+  Sv = "sv",
   /** Swahili */
-  Sw = 'sw',
+  Sw = "sw",
   /** Congo Swahili */
-  SwCd = 'sw_CD',
+  SwCd = "sw_CD",
   /** Tamil */
-  Ta = 'ta',
+  Ta = "ta",
   /** Telugu */
-  Te = 'te',
+  Te = "te",
   /** Tajik */
-  Tg = 'tg',
+  Tg = "tg",
   /** Thai */
-  Th = 'th',
+  Th = "th",
   /** Tigrinya */
-  Ti = 'ti',
+  Ti = "ti",
   /** Turkmen */
-  Tk = 'tk',
+  Tk = "tk",
   /** Tongan */
-  To = 'to',
+  To = "to",
   /** Turkish */
-  Tr = 'tr',
+  Tr = "tr",
   /** Tatar */
-  Tt = 'tt',
+  Tt = "tt",
   /** Uyghur */
-  Ug = 'ug',
+  Ug = "ug",
   /** Ukrainian */
-  Uk = 'uk',
+  Uk = "uk",
   /** Urdu */
-  Ur = 'ur',
+  Ur = "ur",
   /** Uzbek */
-  Uz = 'uz',
+  Uz = "uz",
   /** Vietnamese */
-  Vi = 'vi',
+  Vi = "vi",
   /** Volapük */
-  Vo = 'vo',
+  Vo = "vo",
   /** Wolof */
-  Wo = 'wo',
+  Wo = "wo",
   /** Xhosa */
-  Xh = 'xh',
+  Xh = "xh",
   /** Yiddish */
-  Yi = 'yi',
+  Yi = "yi",
   /** Yoruba */
-  Yo = 'yo',
+  Yo = "yo",
   /** Chinese */
-  Zh = 'zh',
+  Zh = "zh",
   /** Simplified Chinese */
-  ZhHans = 'zh_Hans',
+  ZhHans = "zh_Hans",
   /** Traditional Chinese */
-  ZhHant = 'zh_Hant',
+  ZhHant = "zh_Hant",
   /** Zulu */
-  Zu = 'zu'
+  Zu = "zu",
 }
 
 export type LocaleStringCustomFieldConfig = CustomField & {
-  __typename?: 'LocaleStringCustomFieldConfig';
+  __typename?: "LocaleStringCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  length?: Maybe<Scalars['Int']['output']>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  pattern?: Maybe<Scalars['String']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  length?: Maybe<Scalars["Int"]["output"]>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  pattern?: Maybe<Scalars["String"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type LocaleTextCustomFieldConfig = CustomField & {
-  __typename?: 'LocaleTextCustomFieldConfig';
+  __typename?: "LocaleTextCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type LocalizedString = {
-  __typename?: 'LocalizedString';
+  __typename?: "LocalizedString";
   languageCode: LanguageCode;
-  value: Scalars['String']['output'];
+  value: Scalars["String"]["output"];
 };
 
 export enum LogicalOperator {
-  And = 'AND',
-  Or = 'OR'
+  And = "AND",
+  Or = "OR",
 }
 
 /** Returned when attempting to register or verify a customer account without a password, when one is required. */
 export type MissingPasswordError = ErrorResult & {
-  __typename?: 'MissingPasswordError';
+  __typename?: "MissingPasswordError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   addDeviceToken?: Maybe<DeviceToken>;
   /** Adds an item to the order. If custom fields are defined on the OrderLine entity, a third argument 'customFields' will be available. */
   addItemToOrder: UpdateOrderItemsResult;
@@ -2019,200 +2058,171 @@ export type Mutation = {
   voteOnReview: ProductReview;
 };
 
-
 export type MutationAddDeviceTokenArgs = {
-  token: Scalars['String']['input'];
+  token: Scalars["String"]["input"];
 };
-
 
 export type MutationAddItemToOrderArgs = {
-  productVariantId: Scalars['ID']['input'];
-  quantity: Scalars['Int']['input'];
+  productVariantId: Scalars["ID"]["input"];
+  quantity: Scalars["Int"]["input"];
 };
-
 
 export type MutationAddPaymentToOrderArgs = {
   input: PaymentInput;
 };
 
-
 export type MutationAdjustOrderLineArgs = {
-  orderLineId: Scalars['ID']['input'];
-  quantity: Scalars['Int']['input'];
+  orderLineId: Scalars["ID"]["input"];
+  quantity: Scalars["Int"]["input"];
 };
-
 
 export type MutationApplyCouponCodeArgs = {
-  couponCode: Scalars['String']['input'];
+  couponCode: Scalars["String"]["input"];
 };
-
 
 export type MutationAuthenticateArgs = {
   input: AuthenticationInput;
-  rememberMe?: InputMaybe<Scalars['Boolean']['input']>;
+  rememberMe?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
-
 
 export type MutationCreateCustomerAddressArgs = {
   input: CreateAddressInput;
 };
 
-
 export type MutationDeleteCustomerAddressArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type MutationExchangePointToVariantArgs = {
-  productVariantId: Scalars['ID']['input'];
+  productVariantId: Scalars["ID"]["input"];
 };
-
 
 export type MutationLoginArgs = {
-  password: Scalars['String']['input'];
-  rememberMe?: InputMaybe<Scalars['Boolean']['input']>;
-  username: Scalars['String']['input'];
+  password: Scalars["String"]["input"];
+  rememberMe?: InputMaybe<Scalars["Boolean"]["input"]>;
+  username: Scalars["String"]["input"];
 };
-
 
 export type MutationMaskAsReadArgs = {
-  notificationId?: InputMaybe<Scalars['ID']['input']>;
+  notificationId?: InputMaybe<Scalars["ID"]["input"]>;
 };
-
 
 export type MutationRefreshCustomerVerificationArgs = {
-  emailAddress: Scalars['String']['input'];
+  emailAddress: Scalars["String"]["input"];
 };
-
 
 export type MutationRegisterCustomerAccountArgs = {
   input: RegisterCustomerInput;
 };
 
-
 export type MutationRemoveCouponCodeArgs = {
-  couponCode: Scalars['String']['input'];
+  couponCode: Scalars["String"]["input"];
 };
-
 
 export type MutationRemoveOrderLineArgs = {
-  orderLineId: Scalars['ID']['input'];
+  orderLineId: Scalars["ID"]["input"];
 };
-
 
 export type MutationRequestPasswordResetArgs = {
-  emailAddress: Scalars['String']['input'];
+  emailAddress: Scalars["String"]["input"];
 };
-
 
 export type MutationRequestUpdateCustomerEmailAddressArgs = {
-  newEmailAddress: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+  newEmailAddress: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
 };
-
 
 export type MutationResetPasswordArgs = {
-  password: Scalars['String']['input'];
-  token: Scalars['String']['input'];
+  password: Scalars["String"]["input"];
+  token: Scalars["String"]["input"];
 };
-
 
 export type MutationSetCustomerForOrderArgs = {
   input: CreateCustomerInput;
 };
 
-
 export type MutationSetOrderBillingAddressArgs = {
   input: CreateAddressInput;
 };
-
 
 export type MutationSetOrderCustomFieldsArgs = {
   input: UpdateOrderInput;
 };
 
-
 export type MutationSetOrderShippingAddressArgs = {
   input: CreateAddressInput;
 };
 
-
 export type MutationSetOrderShippingMethodArgs = {
-  shippingMethodId: Array<Scalars['ID']['input']>;
+  shippingMethodId: Array<Scalars["ID"]["input"]>;
 };
-
 
 export type MutationSubmitProductReviewArgs = {
   input: SubmitProductReviewInput;
 };
 
-
 export type MutationSubmitQuestionAnswerArgs = {
   input: SubmitQuestionAnswerInput;
 };
 
-
 export type MutationToggleFavoriteArgs = {
-  productVariantId: Scalars['ID']['input'];
+  productVariantId: Scalars["ID"]["input"];
 };
-
 
 export type MutationTransitionOrderToStateArgs = {
-  state: Scalars['String']['input'];
+  state: Scalars["String"]["input"];
 };
-
 
 export type MutationUpdateCustomerArgs = {
   input: UpdateCustomerInput;
 };
 
-
 export type MutationUpdateCustomerAddressArgs = {
   input: UpdateAddressInput;
 };
 
-
 export type MutationUpdateCustomerEmailAddressArgs = {
-  token: Scalars['String']['input'];
+  token: Scalars["String"]["input"];
 };
-
 
 export type MutationUpdateCustomerPasswordArgs = {
-  currentPassword: Scalars['String']['input'];
-  newPassword: Scalars['String']['input'];
+  currentPassword: Scalars["String"]["input"];
+  newPassword: Scalars["String"]["input"];
 };
-
 
 export type MutationVerifyCustomerAccountArgs = {
-  password?: InputMaybe<Scalars['String']['input']>;
-  token: Scalars['String']['input'];
+  password?: InputMaybe<Scalars["String"]["input"]>;
+  token: Scalars["String"]["input"];
 };
 
-
 export type MutationVoteOnReviewArgs = {
-  id: Scalars['ID']['input'];
-  vote: Scalars['Boolean']['input'];
+  id: Scalars["ID"]["input"];
+  vote: Scalars["Boolean"]["input"];
 };
 
 export type NativeAuthInput = {
-  password: Scalars['String']['input'];
-  username: Scalars['String']['input'];
+  password: Scalars["String"]["input"];
+  username: Scalars["String"]["input"];
 };
 
 /** Returned when attempting an operation that relies on the NativeAuthStrategy, if that strategy is not configured. */
 export type NativeAuthStrategyError = ErrorResult & {
-  __typename?: 'NativeAuthStrategyError';
+  __typename?: "NativeAuthStrategyError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
-export type NativeAuthenticationResult = CurrentUser | InvalidCredentialsError | NativeAuthStrategyError | NotVerifiedError;
+export type NativeAuthenticationResult =
+  | CurrentUser
+  | InvalidCredentialsError
+  | NativeAuthStrategyError
+  | NotVerifiedError;
 
 /** Returned when attempting to set a negative OrderLine quantity. */
 export type NegativeQuantityError = ErrorResult & {
-  __typename?: 'NegativeQuantityError';
+  __typename?: "NegativeQuantityError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -2220,13 +2230,13 @@ export type NegativeQuantityError = ErrorResult & {
  * current session.
  */
 export type NoActiveOrderError = ErrorResult & {
-  __typename?: 'NoActiveOrderError';
+  __typename?: "NoActiveOrderError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export type Node = {
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
 };
 
 /**
@@ -2234,48 +2244,48 @@ export type Node = {
  * and an unverified user attempts to authenticate.
  */
 export type NotVerifiedError = ErrorResult & {
-  __typename?: 'NotVerifiedError';
+  __typename?: "NotVerifiedError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export type Notification = Node & {
-  __typename?: 'Notification';
-  body?: Maybe<Scalars['String']['output']>;
+  __typename?: "Notification";
+  body?: Maybe<Scalars["String"]["output"]>;
   conditions: Array<ConfigurableOperation>;
-  content?: Maybe<Scalars['String']['output']>;
-  createdAt: Scalars['DateTime']['output'];
+  content?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
   event?: Maybe<ConfigurableOperation>;
-  id: Scalars['ID']['output'];
-  isAuto?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars["ID"]["output"];
+  isAuto?: Maybe<Scalars["Boolean"]["output"]>;
   languageCode: LanguageCode;
   link?: Maybe<ConfigurableOperation>;
-  title: Scalars['String']['output'];
+  title: Scalars["String"]["output"];
   translations: Array<NotificationTranslation>;
-  unSeen?: Maybe<Scalars['Boolean']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  unSeen?: Maybe<Scalars["Boolean"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type NotificationAutoTemplate = Node & {
-  __typename?: 'NotificationAutoTemplate';
-  bodyTemplate?: Maybe<Scalars['String']['output']>;
+  __typename?: "NotificationAutoTemplate";
+  bodyTemplate?: Maybe<Scalars["String"]["output"]>;
   conditions: Array<ConfigurableOperation>;
-  createdAt: Scalars['DateTime']['output'];
-  eventType?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  createdAt: Scalars["DateTime"]["output"];
+  eventType?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
   link?: Maybe<ConfigurableOperation>;
-  titleTemplate: Scalars['String']['output'];
+  titleTemplate: Scalars["String"]["output"];
   translations: Array<NotificationAutoTemplateTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type NotificationAutoTemplateTranslation = {
-  __typename?: 'NotificationAutoTemplateTranslation';
-  bodyTemplate?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
+  __typename?: "NotificationAutoTemplateTranslation";
+  bodyTemplate?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["ID"]["output"]>;
   languageCode: LanguageCode;
-  titleTemplate: Scalars['String']['output'];
+  titleTemplate: Scalars["String"]["output"];
 };
 
 export type NotificationFilterParameter = {
@@ -2291,9 +2301,9 @@ export type NotificationFilterParameter = {
 };
 
 export type NotificationList = PaginatedList & {
-  __typename?: 'NotificationList';
+  __typename?: "NotificationList";
   items: Array<Notification>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type NotificationListOptions = {
@@ -2302,11 +2312,11 @@ export type NotificationListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<NotificationSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type NotificationSortParameter = {
@@ -2319,75 +2329,75 @@ export type NotificationSortParameter = {
 };
 
 export type NotificationTranslation = {
-  __typename?: 'NotificationTranslation';
-  body?: Maybe<Scalars['String']['output']>;
-  content?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
+  __typename?: "NotificationTranslation";
+  body?: Maybe<Scalars["String"]["output"]>;
+  content?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["ID"]["output"]>;
   languageCode: LanguageCode;
-  title: Scalars['String']['output'];
+  title: Scalars["String"]["output"];
 };
 
 /** Operators for filtering on a list of Number fields */
 export type NumberListOperators = {
-  inList: Scalars['Float']['input'];
+  inList: Scalars["Float"]["input"];
 };
 
 /** Operators for filtering on a Int or Float field */
 export type NumberOperators = {
   between?: InputMaybe<NumberRange>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  isNull?: InputMaybe<Scalars['Boolean']['input']>;
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars["Float"]["input"]>;
+  gt?: InputMaybe<Scalars["Float"]["input"]>;
+  gte?: InputMaybe<Scalars["Float"]["input"]>;
+  isNull?: InputMaybe<Scalars["Boolean"]["input"]>;
+  lt?: InputMaybe<Scalars["Float"]["input"]>;
+  lte?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
 export type NumberRange = {
-  end: Scalars['Float']['input'];
-  start: Scalars['Float']['input'];
+  end: Scalars["Float"]["input"];
+  start: Scalars["Float"]["input"];
 };
 
 export type Order = Node & {
-  __typename?: 'Order';
+  __typename?: "Order";
   /** An order is active as long as the payment process has not been completed */
-  active: Scalars['Boolean']['output'];
+  active: Scalars["Boolean"]["output"];
   billingAddress?: Maybe<OrderAddress>;
   /** A unique code for the Order */
-  code: Scalars['String']['output'];
+  code: Scalars["String"]["output"];
   /** An array of all coupon codes applied to the Order */
-  couponCodes: Array<Scalars['String']['output']>;
-  createdAt: Scalars['DateTime']['output'];
+  couponCodes: Array<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
   currencyCode: CurrencyCode;
   customFields?: Maybe<OrderCustomFields>;
   customer?: Maybe<Customer>;
   discounts: Array<Discount>;
   fulfillments?: Maybe<Array<Fulfillment>>;
   history: HistoryEntryList;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   lines: Array<OrderLine>;
   /**
    * The date & time that the Order was placed, i.e. the Customer
    * completed the checkout and the Order is no longer "active"
    */
-  orderPlacedAt?: Maybe<Scalars['DateTime']['output']>;
+  orderPlacedAt?: Maybe<Scalars["DateTime"]["output"]>;
   payments?: Maybe<Array<Payment>>;
   /** Promotions applied to the order. Only gets populated after the payment process has completed. */
   promotions: Array<Promotion>;
-  shipping: Scalars['Money']['output'];
+  shipping: Scalars["Money"]["output"];
   shippingAddress?: Maybe<OrderAddress>;
   shippingLines: Array<ShippingLine>;
-  shippingWithTax: Scalars['Money']['output'];
-  state: Scalars['String']['output'];
+  shippingWithTax: Scalars["Money"]["output"];
+  state: Scalars["String"]["output"];
   /**
    * The subTotal is the total of all OrderLines in the Order. This figure also includes any Order-level
    * discounts which have been prorated (proportionally distributed) amongst the items of each OrderLine.
    * To get a total of all OrderLines which does not account for prorated discounts, use the
    * sum of `OrderLine.discountedLinePrice` values.
    */
-  subTotal: Scalars['Money']['output'];
+  subTotal: Scalars["Money"]["output"];
   /** Same as subTotal, but inclusive of tax */
-  subTotalWithTax: Scalars['Money']['output'];
+  subTotalWithTax: Scalars["Money"]["output"];
   /**
    * Surcharges are arbitrary modifications to the Order total which are neither
    * ProductVariants nor discounts resulting from applied Promotions. For example,
@@ -2398,37 +2408,36 @@ export type Order = Node & {
   /** A summary of the taxes being applied to this Order */
   taxSummary: Array<OrderTaxSummary>;
   /** Equal to subTotal plus shipping */
-  total: Scalars['Money']['output'];
-  totalQuantity: Scalars['Int']['output'];
+  total: Scalars["Money"]["output"];
+  totalQuantity: Scalars["Int"]["output"];
   /** The final payable amount. Equal to subTotalWithTax plus shippingWithTax */
-  totalWithTax: Scalars['Money']['output'];
+  totalWithTax: Scalars["Money"]["output"];
   type: OrderType;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
-
 
 export type OrderHistoryArgs = {
   options?: InputMaybe<HistoryEntryListOptions>;
 };
 
 export type OrderAddress = {
-  __typename?: 'OrderAddress';
-  city?: Maybe<Scalars['String']['output']>;
-  company?: Maybe<Scalars['String']['output']>;
-  country?: Maybe<Scalars['String']['output']>;
-  countryCode?: Maybe<Scalars['String']['output']>;
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  fullName?: Maybe<Scalars['String']['output']>;
-  phoneNumber?: Maybe<Scalars['String']['output']>;
-  postalCode?: Maybe<Scalars['String']['output']>;
-  province?: Maybe<Scalars['String']['output']>;
-  streetLine1?: Maybe<Scalars['String']['output']>;
-  streetLine2?: Maybe<Scalars['String']['output']>;
+  __typename?: "OrderAddress";
+  city?: Maybe<Scalars["String"]["output"]>;
+  company?: Maybe<Scalars["String"]["output"]>;
+  country?: Maybe<Scalars["String"]["output"]>;
+  countryCode?: Maybe<Scalars["String"]["output"]>;
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  fullName?: Maybe<Scalars["String"]["output"]>;
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
+  postalCode?: Maybe<Scalars["String"]["output"]>;
+  province?: Maybe<Scalars["String"]["output"]>;
+  streetLine1?: Maybe<Scalars["String"]["output"]>;
+  streetLine2?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type OrderCustomFields = {
-  __typename?: 'OrderCustomFields';
-  note?: Maybe<Scalars['String']['output']>;
+  __typename?: "OrderCustomFields";
+  note?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type OrderFilterParameter = {
@@ -2453,20 +2462,20 @@ export type OrderFilterParameter = {
 
 /** Returned when the maximum order size limit has been reached. */
 export type OrderLimitError = ErrorResult & {
-  __typename?: 'OrderLimitError';
+  __typename?: "OrderLimitError";
   errorCode: ErrorCode;
-  maxItems: Scalars['Int']['output'];
-  message: Scalars['String']['output'];
+  maxItems: Scalars["Int"]["output"];
+  message: Scalars["String"]["output"];
 };
 
 export type OrderLine = Node & {
-  __typename?: 'OrderLine';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
+  __typename?: "OrderLine";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
   /** The price of the line including discounts, excluding tax */
-  discountedLinePrice: Scalars['Money']['output'];
+  discountedLinePrice: Scalars["Money"]["output"];
   /** The price of the line including discounts and tax */
-  discountedLinePriceWithTax: Scalars['Money']['output'];
+  discountedLinePriceWithTax: Scalars["Money"]["output"];
   /**
    * The price of a single unit including discounts, excluding tax.
    *
@@ -2475,58 +2484,58 @@ export type OrderLine = Node & {
    * correct price to display to customers to avoid confusion
    * about the internal handling of distributed Order-level discounts.
    */
-  discountedUnitPrice: Scalars['Money']['output'];
+  discountedUnitPrice: Scalars["Money"]["output"];
   /** The price of a single unit including discounts and tax */
-  discountedUnitPriceWithTax: Scalars['Money']['output'];
+  discountedUnitPriceWithTax: Scalars["Money"]["output"];
   discounts: Array<Discount>;
   featuredAsset?: Maybe<Asset>;
   fulfillmentLines?: Maybe<Array<FulfillmentLine>>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   /** The total price of the line excluding tax and discounts. */
-  linePrice: Scalars['Money']['output'];
+  linePrice: Scalars["Money"]["output"];
   /** The total price of the line including tax but excluding discounts. */
-  linePriceWithTax: Scalars['Money']['output'];
+  linePriceWithTax: Scalars["Money"]["output"];
   /** The total tax on this line */
-  lineTax: Scalars['Money']['output'];
+  lineTax: Scalars["Money"]["output"];
   order: Order;
   /** The quantity at the time the Order was placed */
-  orderPlacedQuantity: Scalars['Int']['output'];
+  orderPlacedQuantity: Scalars["Int"]["output"];
   productVariant: ProductVariant;
   /**
    * The actual line price, taking into account both item discounts _and_ prorated (proportionally-distributed)
    * Order-level discounts. This value is the true economic value of the OrderLine, and is used in tax
    * and refund calculations.
    */
-  proratedLinePrice: Scalars['Money']['output'];
+  proratedLinePrice: Scalars["Money"]["output"];
   /** The proratedLinePrice including tax */
-  proratedLinePriceWithTax: Scalars['Money']['output'];
+  proratedLinePriceWithTax: Scalars["Money"]["output"];
   /**
    * The actual unit price, taking into account both item discounts _and_ prorated (proportionally-distributed)
    * Order-level discounts. This value is the true economic value of the OrderItem, and is used in tax
    * and refund calculations.
    */
-  proratedUnitPrice: Scalars['Money']['output'];
+  proratedUnitPrice: Scalars["Money"]["output"];
   /** The proratedUnitPrice including tax */
-  proratedUnitPriceWithTax: Scalars['Money']['output'];
+  proratedUnitPriceWithTax: Scalars["Money"]["output"];
   /** The quantity of items purchased */
-  quantity: Scalars['Int']['output'];
+  quantity: Scalars["Int"]["output"];
   taxLines: Array<TaxLine>;
-  taxRate: Scalars['Float']['output'];
+  taxRate: Scalars["Float"]["output"];
   /** The price of a single unit, excluding tax and discounts */
-  unitPrice: Scalars['Money']['output'];
+  unitPrice: Scalars["Money"]["output"];
   /** Non-zero if the unitPrice has changed since it was initially added to Order */
-  unitPriceChangeSinceAdded: Scalars['Money']['output'];
+  unitPriceChangeSinceAdded: Scalars["Money"]["output"];
   /** The price of a single unit, including tax but excluding discounts */
-  unitPriceWithTax: Scalars['Money']['output'];
+  unitPriceWithTax: Scalars["Money"]["output"];
   /** Non-zero if the unitPriceWithTax has changed since it was initially added to Order */
-  unitPriceWithTaxChangeSinceAdded: Scalars['Money']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  unitPriceWithTaxChangeSinceAdded: Scalars["Money"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type OrderList = PaginatedList & {
-  __typename?: 'OrderList';
+  __typename?: "OrderList";
   items: Array<Order>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type OrderListOptions = {
@@ -2535,25 +2544,25 @@ export type OrderListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<OrderSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** Returned when attempting to modify the contents of an Order that is not in the `AddingItems` state. */
 export type OrderModificationError = ErrorResult & {
-  __typename?: 'OrderModificationError';
+  __typename?: "OrderModificationError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to add a Payment to an Order that is not in the `ArrangingPayment` state. */
 export type OrderPaymentStateError = ErrorResult & {
-  __typename?: 'OrderPaymentStateError';
+  __typename?: "OrderPaymentStateError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 export type OrderSortParameter = {
@@ -2575,12 +2584,12 @@ export type OrderSortParameter = {
 
 /** Returned if there is an error in transitioning the Order state */
 export type OrderStateTransitionError = ErrorResult & {
-  __typename?: 'OrderStateTransitionError';
+  __typename?: "OrderStateTransitionError";
   errorCode: ErrorCode;
-  fromState: Scalars['String']['output'];
-  message: Scalars['String']['output'];
-  toState: Scalars['String']['output'];
-  transitionError: Scalars['String']['output'];
+  fromState: Scalars["String"]["output"];
+  message: Scalars["String"]["output"];
+  toState: Scalars["String"]["output"];
+  transitionError: Scalars["String"]["output"];
 };
 
 /**
@@ -2588,33 +2597,33 @@ export type OrderStateTransitionError = ErrorResult & {
  * by taxRate.
  */
 export type OrderTaxSummary = {
-  __typename?: 'OrderTaxSummary';
+  __typename?: "OrderTaxSummary";
   /** A description of this tax */
-  description: Scalars['String']['output'];
+  description: Scalars["String"]["output"];
   /** The total net price of OrderLines to which this taxRate applies */
-  taxBase: Scalars['Money']['output'];
+  taxBase: Scalars["Money"]["output"];
   /** The taxRate as a percentage */
-  taxRate: Scalars['Float']['output'];
+  taxRate: Scalars["Float"]["output"];
   /** The total tax being applied to the Order at this taxRate */
-  taxTotal: Scalars['Money']['output'];
+  taxTotal: Scalars["Money"]["output"];
 };
 
 export enum OrderType {
-  Aggregate = 'Aggregate',
-  Regular = 'Regular',
-  Seller = 'Seller'
+  Aggregate = "Aggregate",
+  Regular = "Regular",
+  Seller = "Seller",
 }
 
 export type PaginatedList = {
   items: Array<Node>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 /** Returned when attempting to verify a customer account with a password, when a password has already been set. */
 export type PasswordAlreadySetError = ErrorResult & {
-  __typename?: 'PasswordAlreadySetError';
+  __typename?: "PasswordAlreadySetError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -2622,9 +2631,9 @@ export type PasswordAlreadySetError = ErrorResult & {
  * expired according to the `verificationTokenDuration` setting in the AuthOptions.
  */
 export type PasswordResetTokenExpiredError = ErrorResult & {
-  __typename?: 'PasswordResetTokenExpiredError';
+  __typename?: "PasswordResetTokenExpiredError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -2632,47 +2641,47 @@ export type PasswordResetTokenExpiredError = ErrorResult & {
  * invalid or does not match any expected tokens.
  */
 export type PasswordResetTokenInvalidError = ErrorResult & {
-  __typename?: 'PasswordResetTokenInvalidError';
+  __typename?: "PasswordResetTokenInvalidError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /** Returned when attempting to register or verify a customer account where the given password fails password validation. */
 export type PasswordValidationError = ErrorResult & {
-  __typename?: 'PasswordValidationError';
+  __typename?: "PasswordValidationError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
-  validationErrorMessage: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
+  validationErrorMessage: Scalars["String"]["output"];
 };
 
 export type Payment = Node & {
-  __typename?: 'Payment';
-  amount: Scalars['Money']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  errorMessage?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  method: Scalars['String']['output'];
+  __typename?: "Payment";
+  amount: Scalars["Money"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  errorMessage?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
+  metadata?: Maybe<Scalars["JSON"]["output"]>;
+  method: Scalars["String"]["output"];
   refunds: Array<Refund>;
-  state: Scalars['String']['output'];
-  transactionId?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  state: Scalars["String"]["output"];
+  transactionId?: Maybe<Scalars["String"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 /** Returned when a Payment is declined by the payment provider. */
 export type PaymentDeclinedError = ErrorResult & {
-  __typename?: 'PaymentDeclinedError';
+  __typename?: "PaymentDeclinedError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
-  paymentErrorMessage: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
+  paymentErrorMessage: Scalars["String"]["output"];
 };
 
 /** Returned when a Payment fails due to an error. */
 export type PaymentFailedError = ErrorResult & {
-  __typename?: 'PaymentFailedError';
+  __typename?: "PaymentFailedError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
-  paymentErrorMessage: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
+  paymentErrorMessage: Scalars["String"]["output"];
 };
 
 /** Passed as input to the `addPaymentToOrder` mutation. */
@@ -2682,45 +2691,45 @@ export type PaymentInput = {
    * as the "metadata" argument. For example, it could contain an ID for the payment and other
    * data generated by the payment provider.
    */
-  metadata: Scalars['JSON']['input'];
+  metadata: Scalars["JSON"]["input"];
   /** This field should correspond to the `code` property of a PaymentMethod. */
-  method: Scalars['String']['input'];
+  method: Scalars["String"]["input"];
 };
 
 export type PaymentMethod = Node & {
-  __typename?: 'PaymentMethod';
+  __typename?: "PaymentMethod";
   checker?: Maybe<ConfigurableOperation>;
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
-  enabled: Scalars['Boolean']['output'];
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
+  enabled: Scalars["Boolean"]["output"];
   handler: ConfigurableOperation;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
   translations: Array<PaymentMethodTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type PaymentMethodQuote = {
-  __typename?: 'PaymentMethodQuote';
-  code: Scalars['String']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
-  eligibilityMessage?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  isEligible: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
+  __typename?: "PaymentMethodQuote";
+  code: Scalars["String"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
+  eligibilityMessage?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
+  isEligible: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
 };
 
 export type PaymentMethodTranslation = {
-  __typename?: 'PaymentMethodTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "PaymentMethodTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 /**
@@ -2757,231 +2766,229 @@ export type PaymentMethodTranslation = {
  */
 export enum Permission {
   /** Authenticated means simply that the user is logged in */
-  Authenticated = 'Authenticated',
+  Authenticated = "Authenticated",
   /** Grants permission to create Administrator */
-  CreateAdministrator = 'CreateAdministrator',
+  CreateAdministrator = "CreateAdministrator",
   /** Grants permission to create Asset */
-  CreateAsset = 'CreateAsset',
+  CreateAsset = "CreateAsset",
   /** Grants permission to create Products, Facets, Assets, Collections */
-  CreateCatalog = 'CreateCatalog',
+  CreateCatalog = "CreateCatalog",
   /** Grants permission to create Channel */
-  CreateChannel = 'CreateChannel',
+  CreateChannel = "CreateChannel",
   /** Grants permission to create Collection */
-  CreateCollection = 'CreateCollection',
+  CreateCollection = "CreateCollection",
   /** Grants permission to create Country */
-  CreateCountry = 'CreateCountry',
+  CreateCountry = "CreateCountry",
   /** Grants permission to create Customer */
-  CreateCustomer = 'CreateCustomer',
+  CreateCustomer = "CreateCustomer",
   /** Grants permission to create CustomerGroup */
-  CreateCustomerGroup = 'CreateCustomerGroup',
+  CreateCustomerGroup = "CreateCustomerGroup",
   /** Grants permission to create Facet */
-  CreateFacet = 'CreateFacet',
+  CreateFacet = "CreateFacet",
   /** Grants permission to create Order */
-  CreateOrder = 'CreateOrder',
+  CreateOrder = "CreateOrder",
   /** Grants permission to create PaymentMethod */
-  CreatePaymentMethod = 'CreatePaymentMethod',
+  CreatePaymentMethod = "CreatePaymentMethod",
   /** Grants permission to create Product */
-  CreateProduct = 'CreateProduct',
+  CreateProduct = "CreateProduct",
   /** Grants permission to create Promotion */
-  CreatePromotion = 'CreatePromotion',
+  CreatePromotion = "CreatePromotion",
   /** Grants permission to create Seller */
-  CreateSeller = 'CreateSeller',
+  CreateSeller = "CreateSeller",
   /** Grants permission to create PaymentMethods, ShippingMethods, TaxCategories, TaxRates, Zones, Countries, System & GlobalSettings */
-  CreateSettings = 'CreateSettings',
+  CreateSettings = "CreateSettings",
   /** Grants permission to create ShippingMethod */
-  CreateShippingMethod = 'CreateShippingMethod',
+  CreateShippingMethod = "CreateShippingMethod",
   /** Grants permission to create StockLocation */
-  CreateStockLocation = 'CreateStockLocation',
+  CreateStockLocation = "CreateStockLocation",
   /** Grants permission to create System */
-  CreateSystem = 'CreateSystem',
+  CreateSystem = "CreateSystem",
   /** Grants permission to create Tag */
-  CreateTag = 'CreateTag',
+  CreateTag = "CreateTag",
   /** Grants permission to create TaxCategory */
-  CreateTaxCategory = 'CreateTaxCategory',
+  CreateTaxCategory = "CreateTaxCategory",
   /** Grants permission to create TaxRate */
-  CreateTaxRate = 'CreateTaxRate',
+  CreateTaxRate = "CreateTaxRate",
   /** Grants permission to create Zone */
-  CreateZone = 'CreateZone',
+  CreateZone = "CreateZone",
   /** Grants permission to delete Administrator */
-  DeleteAdministrator = 'DeleteAdministrator',
+  DeleteAdministrator = "DeleteAdministrator",
   /** Grants permission to delete Asset */
-  DeleteAsset = 'DeleteAsset',
+  DeleteAsset = "DeleteAsset",
   /** Grants permission to delete Products, Facets, Assets, Collections */
-  DeleteCatalog = 'DeleteCatalog',
+  DeleteCatalog = "DeleteCatalog",
   /** Grants permission to delete Channel */
-  DeleteChannel = 'DeleteChannel',
+  DeleteChannel = "DeleteChannel",
   /** Grants permission to delete Collection */
-  DeleteCollection = 'DeleteCollection',
+  DeleteCollection = "DeleteCollection",
   /** Grants permission to delete Country */
-  DeleteCountry = 'DeleteCountry',
+  DeleteCountry = "DeleteCountry",
   /** Grants permission to delete Customer */
-  DeleteCustomer = 'DeleteCustomer',
+  DeleteCustomer = "DeleteCustomer",
   /** Grants permission to delete CustomerGroup */
-  DeleteCustomerGroup = 'DeleteCustomerGroup',
+  DeleteCustomerGroup = "DeleteCustomerGroup",
   /** Grants permission to delete Facet */
-  DeleteFacet = 'DeleteFacet',
+  DeleteFacet = "DeleteFacet",
   /** Grants permission to delete Order */
-  DeleteOrder = 'DeleteOrder',
+  DeleteOrder = "DeleteOrder",
   /** Grants permission to delete PaymentMethod */
-  DeletePaymentMethod = 'DeletePaymentMethod',
+  DeletePaymentMethod = "DeletePaymentMethod",
   /** Grants permission to delete Product */
-  DeleteProduct = 'DeleteProduct',
+  DeleteProduct = "DeleteProduct",
   /** Grants permission to delete Promotion */
-  DeletePromotion = 'DeletePromotion',
+  DeletePromotion = "DeletePromotion",
   /** Grants permission to delete Seller */
-  DeleteSeller = 'DeleteSeller',
+  DeleteSeller = "DeleteSeller",
   /** Grants permission to delete PaymentMethods, ShippingMethods, TaxCategories, TaxRates, Zones, Countries, System & GlobalSettings */
-  DeleteSettings = 'DeleteSettings',
+  DeleteSettings = "DeleteSettings",
   /** Grants permission to delete ShippingMethod */
-  DeleteShippingMethod = 'DeleteShippingMethod',
+  DeleteShippingMethod = "DeleteShippingMethod",
   /** Grants permission to delete StockLocation */
-  DeleteStockLocation = 'DeleteStockLocation',
+  DeleteStockLocation = "DeleteStockLocation",
   /** Grants permission to delete System */
-  DeleteSystem = 'DeleteSystem',
+  DeleteSystem = "DeleteSystem",
   /** Grants permission to delete Tag */
-  DeleteTag = 'DeleteTag',
+  DeleteTag = "DeleteTag",
   /** Grants permission to delete TaxCategory */
-  DeleteTaxCategory = 'DeleteTaxCategory',
+  DeleteTaxCategory = "DeleteTaxCategory",
   /** Grants permission to delete TaxRate */
-  DeleteTaxRate = 'DeleteTaxRate',
+  DeleteTaxRate = "DeleteTaxRate",
   /** Grants permission to delete Zone */
-  DeleteZone = 'DeleteZone',
+  DeleteZone = "DeleteZone",
   /** Owner means the user owns this entity, e.g. a Customer's own Order */
-  Owner = 'Owner',
+  Owner = "Owner",
   /** Public means any unauthenticated user may perform the operation */
-  Public = 'Public',
+  Public = "Public",
   /** Grants permission to read Administrator */
-  ReadAdministrator = 'ReadAdministrator',
+  ReadAdministrator = "ReadAdministrator",
   /** Grants permission to read Asset */
-  ReadAsset = 'ReadAsset',
+  ReadAsset = "ReadAsset",
   /** Grants permission to read Products, Facets, Assets, Collections */
-  ReadCatalog = 'ReadCatalog',
+  ReadCatalog = "ReadCatalog",
   /** Grants permission to read Channel */
-  ReadChannel = 'ReadChannel',
+  ReadChannel = "ReadChannel",
   /** Grants permission to read Collection */
-  ReadCollection = 'ReadCollection',
+  ReadCollection = "ReadCollection",
   /** Grants permission to read Country */
-  ReadCountry = 'ReadCountry',
+  ReadCountry = "ReadCountry",
   /** Grants permission to read Customer */
-  ReadCustomer = 'ReadCustomer',
+  ReadCustomer = "ReadCustomer",
   /** Grants permission to read CustomerGroup */
-  ReadCustomerGroup = 'ReadCustomerGroup',
+  ReadCustomerGroup = "ReadCustomerGroup",
   /** Grants permission to read Facet */
-  ReadFacet = 'ReadFacet',
+  ReadFacet = "ReadFacet",
   /** Grants permission to read Order */
-  ReadOrder = 'ReadOrder',
+  ReadOrder = "ReadOrder",
   /** Grants permission to read PaymentMethod */
-  ReadPaymentMethod = 'ReadPaymentMethod',
+  ReadPaymentMethod = "ReadPaymentMethod",
   /** Grants permission to read Product */
-  ReadProduct = 'ReadProduct',
+  ReadProduct = "ReadProduct",
   /** Grants permission to read Promotion */
-  ReadPromotion = 'ReadPromotion',
+  ReadPromotion = "ReadPromotion",
   /** Grants permission to read Seller */
-  ReadSeller = 'ReadSeller',
+  ReadSeller = "ReadSeller",
   /** Grants permission to read PaymentMethods, ShippingMethods, TaxCategories, TaxRates, Zones, Countries, System & GlobalSettings */
-  ReadSettings = 'ReadSettings',
+  ReadSettings = "ReadSettings",
   /** Grants permission to read ShippingMethod */
-  ReadShippingMethod = 'ReadShippingMethod',
+  ReadShippingMethod = "ReadShippingMethod",
   /** Grants permission to read StockLocation */
-  ReadStockLocation = 'ReadStockLocation',
+  ReadStockLocation = "ReadStockLocation",
   /** Grants permission to read System */
-  ReadSystem = 'ReadSystem',
+  ReadSystem = "ReadSystem",
   /** Grants permission to read Tag */
-  ReadTag = 'ReadTag',
+  ReadTag = "ReadTag",
   /** Grants permission to read TaxCategory */
-  ReadTaxCategory = 'ReadTaxCategory',
+  ReadTaxCategory = "ReadTaxCategory",
   /** Grants permission to read TaxRate */
-  ReadTaxRate = 'ReadTaxRate',
+  ReadTaxRate = "ReadTaxRate",
   /** Grants permission to read Zone */
-  ReadZone = 'ReadZone',
+  ReadZone = "ReadZone",
   /** SuperAdmin has unrestricted access to all operations */
-  SuperAdmin = 'SuperAdmin',
+  SuperAdmin = "SuperAdmin",
   /** Grants permission to update Administrator */
-  UpdateAdministrator = 'UpdateAdministrator',
+  UpdateAdministrator = "UpdateAdministrator",
   /** Grants permission to update Asset */
-  UpdateAsset = 'UpdateAsset',
+  UpdateAsset = "UpdateAsset",
   /** Grants permission to update Products, Facets, Assets, Collections */
-  UpdateCatalog = 'UpdateCatalog',
+  UpdateCatalog = "UpdateCatalog",
   /** Grants permission to update Channel */
-  UpdateChannel = 'UpdateChannel',
+  UpdateChannel = "UpdateChannel",
   /** Grants permission to update Collection */
-  UpdateCollection = 'UpdateCollection',
+  UpdateCollection = "UpdateCollection",
   /** Grants permission to update Country */
-  UpdateCountry = 'UpdateCountry',
+  UpdateCountry = "UpdateCountry",
   /** Grants permission to update Customer */
-  UpdateCustomer = 'UpdateCustomer',
+  UpdateCustomer = "UpdateCustomer",
   /** Grants permission to update CustomerGroup */
-  UpdateCustomerGroup = 'UpdateCustomerGroup',
+  UpdateCustomerGroup = "UpdateCustomerGroup",
   /** Grants permission to update Facet */
-  UpdateFacet = 'UpdateFacet',
+  UpdateFacet = "UpdateFacet",
   /** Grants permission to update GlobalSettings */
-  UpdateGlobalSettings = 'UpdateGlobalSettings',
+  UpdateGlobalSettings = "UpdateGlobalSettings",
   /** Grants permission to update Order */
-  UpdateOrder = 'UpdateOrder',
+  UpdateOrder = "UpdateOrder",
   /** Grants permission to update PaymentMethod */
-  UpdatePaymentMethod = 'UpdatePaymentMethod',
+  UpdatePaymentMethod = "UpdatePaymentMethod",
   /** Grants permission to update Product */
-  UpdateProduct = 'UpdateProduct',
+  UpdateProduct = "UpdateProduct",
   /** Grants permission to update Promotion */
-  UpdatePromotion = 'UpdatePromotion',
+  UpdatePromotion = "UpdatePromotion",
   /** Grants permission to update Seller */
-  UpdateSeller = 'UpdateSeller',
+  UpdateSeller = "UpdateSeller",
   /** Grants permission to update PaymentMethods, ShippingMethods, TaxCategories, TaxRates, Zones, Countries, System & GlobalSettings */
-  UpdateSettings = 'UpdateSettings',
+  UpdateSettings = "UpdateSettings",
   /** Grants permission to update ShippingMethod */
-  UpdateShippingMethod = 'UpdateShippingMethod',
+  UpdateShippingMethod = "UpdateShippingMethod",
   /** Grants permission to update StockLocation */
-  UpdateStockLocation = 'UpdateStockLocation',
+  UpdateStockLocation = "UpdateStockLocation",
   /** Grants permission to update System */
-  UpdateSystem = 'UpdateSystem',
+  UpdateSystem = "UpdateSystem",
   /** Grants permission to update Tag */
-  UpdateTag = 'UpdateTag',
+  UpdateTag = "UpdateTag",
   /** Grants permission to update TaxCategory */
-  UpdateTaxCategory = 'UpdateTaxCategory',
+  UpdateTaxCategory = "UpdateTaxCategory",
   /** Grants permission to update TaxRate */
-  UpdateTaxRate = 'UpdateTaxRate',
+  UpdateTaxRate = "UpdateTaxRate",
   /** Grants permission to update Zone */
-  UpdateZone = 'UpdateZone'
+  UpdateZone = "UpdateZone",
 }
 
 /** The price range where the result has more than one price */
 export type PriceRange = {
-  __typename?: 'PriceRange';
-  max: Scalars['Money']['output'];
-  min: Scalars['Money']['output'];
+  __typename?: "PriceRange";
+  max: Scalars["Money"]["output"];
+  min: Scalars["Money"]["output"];
 };
 
 export type Product = Node & {
-  __typename?: 'Product';
+  __typename?: "Product";
   assets: Array<Asset>;
   collections: Array<Collection>;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
   facetValues: Array<FacetValue>;
   featuredAsset?: Maybe<Asset>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   optionGroups: Array<ProductOptionGroup>;
-  reviewCount: Scalars['Int']['output'];
-  reviewRating?: Maybe<Scalars['Int']['output']>;
+  reviewCount: Scalars["Int"]["output"];
+  reviewRating?: Maybe<Scalars["Int"]["output"]>;
   reviews: ProductReviewList;
   reviewsHistogram: Array<ProductReviewHistogramItem>;
-  slug: Scalars['String']['output'];
+  slug: Scalars["String"]["output"];
   translations: Array<ProductTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
   /** Returns a paginated, sortable, filterable list of ProductVariants */
   variantList: ProductVariantList;
   /** Returns all ProductVariants */
   variants: Array<ProductVariant>;
 };
 
-
 export type ProductReviewsArgs = {
   options?: InputMaybe<ProductReviewListOptions>;
 };
-
 
 export type ProductVariantListArgs = {
   options?: InputMaybe<ProductVariantListOptions>;
@@ -3000,9 +3007,9 @@ export type ProductFilterParameter = {
 };
 
 export type ProductList = PaginatedList & {
-  __typename?: 'ProductList';
+  __typename?: "ProductList";
   items: Array<Product>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type ProductListOptions = {
@@ -3011,75 +3018,75 @@ export type ProductListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<ProductSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type ProductOption = Node & {
-  __typename?: 'ProductOption';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
+  __typename?: "ProductOption";
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
   group: ProductOptionGroup;
-  groupId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
+  groupId: Scalars["ID"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   translations: Array<ProductOptionTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductOptionGroup = Node & {
-  __typename?: 'ProductOptionGroup';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
+  __typename?: "ProductOptionGroup";
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   options: Array<ProductOption>;
   translations: Array<ProductOptionGroupTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductOptionGroupTranslation = {
-  __typename?: 'ProductOptionGroupTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ProductOptionGroupTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductOptionTranslation = {
-  __typename?: 'ProductOptionTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ProductOptionTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductReview = Node & {
-  __typename?: 'ProductReview';
-  authorLocation?: Maybe<Scalars['String']['output']>;
-  authorName: Scalars['String']['output'];
-  body?: Maybe<Scalars['String']['output']>;
-  createdAt: Scalars['DateTime']['output'];
-  downvotes: Scalars['Int']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ProductReview";
+  authorLocation?: Maybe<Scalars["String"]["output"]>;
+  authorName: Scalars["String"]["output"];
+  body?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
+  downvotes: Scalars["Int"]["output"];
+  id: Scalars["ID"]["output"];
   product: Product;
   productVariant?: Maybe<ProductVariant>;
-  rating: Scalars['Float']['output'];
-  response?: Maybe<Scalars['String']['output']>;
-  responseCreatedAt?: Maybe<Scalars['DateTime']['output']>;
-  state: Scalars['String']['output'];
-  summary: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-  upvotes: Scalars['Int']['output'];
+  rating: Scalars["Float"]["output"];
+  response?: Maybe<Scalars["String"]["output"]>;
+  responseCreatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  state: Scalars["String"]["output"];
+  summary: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
+  upvotes: Scalars["Int"]["output"];
 };
 
 export type ProductReviewFilterParameter = {
@@ -3099,15 +3106,15 @@ export type ProductReviewFilterParameter = {
 };
 
 export type ProductReviewHistogramItem = {
-  __typename?: 'ProductReviewHistogramItem';
-  bin: Scalars['Int']['output'];
-  frequency: Scalars['Int']['output'];
+  __typename?: "ProductReviewHistogramItem";
+  bin: Scalars["Int"]["output"];
+  frequency: Scalars["Int"]["output"];
 };
 
 export type ProductReviewList = PaginatedList & {
-  __typename?: 'ProductReviewList';
+  __typename?: "ProductReviewList";
   items: Array<ProductReview>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type ProductReviewListOptions = {
@@ -3116,11 +3123,11 @@ export type ProductReviewListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<ProductReviewSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type ProductReviewSortParameter = {
@@ -3151,46 +3158,46 @@ export type ProductSortParameter = {
 };
 
 export type ProductTranslation = {
-  __typename?: 'ProductTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ProductTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  slug: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductVariant = Node & {
-  __typename?: 'ProductVariant';
+  __typename?: "ProductVariant";
   assets: Array<Asset>;
-  createdAt: Scalars['DateTime']['output'];
+  createdAt: Scalars["DateTime"]["output"];
   currencyCode: CurrencyCode;
   customFields?: Maybe<ProductVariantCustomFields>;
-  discountAmount?: Maybe<Scalars['Float']['output']>;
-  discountPercent?: Maybe<Scalars['Float']['output']>;
+  discountAmount?: Maybe<Scalars["Float"]["output"]>;
+  discountPercent?: Maybe<Scalars["Float"]["output"]>;
   facetValues: Array<FacetValue>;
   featuredAsset?: Maybe<Asset>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   options: Array<ProductOption>;
-  price: Scalars['Money']['output'];
-  priceWithTax: Scalars['Money']['output'];
+  price: Scalars["Money"]["output"];
+  priceWithTax: Scalars["Money"]["output"];
   product: Product;
-  productId: Scalars['ID']['output'];
-  sku: Scalars['String']['output'];
-  stockLevel: Scalars['String']['output'];
+  productId: Scalars["ID"]["output"];
+  sku: Scalars["String"]["output"];
+  stockLevel: Scalars["String"]["output"];
   taxCategory: TaxCategory;
   taxRateApplied: TaxRate;
   translations: Array<ProductVariantTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ProductVariantCustomFields = {
-  __typename?: 'ProductVariantCustomFields';
-  barcode?: Maybe<Scalars['String']['output']>;
-  rrp?: Maybe<Scalars['Int']['output']>;
+  __typename?: "ProductVariantCustomFields";
+  barcode?: Maybe<Scalars["String"]["output"]>;
+  rrp?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type ProductVariantFilterParameter = {
@@ -3212,9 +3219,9 @@ export type ProductVariantFilterParameter = {
 };
 
 export type ProductVariantList = PaginatedList & {
-  __typename?: 'ProductVariantList';
+  __typename?: "ProductVariantList";
   items: Array<ProductVariant>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type ProductVariantListOptions = {
@@ -3223,20 +3230,20 @@ export type ProductVariantListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<ProductVariantSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type ProductVariantPoint = Node & {
-  __typename?: 'ProductVariantPoint';
-  channelId: Scalars['ID']['output'];
-  id: Scalars['ID']['output'];
-  point: Scalars['Int']['output'];
+  __typename?: "ProductVariantPoint";
+  channelId: Scalars["ID"]["output"];
+  id: Scalars["ID"]["output"];
+  point: Scalars["Int"]["output"];
   variant?: Maybe<ProductVariant>;
-  variantId: Scalars['ID']['output'];
+  variantId: Scalars["ID"]["output"];
 };
 
 export type ProductVariantSortParameter = {
@@ -3256,31 +3263,31 @@ export type ProductVariantSortParameter = {
 };
 
 export type ProductVariantTranslation = {
-  __typename?: 'ProductVariantTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ProductVariantTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type Promotion = Node & {
-  __typename?: 'Promotion';
+  __typename?: "Promotion";
   actions: Array<ConfigurableOperation>;
   conditions: Array<ConfigurableOperation>;
-  couponCode?: Maybe<Scalars['String']['output']>;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
-  enabled: Scalars['Boolean']['output'];
-  endsAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  perCustomerUsageLimit?: Maybe<Scalars['Int']['output']>;
-  startsAt?: Maybe<Scalars['DateTime']['output']>;
+  couponCode?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
+  enabled: Scalars["Boolean"]["output"];
+  endsAt?: Maybe<Scalars["DateTime"]["output"]>;
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  perCustomerUsageLimit?: Maybe<Scalars["Int"]["output"]>;
+  startsAt?: Maybe<Scalars["DateTime"]["output"]>;
   translations: Array<PromotionTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
-  usageLimit?: Maybe<Scalars['Int']['output']>;
+  updatedAt: Scalars["DateTime"]["output"];
+  usageLimit?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type PromotionFilterParameter = {
@@ -3298,9 +3305,9 @@ export type PromotionFilterParameter = {
 };
 
 export type PromotionList = PaginatedList & {
-  __typename?: 'PromotionList';
+  __typename?: "PromotionList";
   items: Array<Promotion>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type PromotionListOptions = {
@@ -3309,11 +3316,11 @@ export type PromotionListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<PromotionSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type PromotionSortParameter = {
@@ -3330,39 +3337,40 @@ export type PromotionSortParameter = {
 };
 
 export type PromotionTranslation = {
-  __typename?: 'PromotionTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "PromotionTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
-export type Province = Node & Region & {
-  __typename?: 'Province';
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  parent?: Maybe<Region>;
-  parentId?: Maybe<Scalars['ID']['output']>;
-  translations: Array<RegionTranslation>;
-  type: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-};
+export type Province = Node &
+  Region & {
+    __typename?: "Province";
+    code: Scalars["String"]["output"];
+    createdAt: Scalars["DateTime"]["output"];
+    customFields?: Maybe<Scalars["JSON"]["output"]>;
+    enabled: Scalars["Boolean"]["output"];
+    id: Scalars["ID"]["output"];
+    languageCode: LanguageCode;
+    name: Scalars["String"]["output"];
+    parent?: Maybe<Region>;
+    parentId?: Maybe<Scalars["ID"]["output"]>;
+    translations: Array<RegionTranslation>;
+    type: Scalars["String"]["output"];
+    updatedAt: Scalars["DateTime"]["output"];
+  };
 
 export type ProvinceList = PaginatedList & {
-  __typename?: 'ProvinceList';
+  __typename?: "ProvinceList";
   items: Array<Province>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   /** The active Channel */
   activeChannel: Channel;
   /** The active Customer */
@@ -3399,7 +3407,7 @@ export type Query = {
   /** Returns information about the current authenticated User */
   me?: Maybe<CurrentUser>;
   /** Returns the possible next states that the activeOrder can transition to */
-  nextOrderStates: Array<Scalars['String']['output']>;
+  nextOrderStates: Array<Scalars["String"]["output"]>;
   notification?: Maybe<Notification>;
   notifications: NotificationList;
   /**
@@ -3427,133 +3435,111 @@ export type Query = {
   search: SearchResponse;
 };
 
-
 export type QueryBenefitArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryBenefitPromotionsArgs = {
   options?: InputMaybe<PromotionListOptions>;
 };
 
-
 export type QueryBenefitsArgs = {
   options?: InputMaybe<BenefitListOptions>;
 };
 
-
 export type QueryBlogArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryBlogsArgs = {
   options?: InputMaybe<BlogListOptions>;
 };
 
-
 export type QueryCollectionArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars["ID"]["input"]>;
+  slug?: InputMaybe<Scalars["String"]["input"]>;
 };
-
 
 export type QueryCollectionsArgs = {
   options?: InputMaybe<CollectionListOptions>;
 };
 
-
 export type QueryCountFavoriteArgs = {
-  productVariantId: Scalars['ID']['input'];
+  productVariantId: Scalars["ID"]["input"];
 };
-
 
 export type QueryFacetArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryFacetsArgs = {
   options?: InputMaybe<FacetListOptions>;
 };
 
-
 export type QueryFavoritesArgs = {
   options?: InputMaybe<FavoriteListOptions>;
 };
 
-
 export type QueryNotificationArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryNotificationsArgs = {
   options?: InputMaybe<NotificationListOptions>;
 };
 
-
 export type QueryOrderArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryOrderByCodeArgs = {
-  code: Scalars['String']['input'];
+  code: Scalars["String"]["input"];
 };
-
 
 export type QueryProductArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars["ID"]["input"]>;
+  slug?: InputMaybe<Scalars["String"]["input"]>;
 };
-
 
 export type QueryProductsArgs = {
   options?: InputMaybe<ProductListOptions>;
 };
 
-
 export type QueryQuestionAnswerArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryQuestionAnswersArgs = {
   options?: InputMaybe<QuestionAnswerListOptions>;
 };
 
-
 export type QueryRankArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars["ID"]["input"];
 };
-
 
 export type QueryRanksArgs = {
   options?: InputMaybe<RankListOptions>;
 };
-
 
 export type QuerySearchArgs = {
   input: SearchInput;
 };
 
 export type QuestionAnswer = Node & {
-  __typename?: 'QuestionAnswer';
+  __typename?: "QuestionAnswer";
   admin?: Maybe<Admin>;
-  adminId?: Maybe<Scalars['ID']['output']>;
+  adminId?: Maybe<Scalars["ID"]["output"]>;
   answers?: Maybe<Array<Maybe<QuestionAnswer>>>;
-  body?: Maybe<Scalars['String']['output']>;
-  createdAt: Scalars['DateTime']['output'];
+  body?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
   customer?: Maybe<Customer>;
-  customerId?: Maybe<Scalars['ID']['output']>;
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
+  customerId?: Maybe<Scalars["ID"]["output"]>;
+  enabled: Scalars["Boolean"]["output"];
+  id: Scalars["ID"]["output"];
   productVariant: ProductVariant;
-  productVariantId: Scalars['ID']['output'];
-  replied?: Maybe<Scalars['Boolean']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  productVariantId: Scalars["ID"]["output"];
+  replied?: Maybe<Scalars["Boolean"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type QuestionAnswerFilterParameter = {
@@ -3569,9 +3555,9 @@ export type QuestionAnswerFilterParameter = {
 };
 
 export type QuestionAnswerList = PaginatedList & {
-  __typename?: 'QuestionAnswerList';
+  __typename?: "QuestionAnswerList";
   items: Array<QuestionAnswer>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type QuestionAnswerListOptions = {
@@ -3579,14 +3565,14 @@ export type QuestionAnswerListOptions = {
   filter?: InputMaybe<QuestionAnswerFilterParameter>;
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
-  parentId?: InputMaybe<Scalars['ID']['input']>;
-  productVariantId?: InputMaybe<Scalars['ID']['input']>;
+  parentId?: InputMaybe<Scalars["ID"]["input"]>;
+  productVariantId?: InputMaybe<Scalars["ID"]["input"]>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<QuestionAnswerSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type QuestionAnswerSortParameter = {
@@ -3600,17 +3586,17 @@ export type QuestionAnswerSortParameter = {
 };
 
 export type Rank = Node & {
-  __typename?: 'Rank';
+  __typename?: "Rank";
   assets?: Maybe<Array<Maybe<Asset>>>;
   channels: Array<Channel>;
-  createdAt: Scalars['DateTime']['output'];
+  createdAt: Scalars["DateTime"]["output"];
   featuredAsset?: Maybe<Asset>;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  requiredPoint: Scalars['Int']['output'];
+  name: Scalars["String"]["output"];
+  requiredPoint: Scalars["Int"]["output"];
   translations: Array<RankTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type RankFilterParameter = {
@@ -3623,9 +3609,9 @@ export type RankFilterParameter = {
 };
 
 export type RankList = PaginatedList & {
-  __typename?: 'RankList';
+  __typename?: "RankList";
   items: Array<Rank>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type RankListOptions = {
@@ -3634,11 +3620,11 @@ export type RankListOptions = {
   /** Specifies whether multiple "filter" arguments should be combines with a logical AND or OR operation. Defaults to AND. */
   filterOperator?: InputMaybe<LogicalOperator>;
   /** Skips the first n results, for use in pagination */
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   /** Specifies which properties to sort the results by */
   sort?: InputMaybe<RankSortParameter>;
   /** Takes n results, for use in pagination */
-  take?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type RankSortParameter = {
@@ -3650,174 +3636,190 @@ export type RankSortParameter = {
 };
 
 export type RankTranslation = Node & {
-  __typename?: 'RankTranslation';
+  __typename?: "RankTranslation";
   base: Rank;
-  id: Scalars['ID']['output'];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
 };
 
-export type RefreshCustomerVerificationResult = NativeAuthStrategyError | Success;
+export type RefreshCustomerVerificationResult =
+  | NativeAuthStrategyError
+  | Success;
 
 export type Refund = Node & {
-  __typename?: 'Refund';
-  adjustment: Scalars['Money']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  items: Scalars['Money']['output'];
+  __typename?: "Refund";
+  adjustment: Scalars["Money"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
+  items: Scalars["Money"]["output"];
   lines: Array<RefundLine>;
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  method?: Maybe<Scalars['String']['output']>;
-  paymentId: Scalars['ID']['output'];
-  reason?: Maybe<Scalars['String']['output']>;
-  shipping: Scalars['Money']['output'];
-  state: Scalars['String']['output'];
-  total: Scalars['Money']['output'];
-  transactionId?: Maybe<Scalars['String']['output']>;
-  updatedAt: Scalars['DateTime']['output'];
+  metadata?: Maybe<Scalars["JSON"]["output"]>;
+  method?: Maybe<Scalars["String"]["output"]>;
+  paymentId: Scalars["ID"]["output"];
+  reason?: Maybe<Scalars["String"]["output"]>;
+  shipping: Scalars["Money"]["output"];
+  state: Scalars["String"]["output"];
+  total: Scalars["Money"]["output"];
+  transactionId?: Maybe<Scalars["String"]["output"]>;
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type RefundLine = {
-  __typename?: 'RefundLine';
+  __typename?: "RefundLine";
   orderLine: OrderLine;
-  orderLineId: Scalars['ID']['output'];
-  quantity: Scalars['Int']['output'];
+  orderLineId: Scalars["ID"]["output"];
+  quantity: Scalars["Int"]["output"];
   refund: Refund;
-  refundId: Scalars['ID']['output'];
+  refundId: Scalars["ID"]["output"];
 };
 
 export type Region = {
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  enabled: Scalars["Boolean"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   parent?: Maybe<Region>;
-  parentId?: Maybe<Scalars['ID']['output']>;
+  parentId?: Maybe<Scalars["ID"]["output"]>;
   translations: Array<RegionTranslation>;
-  type: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  type: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type RegionTranslation = {
-  __typename?: 'RegionTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "RegionTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
-export type RegisterCustomerAccountResult = MissingPasswordError | NativeAuthStrategyError | PasswordValidationError | Success;
+export type RegisterCustomerAccountResult =
+  | MissingPasswordError
+  | NativeAuthStrategyError
+  | PasswordValidationError
+  | Success;
 
 export type RegisterCustomerCustomFieldsInput = {
-  avatarId?: InputMaybe<Scalars['ID']['input']>;
-  dateOfBirth?: InputMaybe<Scalars['DateTime']['input']>;
-  gender?: InputMaybe<Scalars['Int']['input']>;
+  avatarId?: InputMaybe<Scalars["ID"]["input"]>;
+  dateOfBirth?: InputMaybe<Scalars["DateTime"]["input"]>;
+  gender?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type RegisterCustomerInput = {
   customFields?: InputMaybe<RegisterCustomerCustomFieldsInput>;
-  emailAddress: Scalars['String']['input'];
-  firstName?: InputMaybe<Scalars['String']['input']>;
-  lastName?: InputMaybe<Scalars['String']['input']>;
-  password?: InputMaybe<Scalars['String']['input']>;
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  emailAddress: Scalars["String"]["input"];
+  firstName?: InputMaybe<Scalars["String"]["input"]>;
+  lastName?: InputMaybe<Scalars["String"]["input"]>;
+  password?: InputMaybe<Scalars["String"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type RelationCustomFieldConfig = CustomField & {
-  __typename?: 'RelationCustomFieldConfig';
+  __typename?: "RelationCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  entity: Scalars['String']['output'];
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  entity: Scalars["String"]["output"];
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  scalarFields: Array<Scalars['String']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  scalarFields: Array<Scalars["String"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type RemoveOrderItemsResult = Order | OrderModificationError;
 
 export type RequestPasswordResetResult = NativeAuthStrategyError | Success;
 
-export type RequestUpdateCustomerEmailAddressResult = EmailAddressConflictError | InvalidCredentialsError | NativeAuthStrategyError | Success;
+export type RequestUpdateCustomerEmailAddressResult =
+  | EmailAddressConflictError
+  | InvalidCredentialsError
+  | NativeAuthStrategyError
+  | Success;
 
-export type ResetPasswordResult = CurrentUser | NativeAuthStrategyError | NotVerifiedError | PasswordResetTokenExpiredError | PasswordResetTokenInvalidError | PasswordValidationError;
+export type ResetPasswordResult =
+  | CurrentUser
+  | NativeAuthStrategyError
+  | NotVerifiedError
+  | PasswordResetTokenExpiredError
+  | PasswordResetTokenInvalidError
+  | PasswordValidationError;
 
 export type Role = Node & {
-  __typename?: 'Role';
+  __typename?: "Role";
   channels: Array<Channel>;
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   permissions: Array<Permission>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type RoleList = PaginatedList & {
-  __typename?: 'RoleList';
+  __typename?: "RoleList";
   items: Array<Role>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type SearchInput = {
-  collectionId?: InputMaybe<Scalars['ID']['input']>;
-  collectionSlug?: InputMaybe<Scalars['String']['input']>;
+  collectionId?: InputMaybe<Scalars["ID"]["input"]>;
+  collectionSlug?: InputMaybe<Scalars["String"]["input"]>;
   facetValueFilters?: InputMaybe<Array<FacetValueFilterInput>>;
-  groupByProduct?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
+  groupByProduct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
   sort?: InputMaybe<SearchResultSortParameter>;
-  take?: InputMaybe<Scalars['Int']['input']>;
-  term?: InputMaybe<Scalars['String']['input']>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
+  term?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type SearchReindexResponse = {
-  __typename?: 'SearchReindexResponse';
-  success: Scalars['Boolean']['output'];
+  __typename?: "SearchReindexResponse";
+  success: Scalars["Boolean"]["output"];
 };
 
 export type SearchResponse = {
-  __typename?: 'SearchResponse';
+  __typename?: "SearchResponse";
   collections: Array<CollectionResult>;
   facetValues: Array<FacetValueResult>;
   items: Array<SearchResult>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type SearchResult = {
-  __typename?: 'SearchResult';
+  __typename?: "SearchResult";
   /** An array of ids of the Collections in which this result appears */
-  collectionIds: Array<Scalars['ID']['output']>;
+  collectionIds: Array<Scalars["ID"]["output"]>;
   currencyCode: CurrencyCode;
-  description: Scalars['String']['output'];
-  facetIds: Array<Scalars['ID']['output']>;
-  facetValueIds: Array<Scalars['ID']['output']>;
+  description: Scalars["String"]["output"];
+  facetIds: Array<Scalars["ID"]["output"]>;
+  facetValueIds: Array<Scalars["ID"]["output"]>;
   price: SearchResultPrice;
   priceWithTax: SearchResultPrice;
   productAsset?: Maybe<SearchResultAsset>;
-  productId: Scalars['ID']['output'];
-  productName: Scalars['String']['output'];
+  productId: Scalars["ID"]["output"];
+  productName: Scalars["String"]["output"];
   productVariantAsset?: Maybe<SearchResultAsset>;
-  productVariantId: Scalars['ID']['output'];
-  productVariantName: Scalars['String']['output'];
+  productVariantId: Scalars["ID"]["output"];
+  productVariantName: Scalars["String"]["output"];
   /** A relevance score for the result. Differs between database implementations */
-  score: Scalars['Float']['output'];
-  sku: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
+  score: Scalars["Float"]["output"];
+  sku: Scalars["String"]["output"];
+  slug: Scalars["String"]["output"];
 };
 
 export type SearchResultAsset = {
-  __typename?: 'SearchResultAsset';
+  __typename?: "SearchResultAsset";
   focalPoint?: Maybe<Coordinate>;
-  id: Scalars['ID']['output'];
-  preview: Scalars['String']['output'];
+  id: Scalars["ID"]["output"];
+  preview: Scalars["String"]["output"];
 };
 
 /** The price of a search result product, either as a range or as a single price */
@@ -3829,285 +3831,307 @@ export type SearchResultSortParameter = {
 };
 
 export type Seller = Node & {
-  __typename?: 'Seller';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  __typename?: "Seller";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
-export type SetCustomerForOrderResult = AlreadyLoggedInError | EmailAddressConflictError | GuestCheckoutError | NoActiveOrderError | Order;
+export type SetCustomerForOrderResult =
+  | AlreadyLoggedInError
+  | EmailAddressConflictError
+  | GuestCheckoutError
+  | NoActiveOrderError
+  | Order;
 
-export type SetOrderShippingMethodResult = IneligibleShippingMethodError | NoActiveOrderError | Order | OrderModificationError;
+export type SetOrderShippingMethodResult =
+  | IneligibleShippingMethodError
+  | NoActiveOrderError
+  | Order
+  | OrderModificationError;
 
 export type ShippingLine = {
-  __typename?: 'ShippingLine';
-  discountedPrice: Scalars['Money']['output'];
-  discountedPriceWithTax: Scalars['Money']['output'];
+  __typename?: "ShippingLine";
+  discountedPrice: Scalars["Money"]["output"];
+  discountedPriceWithTax: Scalars["Money"]["output"];
   discounts: Array<Discount>;
-  id: Scalars['ID']['output'];
-  price: Scalars['Money']['output'];
-  priceWithTax: Scalars['Money']['output'];
+  id: Scalars["ID"]["output"];
+  price: Scalars["Money"]["output"];
+  priceWithTax: Scalars["Money"]["output"];
   shippingMethod: ShippingMethod;
 };
 
 export type ShippingMethod = Node & {
-  __typename?: 'ShippingMethod';
+  __typename?: "ShippingMethod";
   calculator: ConfigurableOperation;
   checker: ConfigurableOperation;
-  code: Scalars['String']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
-  fulfillmentHandlerCode: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  code: Scalars["String"]["output"];
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
+  fulfillmentHandlerCode: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
+  name: Scalars["String"]["output"];
   translations: Array<ShippingMethodTranslation>;
-  updatedAt: Scalars['DateTime']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type ShippingMethodList = PaginatedList & {
-  __typename?: 'ShippingMethodList';
+  __typename?: "ShippingMethodList";
   items: Array<ShippingMethod>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type ShippingMethodQuote = {
-  __typename?: 'ShippingMethodQuote';
-  code: Scalars['String']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ShippingMethodQuote";
+  code: Scalars["String"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   /** Any optional metadata returned by the ShippingCalculator in the ShippingCalculationResult */
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  name: Scalars['String']['output'];
-  price: Scalars['Money']['output'];
-  priceWithTax: Scalars['Money']['output'];
+  metadata?: Maybe<Scalars["JSON"]["output"]>;
+  name: Scalars["String"]["output"];
+  price: Scalars["Money"]["output"];
+  priceWithTax: Scalars["Money"]["output"];
 };
 
 export type ShippingMethodTranslation = {
-  __typename?: 'ShippingMethodTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
+  __typename?: "ShippingMethodTranslation";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
   languageCode: LanguageCode;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 /** The price value where the result has a single price */
 export type SinglePrice = {
-  __typename?: 'SinglePrice';
-  value: Scalars['Money']['output'];
+  __typename?: "SinglePrice";
+  value: Scalars["Money"]["output"];
 };
 
 export enum SortOrder {
-  Asc = 'ASC',
-  Desc = 'DESC'
+  Asc = "ASC",
+  Desc = "DESC",
 }
 
 export type StringCustomFieldConfig = CustomField & {
-  __typename?: 'StringCustomFieldConfig';
+  __typename?: "StringCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  length?: Maybe<Scalars['Int']['output']>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
+  length?: Maybe<Scalars["Int"]["output"]>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
   options?: Maybe<Array<StringFieldOption>>;
-  pattern?: Maybe<Scalars['String']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  pattern?: Maybe<Scalars["String"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type StringFieldOption = {
-  __typename?: 'StringFieldOption';
+  __typename?: "StringFieldOption";
   label?: Maybe<Array<LocalizedString>>;
-  value: Scalars['String']['output'];
+  value: Scalars["String"]["output"];
 };
 
 /** Operators for filtering on a list of String fields */
 export type StringListOperators = {
-  inList: Scalars['String']['input'];
+  inList: Scalars["String"]["input"];
 };
 
 /** Operators for filtering on a String field */
 export type StringOperators = {
-  contains?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<Scalars['String']['input']>>;
-  isNull?: InputMaybe<Scalars['Boolean']['input']>;
-  notContains?: InputMaybe<Scalars['String']['input']>;
-  notEq?: InputMaybe<Scalars['String']['input']>;
-  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
-  regex?: InputMaybe<Scalars['String']['input']>;
+  contains?: InputMaybe<Scalars["String"]["input"]>;
+  eq?: InputMaybe<Scalars["String"]["input"]>;
+  in?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  isNull?: InputMaybe<Scalars["Boolean"]["input"]>;
+  notContains?: InputMaybe<Scalars["String"]["input"]>;
+  notEq?: InputMaybe<Scalars["String"]["input"]>;
+  notIn?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  regex?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type SubmitProductReviewInput = {
-  authorLocation?: InputMaybe<Scalars['String']['input']>;
-  authorName: Scalars['String']['input'];
-  body: Scalars['String']['input'];
-  customerId?: InputMaybe<Scalars['ID']['input']>;
-  productId: Scalars['ID']['input'];
-  rating: Scalars['Float']['input'];
-  summary: Scalars['String']['input'];
-  variantId?: InputMaybe<Scalars['ID']['input']>;
+  authorLocation?: InputMaybe<Scalars["String"]["input"]>;
+  authorName: Scalars["String"]["input"];
+  body: Scalars["String"]["input"];
+  customerId?: InputMaybe<Scalars["ID"]["input"]>;
+  productId: Scalars["ID"]["input"];
+  rating: Scalars["Float"]["input"];
+  summary: Scalars["String"]["input"];
+  variantId?: InputMaybe<Scalars["ID"]["input"]>;
 };
 
 export type SubmitQuestionAnswerInput = {
-  body: Scalars['String']['input'];
-  parentId?: InputMaybe<Scalars['ID']['input']>;
-  variantId: Scalars['ID']['input'];
+  body: Scalars["String"]["input"];
+  parentId?: InputMaybe<Scalars["ID"]["input"]>;
+  variantId: Scalars["ID"]["input"];
 };
 
 /** Indicates that an operation succeeded, where we do not want to return any more specific information. */
 export type Success = {
-  __typename?: 'Success';
-  success: Scalars['Boolean']['output'];
+  __typename?: "Success";
+  success: Scalars["Boolean"]["output"];
 };
 
 export type Surcharge = Node & {
-  __typename?: 'Surcharge';
-  createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  price: Scalars['Money']['output'];
-  priceWithTax: Scalars['Money']['output'];
-  sku?: Maybe<Scalars['String']['output']>;
+  __typename?: "Surcharge";
+  createdAt: Scalars["DateTime"]["output"];
+  description: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  price: Scalars["Money"]["output"];
+  priceWithTax: Scalars["Money"]["output"];
+  sku?: Maybe<Scalars["String"]["output"]>;
   taxLines: Array<TaxLine>;
-  taxRate: Scalars['Float']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  taxRate: Scalars["Float"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type Tag = Node & {
-  __typename?: 'Tag';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-  value: Scalars['String']['output'];
+  __typename?: "Tag";
+  createdAt: Scalars["DateTime"]["output"];
+  id: Scalars["ID"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
+  value: Scalars["String"]["output"];
 };
 
 export type TagList = PaginatedList & {
-  __typename?: 'TagList';
+  __typename?: "TagList";
   items: Array<Tag>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type TaxCategory = Node & {
-  __typename?: 'TaxCategory';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
-  isDefault: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  __typename?: "TaxCategory";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
+  isDefault: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
 export type TaxLine = {
-  __typename?: 'TaxLine';
-  description: Scalars['String']['output'];
-  taxRate: Scalars['Float']['output'];
+  __typename?: "TaxLine";
+  description: Scalars["String"]["output"];
+  taxRate: Scalars["Float"]["output"];
 };
 
 export type TaxRate = Node & {
-  __typename?: 'TaxRate';
+  __typename?: "TaxRate";
   category: TaxCategory;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
   customerGroup?: Maybe<CustomerGroup>;
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-  value: Scalars['Float']['output'];
+  enabled: Scalars["Boolean"]["output"];
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
+  value: Scalars["Float"]["output"];
   zone: Zone;
 };
 
 export type TaxRateList = PaginatedList & {
-  __typename?: 'TaxRateList';
+  __typename?: "TaxRateList";
   items: Array<TaxRate>;
-  totalItems: Scalars['Int']['output'];
+  totalItems: Scalars["Int"]["output"];
 };
 
 export type TextCustomFieldConfig = CustomField & {
-  __typename?: 'TextCustomFieldConfig';
+  __typename?: "TextCustomFieldConfig";
   description?: Maybe<Array<LocalizedString>>;
-  internal?: Maybe<Scalars['Boolean']['output']>;
+  internal?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Array<LocalizedString>>;
-  list: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
-  nullable?: Maybe<Scalars['Boolean']['output']>;
-  readonly?: Maybe<Scalars['Boolean']['output']>;
-  type: Scalars['String']['output'];
-  ui?: Maybe<Scalars['JSON']['output']>;
+  list: Scalars["Boolean"]["output"];
+  name: Scalars["String"]["output"];
+  nullable?: Maybe<Scalars["Boolean"]["output"]>;
+  readonly?: Maybe<Scalars["Boolean"]["output"]>;
+  type: Scalars["String"]["output"];
+  ui?: Maybe<Scalars["JSON"]["output"]>;
 };
 
 export type Total = {
-  __typename?: 'Total';
-  total: Scalars['Int']['output'];
+  __typename?: "Total";
+  total: Scalars["Int"]["output"];
 };
 
 export type TransitionOrderToStateResult = Order | OrderStateTransitionError;
 
 export type UpdateAddressInput = {
-  city?: InputMaybe<Scalars['String']['input']>;
-  company?: InputMaybe<Scalars['String']['input']>;
-  countryCode?: InputMaybe<Scalars['String']['input']>;
-  customFields?: InputMaybe<Scalars['JSON']['input']>;
-  defaultBillingAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  defaultShippingAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  fullName?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  postalCode?: InputMaybe<Scalars['String']['input']>;
-  province?: InputMaybe<Scalars['String']['input']>;
-  streetLine1?: InputMaybe<Scalars['String']['input']>;
-  streetLine2?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars["String"]["input"]>;
+  company?: InputMaybe<Scalars["String"]["input"]>;
+  countryCode?: InputMaybe<Scalars["String"]["input"]>;
+  customFields?: InputMaybe<Scalars["JSON"]["input"]>;
+  defaultBillingAddress?: InputMaybe<Scalars["Boolean"]["input"]>;
+  defaultShippingAddress?: InputMaybe<Scalars["Boolean"]["input"]>;
+  fullName?: InputMaybe<Scalars["String"]["input"]>;
+  id: Scalars["ID"]["input"];
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  postalCode?: InputMaybe<Scalars["String"]["input"]>;
+  province?: InputMaybe<Scalars["String"]["input"]>;
+  streetLine1?: InputMaybe<Scalars["String"]["input"]>;
+  streetLine2?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type UpdateCustomerCustomFieldsInput = {
-  avatarId?: InputMaybe<Scalars['ID']['input']>;
-  dateOfBirth?: InputMaybe<Scalars['DateTime']['input']>;
-  gender?: InputMaybe<Scalars['Int']['input']>;
+  avatarId?: InputMaybe<Scalars["ID"]["input"]>;
+  dateOfBirth?: InputMaybe<Scalars["DateTime"]["input"]>;
+  gender?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
-export type UpdateCustomerEmailAddressResult = IdentifierChangeTokenExpiredError | IdentifierChangeTokenInvalidError | NativeAuthStrategyError | Success;
+export type UpdateCustomerEmailAddressResult =
+  | IdentifierChangeTokenExpiredError
+  | IdentifierChangeTokenInvalidError
+  | NativeAuthStrategyError
+  | Success;
 
 export type UpdateCustomerInput = {
   customFields?: InputMaybe<UpdateCustomerCustomFieldsInput>;
-  firstName?: InputMaybe<Scalars['String']['input']>;
-  lastName?: InputMaybe<Scalars['String']['input']>;
-  phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  firstName?: InputMaybe<Scalars["String"]["input"]>;
+  lastName?: InputMaybe<Scalars["String"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
 };
 
-export type UpdateCustomerPasswordResult = InvalidCredentialsError | NativeAuthStrategyError | PasswordValidationError | Success;
+export type UpdateCustomerPasswordResult =
+  | InvalidCredentialsError
+  | NativeAuthStrategyError
+  | PasswordValidationError
+  | Success;
 
 export type UpdateOrderCustomFieldsInput = {
-  note?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type UpdateOrderInput = {
   customFields?: InputMaybe<UpdateOrderCustomFieldsInput>;
 };
 
-export type UpdateOrderItemsResult = InsufficientStockError | NegativeQuantityError | Order | OrderLimitError | OrderModificationError;
+export type UpdateOrderItemsResult =
+  | InsufficientStockError
+  | NegativeQuantityError
+  | Order
+  | OrderLimitError
+  | OrderModificationError;
 
 export type User = Node & {
-  __typename?: 'User';
+  __typename?: "User";
   authenticationMethods: Array<AuthenticationMethod>;
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
-  identifier: Scalars['String']['output'];
-  lastLogin?: Maybe<Scalars['DateTime']['output']>;
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
+  identifier: Scalars["String"]["output"];
+  lastLogin?: Maybe<Scalars["DateTime"]["output"]>;
   roles: Array<Role>;
-  updatedAt: Scalars['DateTime']['output'];
-  verified: Scalars['Boolean']['output'];
+  updatedAt: Scalars["DateTime"]["output"];
+  verified: Scalars["Boolean"]["output"];
 };
 
 /**
@@ -4115,9 +4139,9 @@ export type User = Node & {
  * expired according to the `verificationTokenDuration` setting in the AuthOptions.
  */
 export type VerificationTokenExpiredError = ErrorResult & {
-  __typename?: 'VerificationTokenExpiredError';
+  __typename?: "VerificationTokenExpiredError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
 /**
@@ -4125,45 +4149,65 @@ export type VerificationTokenExpiredError = ErrorResult & {
  * invalid or does not match any expected tokens.
  */
 export type VerificationTokenInvalidError = ErrorResult & {
-  __typename?: 'VerificationTokenInvalidError';
+  __typename?: "VerificationTokenInvalidError";
   errorCode: ErrorCode;
-  message: Scalars['String']['output'];
+  message: Scalars["String"]["output"];
 };
 
-export type VerifyCustomerAccountResult = CurrentUser | MissingPasswordError | NativeAuthStrategyError | PasswordAlreadySetError | PasswordValidationError | VerificationTokenExpiredError | VerificationTokenInvalidError;
+export type VerifyCustomerAccountResult =
+  | CurrentUser
+  | MissingPasswordError
+  | NativeAuthStrategyError
+  | PasswordAlreadySetError
+  | PasswordValidationError
+  | VerificationTokenExpiredError
+  | VerificationTokenInvalidError;
 
 export type Zone = Node & {
-  __typename?: 'Zone';
-  createdAt: Scalars['DateTime']['output'];
-  customFields?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
+  __typename?: "Zone";
+  createdAt: Scalars["DateTime"]["output"];
+  customFields?: Maybe<Scalars["JSON"]["output"]>;
+  id: Scalars["ID"]["output"];
   members: Array<Region>;
-  name: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
+  name: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTime"]["output"];
 };
 
-export type GetProductListQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProductListQueryVariables = Exact<{ [key: string]: never }>;
 
+export type GetProductListQuery = {
+  __typename?: "Query";
+  product?: {
+    __typename?: "Product";
+    id: string;
+    name: string;
+    slug: string;
+    description: string;
+  } | null;
+};
 
-export type GetProductListQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug: string, description: string } | null };
-
-export type DetailFragment = { __typename?: 'Product', slug: string, description: string };
+export type DetailFragment = {
+  __typename?: "Product";
+  slug: string;
+  description: string;
+};
 
 export const DetailFragmentDoc = gql`
-    fragment Detail on Product {
-  slug
-  description
-}
-    `;
-export const GetProductListDocument = gql`
-    query GetProductList {
-  product(id: 1) {
-    id
-    name
-    ...Detail
+  fragment Detail on Product {
+    slug
+    description
   }
-}
-    ${DetailFragmentDoc}`;
+`;
+export const GetProductListDocument = gql`
+  query GetProductList {
+    product(id: 1) {
+      id
+      name
+      ...Detail
+    }
+  }
+  ${DetailFragmentDoc}
+`;
 
 /**
  * __useGetProductListQuery__
@@ -4180,31 +4224,64 @@ export const GetProductListDocument = gql`
  *   },
  * });
  */
-export function useGetProductListQuery(baseOptions?: Apollo.QueryHookOptions<GetProductListQuery, GetProductListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetProductListQuery, GetProductListQueryVariables>(GetProductListDocument, options);
-      }
-export function useGetProductListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductListQuery, GetProductListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetProductListQuery, GetProductListQueryVariables>(GetProductListDocument, options);
-        }
-export function useGetProductListSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductListQuery, GetProductListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetProductListQuery, GetProductListQueryVariables>(GetProductListDocument, options);
-        }
-export type GetProductListQueryHookResult = ReturnType<typeof useGetProductListQuery>;
-export type GetProductListLazyQueryHookResult = ReturnType<typeof useGetProductListLazyQuery>;
-export type GetProductListSuspenseQueryHookResult = ReturnType<typeof useGetProductListSuspenseQuery>;
-export type GetProductListQueryResult = Apollo.QueryResult<GetProductListQuery, GetProductListQueryVariables>;
-
+export function useGetProductListQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetProductListQuery,
+    GetProductListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetProductListQuery, GetProductListQueryVariables>(
+    GetProductListDocument,
+    options
+  );
+}
+export function useGetProductListLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetProductListQuery,
+    GetProductListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetProductListQuery, GetProductListQueryVariables>(
+    GetProductListDocument,
+    options
+  );
+}
+export function useGetProductListSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetProductListQuery,
+    GetProductListQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    GetProductListQuery,
+    GetProductListQueryVariables
+  >(GetProductListDocument, options);
+}
+export type GetProductListQueryHookResult = ReturnType<
+  typeof useGetProductListQuery
+>;
+export type GetProductListLazyQueryHookResult = ReturnType<
+  typeof useGetProductListLazyQuery
+>;
+export type GetProductListSuspenseQueryHookResult = ReturnType<
+  typeof useGetProductListSuspenseQuery
+>;
+export type GetProductListQueryResult = Apollo.QueryResult<
+  GetProductListQuery,
+  GetProductListQueryVariables
+>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
-
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+  | ResolverFn<TResult, TParent, TContext, TArgs>
+  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -4227,9 +4304,25 @@ export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
-export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
-  subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
-  resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> {
+  subscribe: SubscriptionSubscribeFn<
+    { [key in TKey]: TResult },
+    TParent,
+    TContext,
+    TArgs
+  >;
+  resolve?: SubscriptionResolveFn<
+    TResult,
+    { [key in TKey]: TResult },
+    TContext,
+    TArgs
+  >;
 }
 
 export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
@@ -4237,12 +4330,26 @@ export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
   resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
 }
 
-export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
+export type SubscriptionObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> =
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> =
+  | ((
+      ...args: any[]
+    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -4251,11 +4358,20 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
+export type DirectiveResolverFn<
+  TResult = {},
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
@@ -4265,53 +4381,239 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
-  ActiveOrderResult: ( NoActiveOrderError ) | ( Order );
-  AddPaymentToOrderResult: ( IneligiblePaymentMethodError ) | ( NoActiveOrderError ) | ( Order ) | ( OrderPaymentStateError ) | ( OrderStateTransitionError ) | ( PaymentDeclinedError ) | ( PaymentFailedError );
-  ApplyCouponCodeResult: ( CouponCodeExpiredError ) | ( CouponCodeInvalidError ) | ( CouponCodeLimitError ) | ( Order );
-  AuthenticationResult: ( CurrentUser ) | ( InvalidCredentialsError ) | ( NotVerifiedError );
-  CustomFieldConfig: ( BooleanCustomFieldConfig ) | ( DateTimeCustomFieldConfig ) | ( FloatCustomFieldConfig ) | ( IntCustomFieldConfig ) | ( LocaleStringCustomFieldConfig ) | ( LocaleTextCustomFieldConfig ) | ( RelationCustomFieldConfig ) | ( StringCustomFieldConfig ) | ( TextCustomFieldConfig );
-  NativeAuthenticationResult: ( CurrentUser ) | ( InvalidCredentialsError ) | ( NativeAuthStrategyError ) | ( NotVerifiedError );
-  RefreshCustomerVerificationResult: ( NativeAuthStrategyError ) | ( Success );
-  RegisterCustomerAccountResult: ( MissingPasswordError ) | ( NativeAuthStrategyError ) | ( PasswordValidationError ) | ( Success );
-  RemoveOrderItemsResult: ( Order ) | ( OrderModificationError );
-  RequestPasswordResetResult: ( NativeAuthStrategyError ) | ( Success );
-  RequestUpdateCustomerEmailAddressResult: ( EmailAddressConflictError ) | ( InvalidCredentialsError ) | ( NativeAuthStrategyError ) | ( Success );
-  ResetPasswordResult: ( CurrentUser ) | ( NativeAuthStrategyError ) | ( NotVerifiedError ) | ( PasswordResetTokenExpiredError ) | ( PasswordResetTokenInvalidError ) | ( PasswordValidationError );
-  SearchResultPrice: ( PriceRange ) | ( SinglePrice );
-  SetCustomerForOrderResult: ( AlreadyLoggedInError ) | ( EmailAddressConflictError ) | ( GuestCheckoutError ) | ( NoActiveOrderError ) | ( Order );
-  SetOrderShippingMethodResult: ( IneligibleShippingMethodError ) | ( NoActiveOrderError ) | ( Order ) | ( OrderModificationError );
-  TransitionOrderToStateResult: ( Order ) | ( OrderStateTransitionError );
-  UpdateCustomerEmailAddressResult: ( IdentifierChangeTokenExpiredError ) | ( IdentifierChangeTokenInvalidError ) | ( NativeAuthStrategyError ) | ( Success );
-  UpdateCustomerPasswordResult: ( InvalidCredentialsError ) | ( NativeAuthStrategyError ) | ( PasswordValidationError ) | ( Success );
-  UpdateOrderItemsResult: ( InsufficientStockError ) | ( NegativeQuantityError ) | ( Order ) | ( OrderLimitError ) | ( OrderModificationError );
-  VerifyCustomerAccountResult: ( CurrentUser ) | ( MissingPasswordError ) | ( NativeAuthStrategyError ) | ( PasswordAlreadySetError ) | ( PasswordValidationError ) | ( VerificationTokenExpiredError ) | ( VerificationTokenInvalidError );
+  ActiveOrderResult: NoActiveOrderError | Order;
+  AddPaymentToOrderResult:
+    | IneligiblePaymentMethodError
+    | NoActiveOrderError
+    | Order
+    | OrderPaymentStateError
+    | OrderStateTransitionError
+    | PaymentDeclinedError
+    | PaymentFailedError;
+  ApplyCouponCodeResult:
+    | CouponCodeExpiredError
+    | CouponCodeInvalidError
+    | CouponCodeLimitError
+    | Order;
+  AuthenticationResult:
+    | CurrentUser
+    | InvalidCredentialsError
+    | NotVerifiedError;
+  CustomFieldConfig:
+    | BooleanCustomFieldConfig
+    | DateTimeCustomFieldConfig
+    | FloatCustomFieldConfig
+    | IntCustomFieldConfig
+    | LocaleStringCustomFieldConfig
+    | LocaleTextCustomFieldConfig
+    | RelationCustomFieldConfig
+    | StringCustomFieldConfig
+    | TextCustomFieldConfig;
+  NativeAuthenticationResult:
+    | CurrentUser
+    | InvalidCredentialsError
+    | NativeAuthStrategyError
+    | NotVerifiedError;
+  RefreshCustomerVerificationResult: NativeAuthStrategyError | Success;
+  RegisterCustomerAccountResult:
+    | MissingPasswordError
+    | NativeAuthStrategyError
+    | PasswordValidationError
+    | Success;
+  RemoveOrderItemsResult: Order | OrderModificationError;
+  RequestPasswordResetResult: NativeAuthStrategyError | Success;
+  RequestUpdateCustomerEmailAddressResult:
+    | EmailAddressConflictError
+    | InvalidCredentialsError
+    | NativeAuthStrategyError
+    | Success;
+  ResetPasswordResult:
+    | CurrentUser
+    | NativeAuthStrategyError
+    | NotVerifiedError
+    | PasswordResetTokenExpiredError
+    | PasswordResetTokenInvalidError
+    | PasswordValidationError;
+  SearchResultPrice: PriceRange | SinglePrice;
+  SetCustomerForOrderResult:
+    | AlreadyLoggedInError
+    | EmailAddressConflictError
+    | GuestCheckoutError
+    | NoActiveOrderError
+    | Order;
+  SetOrderShippingMethodResult:
+    | IneligibleShippingMethodError
+    | NoActiveOrderError
+    | Order
+    | OrderModificationError;
+  TransitionOrderToStateResult: Order | OrderStateTransitionError;
+  UpdateCustomerEmailAddressResult:
+    | IdentifierChangeTokenExpiredError
+    | IdentifierChangeTokenInvalidError
+    | NativeAuthStrategyError
+    | Success;
+  UpdateCustomerPasswordResult:
+    | InvalidCredentialsError
+    | NativeAuthStrategyError
+    | PasswordValidationError
+    | Success;
+  UpdateOrderItemsResult:
+    | InsufficientStockError
+    | NegativeQuantityError
+    | Order
+    | OrderLimitError
+    | OrderModificationError;
+  VerifyCustomerAccountResult:
+    | CurrentUser
+    | MissingPasswordError
+    | NativeAuthStrategyError
+    | PasswordAlreadySetError
+    | PasswordValidationError
+    | VerificationTokenExpiredError
+    | VerificationTokenInvalidError;
 };
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  CustomField: ( BooleanCustomFieldConfig ) | ( DateTimeCustomFieldConfig ) | ( FloatCustomFieldConfig ) | ( IntCustomFieldConfig ) | ( LocaleStringCustomFieldConfig ) | ( LocaleTextCustomFieldConfig ) | ( RelationCustomFieldConfig ) | ( StringCustomFieldConfig ) | ( TextCustomFieldConfig );
-  ErrorResult: ( AlreadyLoggedInError ) | ( CouponCodeExpiredError ) | ( CouponCodeInvalidError ) | ( CouponCodeLimitError ) | ( EmailAddressConflictError ) | ( GuestCheckoutError ) | ( IdentifierChangeTokenExpiredError ) | ( IdentifierChangeTokenInvalidError ) | ( IneligiblePaymentMethodError ) | ( IneligibleShippingMethodError ) | ( InsufficientStockError ) | ( InvalidCredentialsError ) | ( MissingPasswordError ) | ( NativeAuthStrategyError ) | ( NegativeQuantityError ) | ( NoActiveOrderError ) | ( NotVerifiedError ) | ( OrderLimitError ) | ( OrderModificationError ) | ( OrderPaymentStateError ) | ( OrderStateTransitionError ) | ( PasswordAlreadySetError ) | ( PasswordResetTokenExpiredError ) | ( PasswordResetTokenInvalidError ) | ( PasswordValidationError ) | ( PaymentDeclinedError ) | ( PaymentFailedError ) | ( VerificationTokenExpiredError ) | ( VerificationTokenInvalidError );
-  Node: ( Address ) | ( Asset ) | ( AuthenticationMethod ) | ( Benefit ) | ( BenefitRank ) | ( BenefitTranslation ) | ( Blog ) | ( BlogTranslation ) | ( Channel ) | ( Collection ) | ( Country ) | ( Customer ) | ( CustomerGroup ) | ( DeviceToken ) | ( ExchangePoint ) | ( Facet ) | ( FacetValue ) | ( Favorite ) | ( Fulfillment ) | ( HistoryEntry ) | ( Notification ) | ( NotificationAutoTemplate ) | ( Order ) | ( OrderLine ) | ( Payment ) | ( PaymentMethod ) | ( Product ) | ( ProductOption ) | ( ProductOptionGroup ) | ( ProductReview ) | ( ProductVariant ) | ( ProductVariantPoint ) | ( Promotion ) | ( Province ) | ( QuestionAnswer ) | ( Rank ) | ( RankTranslation ) | ( Refund ) | ( Role ) | ( Seller ) | ( ShippingMethod ) | ( Surcharge ) | ( Tag ) | ( TaxCategory ) | ( TaxRate ) | ( User ) | ( Zone );
-  PaginatedList: ( AssetList ) | ( BenefitList ) | ( BlogList ) | ( CollectionList ) | ( CountryList ) | ( CustomerList ) | ( FacetList ) | ( FacetValueList ) | ( FavoriteList ) | ( HistoryEntryList ) | ( NotificationList ) | ( OrderList ) | ( ProductList ) | ( ProductReviewList ) | ( ProductVariantList ) | ( PromotionList ) | ( ProvinceList ) | ( QuestionAnswerList ) | ( RankList ) | ( RoleList ) | ( ShippingMethodList ) | ( TagList ) | ( TaxRateList );
-  Region: ( Country ) | ( Province );
+  CustomField:
+    | BooleanCustomFieldConfig
+    | DateTimeCustomFieldConfig
+    | FloatCustomFieldConfig
+    | IntCustomFieldConfig
+    | LocaleStringCustomFieldConfig
+    | LocaleTextCustomFieldConfig
+    | RelationCustomFieldConfig
+    | StringCustomFieldConfig
+    | TextCustomFieldConfig;
+  ErrorResult:
+    | AlreadyLoggedInError
+    | CouponCodeExpiredError
+    | CouponCodeInvalidError
+    | CouponCodeLimitError
+    | EmailAddressConflictError
+    | GuestCheckoutError
+    | IdentifierChangeTokenExpiredError
+    | IdentifierChangeTokenInvalidError
+    | IneligiblePaymentMethodError
+    | IneligibleShippingMethodError
+    | InsufficientStockError
+    | InvalidCredentialsError
+    | MissingPasswordError
+    | NativeAuthStrategyError
+    | NegativeQuantityError
+    | NoActiveOrderError
+    | NotVerifiedError
+    | OrderLimitError
+    | OrderModificationError
+    | OrderPaymentStateError
+    | OrderStateTransitionError
+    | PasswordAlreadySetError
+    | PasswordResetTokenExpiredError
+    | PasswordResetTokenInvalidError
+    | PasswordValidationError
+    | PaymentDeclinedError
+    | PaymentFailedError
+    | VerificationTokenExpiredError
+    | VerificationTokenInvalidError;
+  Node:
+    | Address
+    | Asset
+    | AuthenticationMethod
+    | Benefit
+    | BenefitRank
+    | BenefitTranslation
+    | Blog
+    | BlogTranslation
+    | Channel
+    | Collection
+    | Country
+    | Customer
+    | CustomerGroup
+    | DeviceToken
+    | ExchangePoint
+    | Facet
+    | FacetValue
+    | Favorite
+    | Fulfillment
+    | HistoryEntry
+    | Notification
+    | NotificationAutoTemplate
+    | Order
+    | OrderLine
+    | Payment
+    | PaymentMethod
+    | Product
+    | ProductOption
+    | ProductOptionGroup
+    | ProductReview
+    | ProductVariant
+    | ProductVariantPoint
+    | Promotion
+    | Province
+    | QuestionAnswer
+    | Rank
+    | RankTranslation
+    | Refund
+    | Role
+    | Seller
+    | ShippingMethod
+    | Surcharge
+    | Tag
+    | TaxCategory
+    | TaxRate
+    | User
+    | Zone;
+  PaginatedList:
+    | AssetList
+    | BenefitList
+    | BlogList
+    | CollectionList
+    | CountryList
+    | CustomerList
+    | FacetList
+    | FacetValueList
+    | FavoriteList
+    | HistoryEntryList
+    | NotificationList
+    | OrderList
+    | ProductList
+    | ProductReviewList
+    | ProductVariantList
+    | PromotionList
+    | ProvinceList
+    | QuestionAnswerList
+    | RankList
+    | RoleList
+    | ShippingMethodList
+    | TagList
+    | TaxRateList;
+  Region: Country | Province;
 };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  ActiveOrderResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['ActiveOrderResult']>;
-  AddPaymentToOrderResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['AddPaymentToOrderResult']>;
+  ActiveOrderResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["ActiveOrderResult"]
+  >;
+  AddPaymentToOrderResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["AddPaymentToOrderResult"]
+  >;
   Address: ResolverTypeWrapper<Address>;
   Adjustment: ResolverTypeWrapper<Adjustment>;
   AdjustmentType: AdjustmentType;
   Admin: ResolverTypeWrapper<Admin>;
   AlreadyLoggedInError: ResolverTypeWrapper<AlreadyLoggedInError>;
-  ApplyCouponCodeResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['ApplyCouponCodeResult']>;
+  ApplyCouponCodeResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["ApplyCouponCodeResult"]
+  >;
   Asset: ResolverTypeWrapper<Asset>;
   AssetList: ResolverTypeWrapper<AssetList>;
   AssetType: AssetType;
   AuthenticationInput: AuthenticationInput;
   AuthenticationMethod: ResolverTypeWrapper<AuthenticationMethod>;
-  AuthenticationResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['AuthenticationResult']>;
+  AuthenticationResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["AuthenticationResult"]
+  >;
   AutoLinkOperationDefinition: ResolverTypeWrapper<AutoLinkOperationDefinition>;
   Benefit: ResolverTypeWrapper<Benefit>;
   BenefitFilterParameter: BenefitFilterParameter;
@@ -4326,7 +4628,7 @@ export type ResolversTypes = {
   BlogListOptions: BlogListOptions;
   BlogSortParameter: BlogSortParameter;
   BlogTranslation: ResolverTypeWrapper<BlogTranslation>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   BooleanCustomFieldConfig: ResolverTypeWrapper<BooleanCustomFieldConfig>;
   BooleanListOperators: BooleanListOperators;
   BooleanOperators: BooleanOperators;
@@ -4357,8 +4659,12 @@ export type ResolversTypes = {
   CurrencyCode: CurrencyCode;
   CurrentUser: ResolverTypeWrapper<CurrentUser>;
   CurrentUserChannel: ResolverTypeWrapper<CurrentUserChannel>;
-  CustomField: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['CustomField']>;
-  CustomFieldConfig: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['CustomFieldConfig']>;
+  CustomField: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["CustomField"]
+  >;
+  CustomFieldConfig: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["CustomFieldConfig"]
+  >;
   Customer: ResolverTypeWrapper<Customer>;
   CustomerCustomFields: ResolverTypeWrapper<CustomerCustomFields>;
   CustomerFilterParameter: CustomerFilterParameter;
@@ -4369,7 +4675,7 @@ export type ResolversTypes = {
   DateListOperators: DateListOperators;
   DateOperators: DateOperators;
   DateRange: DateRange;
-  DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
+  DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   DateTimeCustomFieldConfig: ResolverTypeWrapper<DateTimeCustomFieldConfig>;
   DeletionResponse: ResolverTypeWrapper<DeletionResponse>;
   DeletionResult: DeletionResult;
@@ -4377,7 +4683,9 @@ export type ResolversTypes = {
   Discount: ResolverTypeWrapper<Discount>;
   EmailAddressConflictError: ResolverTypeWrapper<EmailAddressConflictError>;
   ErrorCode: ErrorCode;
-  ErrorResult: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['ErrorResult']>;
+  ErrorResult: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["ErrorResult"]
+  >;
   EventType: ResolverTypeWrapper<EventType>;
   ExchangePoint: ResolverTypeWrapper<ExchangePoint>;
   Facet: ResolverTypeWrapper<Facet>;
@@ -4402,7 +4710,7 @@ export type ResolversTypes = {
   FavoriteListOptions: FavoriteListOptions;
   FavoriteSortParameter: FavoriteSortParameter;
   Field: ResolverTypeWrapper<Field>;
-  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  Float: ResolverTypeWrapper<Scalars["Float"]["output"]>;
   FloatCustomFieldConfig: ResolverTypeWrapper<FloatCustomFieldConfig>;
   Fulfillment: ResolverTypeWrapper<Fulfillment>;
   FulfillmentLine: ResolverTypeWrapper<FulfillmentLine>;
@@ -4414,7 +4722,7 @@ export type ResolversTypes = {
   HistoryEntryListOptions: HistoryEntryListOptions;
   HistoryEntrySortParameter: HistoryEntrySortParameter;
   HistoryEntryType: HistoryEntryType;
-  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   IDListOperators: IdListOperators;
   IDOperators: IdOperators;
   IdentifierChangeTokenExpiredError: ResolverTypeWrapper<IdentifierChangeTokenExpiredError>;
@@ -4422,24 +4730,26 @@ export type ResolversTypes = {
   IneligiblePaymentMethodError: ResolverTypeWrapper<IneligiblePaymentMethodError>;
   IneligibleShippingMethodError: ResolverTypeWrapper<IneligibleShippingMethodError>;
   InsufficientStockError: ResolverTypeWrapper<InsufficientStockError>;
-  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
   IntCustomFieldConfig: ResolverTypeWrapper<IntCustomFieldConfig>;
   InvalidCredentialsError: ResolverTypeWrapper<InvalidCredentialsError>;
-  JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
+  JSON: ResolverTypeWrapper<Scalars["JSON"]["output"]>;
   LanguageCode: LanguageCode;
   LocaleStringCustomFieldConfig: ResolverTypeWrapper<LocaleStringCustomFieldConfig>;
   LocaleTextCustomFieldConfig: ResolverTypeWrapper<LocaleTextCustomFieldConfig>;
   LocalizedString: ResolverTypeWrapper<LocalizedString>;
   LogicalOperator: LogicalOperator;
   MissingPasswordError: ResolverTypeWrapper<MissingPasswordError>;
-  Money: ResolverTypeWrapper<Scalars['Money']['output']>;
+  Money: ResolverTypeWrapper<Scalars["Money"]["output"]>;
   Mutation: ResolverTypeWrapper<{}>;
   NativeAuthInput: NativeAuthInput;
   NativeAuthStrategyError: ResolverTypeWrapper<NativeAuthStrategyError>;
-  NativeAuthenticationResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['NativeAuthenticationResult']>;
+  NativeAuthenticationResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["NativeAuthenticationResult"]
+  >;
   NegativeQuantityError: ResolverTypeWrapper<NegativeQuantityError>;
   NoActiveOrderError: ResolverTypeWrapper<NoActiveOrderError>;
-  Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Node']>;
+  Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>["Node"]>;
   NotVerifiedError: ResolverTypeWrapper<NotVerifiedError>;
   Notification: ResolverTypeWrapper<Notification>;
   NotificationAutoTemplate: ResolverTypeWrapper<NotificationAutoTemplate>;
@@ -4466,7 +4776,9 @@ export type ResolversTypes = {
   OrderStateTransitionError: ResolverTypeWrapper<OrderStateTransitionError>;
   OrderTaxSummary: ResolverTypeWrapper<OrderTaxSummary>;
   OrderType: OrderType;
-  PaginatedList: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['PaginatedList']>;
+  PaginatedList: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["PaginatedList"]
+  >;
   PasswordAlreadySetError: ResolverTypeWrapper<PasswordAlreadySetError>;
   PasswordResetTokenExpiredError: ResolverTypeWrapper<PasswordResetTokenExpiredError>;
   PasswordResetTokenInvalidError: ResolverTypeWrapper<PasswordResetTokenInvalidError>;
@@ -4524,31 +4836,56 @@ export type ResolversTypes = {
   RankListOptions: RankListOptions;
   RankSortParameter: RankSortParameter;
   RankTranslation: ResolverTypeWrapper<RankTranslation>;
-  RefreshCustomerVerificationResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RefreshCustomerVerificationResult']>;
+  RefreshCustomerVerificationResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RefreshCustomerVerificationResult"]
+  >;
   Refund: ResolverTypeWrapper<Refund>;
   RefundLine: ResolverTypeWrapper<RefundLine>;
-  Region: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Region']>;
+  Region: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["Region"]
+  >;
   RegionTranslation: ResolverTypeWrapper<RegionTranslation>;
-  RegisterCustomerAccountResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RegisterCustomerAccountResult']>;
+  RegisterCustomerAccountResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RegisterCustomerAccountResult"]
+  >;
   RegisterCustomerCustomFieldsInput: RegisterCustomerCustomFieldsInput;
   RegisterCustomerInput: RegisterCustomerInput;
   RelationCustomFieldConfig: ResolverTypeWrapper<RelationCustomFieldConfig>;
-  RemoveOrderItemsResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RemoveOrderItemsResult']>;
-  RequestPasswordResetResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RequestPasswordResetResult']>;
-  RequestUpdateCustomerEmailAddressResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RequestUpdateCustomerEmailAddressResult']>;
-  ResetPasswordResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['ResetPasswordResult']>;
+  RemoveOrderItemsResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RemoveOrderItemsResult"]
+  >;
+  RequestPasswordResetResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RequestPasswordResetResult"]
+  >;
+  RequestUpdateCustomerEmailAddressResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["RequestUpdateCustomerEmailAddressResult"]
+  >;
+  ResetPasswordResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["ResetPasswordResult"]
+  >;
   Role: ResolverTypeWrapper<Role>;
   RoleList: ResolverTypeWrapper<RoleList>;
   SearchInput: SearchInput;
   SearchReindexResponse: ResolverTypeWrapper<SearchReindexResponse>;
   SearchResponse: ResolverTypeWrapper<SearchResponse>;
-  SearchResult: ResolverTypeWrapper<Omit<SearchResult, 'price' | 'priceWithTax'> & { price: ResolversTypes['SearchResultPrice'], priceWithTax: ResolversTypes['SearchResultPrice'] }>;
+  SearchResult: ResolverTypeWrapper<
+    Omit<SearchResult, "price" | "priceWithTax"> & {
+      price: ResolversTypes["SearchResultPrice"];
+      priceWithTax: ResolversTypes["SearchResultPrice"];
+    }
+  >;
   SearchResultAsset: ResolverTypeWrapper<SearchResultAsset>;
-  SearchResultPrice: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['SearchResultPrice']>;
+  SearchResultPrice: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["SearchResultPrice"]
+  >;
   SearchResultSortParameter: SearchResultSortParameter;
   Seller: ResolverTypeWrapper<Seller>;
-  SetCustomerForOrderResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['SetCustomerForOrderResult']>;
-  SetOrderShippingMethodResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['SetOrderShippingMethodResult']>;
+  SetCustomerForOrderResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["SetCustomerForOrderResult"]
+  >;
+  SetOrderShippingMethodResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["SetOrderShippingMethodResult"]
+  >;
   ShippingLine: ResolverTypeWrapper<ShippingLine>;
   ShippingMethod: ResolverTypeWrapper<ShippingMethod>;
   ShippingMethodList: ResolverTypeWrapper<ShippingMethodList>;
@@ -4556,7 +4893,7 @@ export type ResolversTypes = {
   ShippingMethodTranslation: ResolverTypeWrapper<ShippingMethodTranslation>;
   SinglePrice: ResolverTypeWrapper<SinglePrice>;
   SortOrder: SortOrder;
-  String: ResolverTypeWrapper<Scalars['String']['output']>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   StringCustomFieldConfig: ResolverTypeWrapper<StringCustomFieldConfig>;
   StringFieldOption: ResolverTypeWrapper<StringFieldOption>;
   StringListOperators: StringListOperators;
@@ -4573,37 +4910,47 @@ export type ResolversTypes = {
   TaxRateList: ResolverTypeWrapper<TaxRateList>;
   TextCustomFieldConfig: ResolverTypeWrapper<TextCustomFieldConfig>;
   Total: ResolverTypeWrapper<Total>;
-  TransitionOrderToStateResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['TransitionOrderToStateResult']>;
+  TransitionOrderToStateResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["TransitionOrderToStateResult"]
+  >;
   UpdateAddressInput: UpdateAddressInput;
   UpdateCustomerCustomFieldsInput: UpdateCustomerCustomFieldsInput;
-  UpdateCustomerEmailAddressResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['UpdateCustomerEmailAddressResult']>;
+  UpdateCustomerEmailAddressResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdateCustomerEmailAddressResult"]
+  >;
   UpdateCustomerInput: UpdateCustomerInput;
-  UpdateCustomerPasswordResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['UpdateCustomerPasswordResult']>;
+  UpdateCustomerPasswordResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdateCustomerPasswordResult"]
+  >;
   UpdateOrderCustomFieldsInput: UpdateOrderCustomFieldsInput;
   UpdateOrderInput: UpdateOrderInput;
-  UpdateOrderItemsResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['UpdateOrderItemsResult']>;
-  Upload: ResolverTypeWrapper<Scalars['Upload']['output']>;
+  UpdateOrderItemsResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdateOrderItemsResult"]
+  >;
+  Upload: ResolverTypeWrapper<Scalars["Upload"]["output"]>;
   User: ResolverTypeWrapper<User>;
   VerificationTokenExpiredError: ResolverTypeWrapper<VerificationTokenExpiredError>;
   VerificationTokenInvalidError: ResolverTypeWrapper<VerificationTokenInvalidError>;
-  VerifyCustomerAccountResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['VerifyCustomerAccountResult']>;
+  VerifyCustomerAccountResult: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["VerifyCustomerAccountResult"]
+  >;
   Zone: ResolverTypeWrapper<Zone>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  ActiveOrderResult: ResolversUnionTypes<ResolversParentTypes>['ActiveOrderResult'];
-  AddPaymentToOrderResult: ResolversUnionTypes<ResolversParentTypes>['AddPaymentToOrderResult'];
+  ActiveOrderResult: ResolversUnionTypes<ResolversParentTypes>["ActiveOrderResult"];
+  AddPaymentToOrderResult: ResolversUnionTypes<ResolversParentTypes>["AddPaymentToOrderResult"];
   Address: Address;
   Adjustment: Adjustment;
   Admin: Admin;
   AlreadyLoggedInError: AlreadyLoggedInError;
-  ApplyCouponCodeResult: ResolversUnionTypes<ResolversParentTypes>['ApplyCouponCodeResult'];
+  ApplyCouponCodeResult: ResolversUnionTypes<ResolversParentTypes>["ApplyCouponCodeResult"];
   Asset: Asset;
   AssetList: AssetList;
   AuthenticationInput: AuthenticationInput;
   AuthenticationMethod: AuthenticationMethod;
-  AuthenticationResult: ResolversUnionTypes<ResolversParentTypes>['AuthenticationResult'];
+  AuthenticationResult: ResolversUnionTypes<ResolversParentTypes>["AuthenticationResult"];
   AutoLinkOperationDefinition: AutoLinkOperationDefinition;
   Benefit: Benefit;
   BenefitFilterParameter: BenefitFilterParameter;
@@ -4618,7 +4965,7 @@ export type ResolversParentTypes = {
   BlogListOptions: BlogListOptions;
   BlogSortParameter: BlogSortParameter;
   BlogTranslation: BlogTranslation;
-  Boolean: Scalars['Boolean']['output'];
+  Boolean: Scalars["Boolean"]["output"];
   BooleanCustomFieldConfig: BooleanCustomFieldConfig;
   BooleanListOperators: BooleanListOperators;
   BooleanOperators: BooleanOperators;
@@ -4648,8 +4995,8 @@ export type ResolversParentTypes = {
   CreateCustomerInput: CreateCustomerInput;
   CurrentUser: CurrentUser;
   CurrentUserChannel: CurrentUserChannel;
-  CustomField: ResolversInterfaceTypes<ResolversParentTypes>['CustomField'];
-  CustomFieldConfig: ResolversUnionTypes<ResolversParentTypes>['CustomFieldConfig'];
+  CustomField: ResolversInterfaceTypes<ResolversParentTypes>["CustomField"];
+  CustomFieldConfig: ResolversUnionTypes<ResolversParentTypes>["CustomFieldConfig"];
   Customer: Customer;
   CustomerCustomFields: CustomerCustomFields;
   CustomerFilterParameter: CustomerFilterParameter;
@@ -4660,13 +5007,13 @@ export type ResolversParentTypes = {
   DateListOperators: DateListOperators;
   DateOperators: DateOperators;
   DateRange: DateRange;
-  DateTime: Scalars['DateTime']['output'];
+  DateTime: Scalars["DateTime"]["output"];
   DateTimeCustomFieldConfig: DateTimeCustomFieldConfig;
   DeletionResponse: DeletionResponse;
   DeviceToken: DeviceToken;
   Discount: Discount;
   EmailAddressConflictError: EmailAddressConflictError;
-  ErrorResult: ResolversInterfaceTypes<ResolversParentTypes>['ErrorResult'];
+  ErrorResult: ResolversInterfaceTypes<ResolversParentTypes>["ErrorResult"];
   EventType: EventType;
   ExchangePoint: ExchangePoint;
   Facet: Facet;
@@ -4691,7 +5038,7 @@ export type ResolversParentTypes = {
   FavoriteListOptions: FavoriteListOptions;
   FavoriteSortParameter: FavoriteSortParameter;
   Field: Field;
-  Float: Scalars['Float']['output'];
+  Float: Scalars["Float"]["output"];
   FloatCustomFieldConfig: FloatCustomFieldConfig;
   Fulfillment: Fulfillment;
   FulfillmentLine: FulfillmentLine;
@@ -4701,7 +5048,7 @@ export type ResolversParentTypes = {
   HistoryEntryList: HistoryEntryList;
   HistoryEntryListOptions: HistoryEntryListOptions;
   HistoryEntrySortParameter: HistoryEntrySortParameter;
-  ID: Scalars['ID']['output'];
+  ID: Scalars["ID"]["output"];
   IDListOperators: IdListOperators;
   IDOperators: IdOperators;
   IdentifierChangeTokenExpiredError: IdentifierChangeTokenExpiredError;
@@ -4709,22 +5056,22 @@ export type ResolversParentTypes = {
   IneligiblePaymentMethodError: IneligiblePaymentMethodError;
   IneligibleShippingMethodError: IneligibleShippingMethodError;
   InsufficientStockError: InsufficientStockError;
-  Int: Scalars['Int']['output'];
+  Int: Scalars["Int"]["output"];
   IntCustomFieldConfig: IntCustomFieldConfig;
   InvalidCredentialsError: InvalidCredentialsError;
-  JSON: Scalars['JSON']['output'];
+  JSON: Scalars["JSON"]["output"];
   LocaleStringCustomFieldConfig: LocaleStringCustomFieldConfig;
   LocaleTextCustomFieldConfig: LocaleTextCustomFieldConfig;
   LocalizedString: LocalizedString;
   MissingPasswordError: MissingPasswordError;
-  Money: Scalars['Money']['output'];
+  Money: Scalars["Money"]["output"];
   Mutation: {};
   NativeAuthInput: NativeAuthInput;
   NativeAuthStrategyError: NativeAuthStrategyError;
-  NativeAuthenticationResult: ResolversUnionTypes<ResolversParentTypes>['NativeAuthenticationResult'];
+  NativeAuthenticationResult: ResolversUnionTypes<ResolversParentTypes>["NativeAuthenticationResult"];
   NegativeQuantityError: NegativeQuantityError;
   NoActiveOrderError: NoActiveOrderError;
-  Node: ResolversInterfaceTypes<ResolversParentTypes>['Node'];
+  Node: ResolversInterfaceTypes<ResolversParentTypes>["Node"];
   NotVerifiedError: NotVerifiedError;
   Notification: Notification;
   NotificationAutoTemplate: NotificationAutoTemplate;
@@ -4750,7 +5097,7 @@ export type ResolversParentTypes = {
   OrderSortParameter: OrderSortParameter;
   OrderStateTransitionError: OrderStateTransitionError;
   OrderTaxSummary: OrderTaxSummary;
-  PaginatedList: ResolversInterfaceTypes<ResolversParentTypes>['PaginatedList'];
+  PaginatedList: ResolversInterfaceTypes<ResolversParentTypes>["PaginatedList"];
   PasswordAlreadySetError: PasswordAlreadySetError;
   PasswordResetTokenExpiredError: PasswordResetTokenExpiredError;
   PasswordResetTokenInvalidError: PasswordResetTokenInvalidError;
@@ -4807,38 +5154,41 @@ export type ResolversParentTypes = {
   RankListOptions: RankListOptions;
   RankSortParameter: RankSortParameter;
   RankTranslation: RankTranslation;
-  RefreshCustomerVerificationResult: ResolversUnionTypes<ResolversParentTypes>['RefreshCustomerVerificationResult'];
+  RefreshCustomerVerificationResult: ResolversUnionTypes<ResolversParentTypes>["RefreshCustomerVerificationResult"];
   Refund: Refund;
   RefundLine: RefundLine;
-  Region: ResolversInterfaceTypes<ResolversParentTypes>['Region'];
+  Region: ResolversInterfaceTypes<ResolversParentTypes>["Region"];
   RegionTranslation: RegionTranslation;
-  RegisterCustomerAccountResult: ResolversUnionTypes<ResolversParentTypes>['RegisterCustomerAccountResult'];
+  RegisterCustomerAccountResult: ResolversUnionTypes<ResolversParentTypes>["RegisterCustomerAccountResult"];
   RegisterCustomerCustomFieldsInput: RegisterCustomerCustomFieldsInput;
   RegisterCustomerInput: RegisterCustomerInput;
   RelationCustomFieldConfig: RelationCustomFieldConfig;
-  RemoveOrderItemsResult: ResolversUnionTypes<ResolversParentTypes>['RemoveOrderItemsResult'];
-  RequestPasswordResetResult: ResolversUnionTypes<ResolversParentTypes>['RequestPasswordResetResult'];
-  RequestUpdateCustomerEmailAddressResult: ResolversUnionTypes<ResolversParentTypes>['RequestUpdateCustomerEmailAddressResult'];
-  ResetPasswordResult: ResolversUnionTypes<ResolversParentTypes>['ResetPasswordResult'];
+  RemoveOrderItemsResult: ResolversUnionTypes<ResolversParentTypes>["RemoveOrderItemsResult"];
+  RequestPasswordResetResult: ResolversUnionTypes<ResolversParentTypes>["RequestPasswordResetResult"];
+  RequestUpdateCustomerEmailAddressResult: ResolversUnionTypes<ResolversParentTypes>["RequestUpdateCustomerEmailAddressResult"];
+  ResetPasswordResult: ResolversUnionTypes<ResolversParentTypes>["ResetPasswordResult"];
   Role: Role;
   RoleList: RoleList;
   SearchInput: SearchInput;
   SearchReindexResponse: SearchReindexResponse;
   SearchResponse: SearchResponse;
-  SearchResult: Omit<SearchResult, 'price' | 'priceWithTax'> & { price: ResolversParentTypes['SearchResultPrice'], priceWithTax: ResolversParentTypes['SearchResultPrice'] };
+  SearchResult: Omit<SearchResult, "price" | "priceWithTax"> & {
+    price: ResolversParentTypes["SearchResultPrice"];
+    priceWithTax: ResolversParentTypes["SearchResultPrice"];
+  };
   SearchResultAsset: SearchResultAsset;
-  SearchResultPrice: ResolversUnionTypes<ResolversParentTypes>['SearchResultPrice'];
+  SearchResultPrice: ResolversUnionTypes<ResolversParentTypes>["SearchResultPrice"];
   SearchResultSortParameter: SearchResultSortParameter;
   Seller: Seller;
-  SetCustomerForOrderResult: ResolversUnionTypes<ResolversParentTypes>['SetCustomerForOrderResult'];
-  SetOrderShippingMethodResult: ResolversUnionTypes<ResolversParentTypes>['SetOrderShippingMethodResult'];
+  SetCustomerForOrderResult: ResolversUnionTypes<ResolversParentTypes>["SetCustomerForOrderResult"];
+  SetOrderShippingMethodResult: ResolversUnionTypes<ResolversParentTypes>["SetOrderShippingMethodResult"];
   ShippingLine: ShippingLine;
   ShippingMethod: ShippingMethod;
   ShippingMethodList: ShippingMethodList;
   ShippingMethodQuote: ShippingMethodQuote;
   ShippingMethodTranslation: ShippingMethodTranslation;
   SinglePrice: SinglePrice;
-  String: Scalars['String']['output'];
+  String: Scalars["String"]["output"];
   StringCustomFieldConfig: StringCustomFieldConfig;
   StringFieldOption: StringFieldOption;
   StringListOperators: StringListOperators;
@@ -4855,1832 +5205,4229 @@ export type ResolversParentTypes = {
   TaxRateList: TaxRateList;
   TextCustomFieldConfig: TextCustomFieldConfig;
   Total: Total;
-  TransitionOrderToStateResult: ResolversUnionTypes<ResolversParentTypes>['TransitionOrderToStateResult'];
+  TransitionOrderToStateResult: ResolversUnionTypes<ResolversParentTypes>["TransitionOrderToStateResult"];
   UpdateAddressInput: UpdateAddressInput;
   UpdateCustomerCustomFieldsInput: UpdateCustomerCustomFieldsInput;
-  UpdateCustomerEmailAddressResult: ResolversUnionTypes<ResolversParentTypes>['UpdateCustomerEmailAddressResult'];
+  UpdateCustomerEmailAddressResult: ResolversUnionTypes<ResolversParentTypes>["UpdateCustomerEmailAddressResult"];
   UpdateCustomerInput: UpdateCustomerInput;
-  UpdateCustomerPasswordResult: ResolversUnionTypes<ResolversParentTypes>['UpdateCustomerPasswordResult'];
+  UpdateCustomerPasswordResult: ResolversUnionTypes<ResolversParentTypes>["UpdateCustomerPasswordResult"];
   UpdateOrderCustomFieldsInput: UpdateOrderCustomFieldsInput;
   UpdateOrderInput: UpdateOrderInput;
-  UpdateOrderItemsResult: ResolversUnionTypes<ResolversParentTypes>['UpdateOrderItemsResult'];
-  Upload: Scalars['Upload']['output'];
+  UpdateOrderItemsResult: ResolversUnionTypes<ResolversParentTypes>["UpdateOrderItemsResult"];
+  Upload: Scalars["Upload"]["output"];
   User: User;
   VerificationTokenExpiredError: VerificationTokenExpiredError;
   VerificationTokenInvalidError: VerificationTokenInvalidError;
-  VerifyCustomerAccountResult: ResolversUnionTypes<ResolversParentTypes>['VerifyCustomerAccountResult'];
+  VerifyCustomerAccountResult: ResolversUnionTypes<ResolversParentTypes>["VerifyCustomerAccountResult"];
   Zone: Zone;
 };
 
-export type ActiveOrderResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['ActiveOrderResult'] = ResolversParentTypes['ActiveOrderResult']> = {
-  __resolveType: TypeResolveFn<'NoActiveOrderError' | 'Order', ParentType, ContextType>;
+export type ActiveOrderResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ActiveOrderResult"] = ResolversParentTypes["ActiveOrderResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "NoActiveOrderError" | "Order",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type AddPaymentToOrderResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddPaymentToOrderResult'] = ResolversParentTypes['AddPaymentToOrderResult']> = {
-  __resolveType: TypeResolveFn<'IneligiblePaymentMethodError' | 'NoActiveOrderError' | 'Order' | 'OrderPaymentStateError' | 'OrderStateTransitionError' | 'PaymentDeclinedError' | 'PaymentFailedError', ParentType, ContextType>;
+export type AddPaymentToOrderResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AddPaymentToOrderResult"] = ResolversParentTypes["AddPaymentToOrderResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "IneligiblePaymentMethodError"
+    | "NoActiveOrderError"
+    | "Order"
+    | "OrderPaymentStateError"
+    | "OrderStateTransitionError"
+    | "PaymentDeclinedError"
+    | "PaymentFailedError",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type AddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['Address'] = ResolversParentTypes['Address']> = {
-  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  company?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  country?: Resolver<ResolversTypes['Country'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  defaultBillingAddress?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  defaultShippingAddress?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  fullName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  postalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  province?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  streetLine1?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  streetLine2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type AddressResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Address"] = ResolversParentTypes["Address"]
+> = {
+  city?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes["Country"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  defaultBillingAddress?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  defaultShippingAddress?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  fullName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  phoneNumber?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  postalCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  province?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  streetLine1?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  streetLine2?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AdjustmentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Adjustment'] = ResolversParentTypes['Adjustment']> = {
-  adjustmentSource?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  amount?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  data?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['AdjustmentType'], ParentType, ContextType>;
+export type AdjustmentResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Adjustment"] = ResolversParentTypes["Adjustment"]
+> = {
+  adjustmentSource?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  amount?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  data?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["AdjustmentType"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AdminResolvers<ContextType = any, ParentType extends ResolversParentTypes['Admin'] = ResolversParentTypes['Admin']> = {
-  emailAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type AdminResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Admin"] = ResolversParentTypes["Admin"]
+> = {
+  emailAddress?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AlreadyLoggedInErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['AlreadyLoggedInError'] = ResolversParentTypes['AlreadyLoggedInError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type AlreadyLoggedInErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AlreadyLoggedInError"] = ResolversParentTypes["AlreadyLoggedInError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ApplyCouponCodeResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['ApplyCouponCodeResult'] = ResolversParentTypes['ApplyCouponCodeResult']> = {
-  __resolveType: TypeResolveFn<'CouponCodeExpiredError' | 'CouponCodeInvalidError' | 'CouponCodeLimitError' | 'Order', ParentType, ContextType>;
+export type ApplyCouponCodeResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ApplyCouponCodeResult"] = ResolversParentTypes["ApplyCouponCodeResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "CouponCodeExpiredError"
+    | "CouponCodeInvalidError"
+    | "CouponCodeLimitError"
+    | "Order",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type AssetResolvers<ContextType = any, ParentType extends ResolversParentTypes['Asset'] = ResolversParentTypes['Asset']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  fileSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  focalPoint?: Resolver<Maybe<ResolversTypes['Coordinate']>, ParentType, ContextType>;
-  height?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  mimeType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  preview?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  source?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['AssetType'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  width?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type AssetResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Asset"] = ResolversParentTypes["Asset"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  fileSize?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  focalPoint?: Resolver<
+    Maybe<ResolversTypes["Coordinate"]>,
+    ParentType,
+    ContextType
+  >;
+  height?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  mimeType?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  preview?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  source?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes["Tag"]>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["AssetType"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  width?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AssetListResolvers<ContextType = any, ParentType extends ResolversParentTypes['AssetList'] = ResolversParentTypes['AssetList']> = {
-  items?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type AssetListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AssetList"] = ResolversParentTypes["AssetList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AuthenticationMethodResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthenticationMethod'] = ResolversParentTypes['AuthenticationMethod']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  strategy?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type AuthenticationMethodResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AuthenticationMethod"] = ResolversParentTypes["AuthenticationMethod"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  strategy?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AuthenticationResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthenticationResult'] = ResolversParentTypes['AuthenticationResult']> = {
-  __resolveType: TypeResolveFn<'CurrentUser' | 'InvalidCredentialsError' | 'NotVerifiedError', ParentType, ContextType>;
+export type AuthenticationResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AuthenticationResult"] = ResolversParentTypes["AuthenticationResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "CurrentUser" | "InvalidCredentialsError" | "NotVerifiedError",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type AutoLinkOperationDefinitionResolvers<ContextType = any, ParentType extends ResolversParentTypes['AutoLinkOperationDefinition'] = ResolversParentTypes['AutoLinkOperationDefinition']> = {
-  args?: Resolver<Array<ResolversTypes['ConfigArgDefinition']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  eventTypes?: Resolver<Maybe<Array<Maybe<ResolversTypes['EventType']>>>, ParentType, ContextType>;
-  fields?: Resolver<Maybe<Array<Maybe<ResolversTypes['Field']>>>, ParentType, ContextType>;
+export type AutoLinkOperationDefinitionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["AutoLinkOperationDefinition"] = ResolversParentTypes["AutoLinkOperationDefinition"]
+> = {
+  args?: Resolver<
+    Array<ResolversTypes["ConfigArgDefinition"]>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  eventTypes?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["EventType"]>>>,
+    ParentType,
+    ContextType
+  >;
+  fields?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Field"]>>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BenefitResolvers<ContextType = any, ParentType extends ResolversParentTypes['Benefit'] = ResolversParentTypes['Benefit']> = {
-  benefitRanks?: Resolver<Maybe<Array<Maybe<ResolversTypes['BenefitRank']>>>, ParentType, ContextType>;
-  condition?: Resolver<ResolversTypes['ConfigurableOperation'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  position?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['BenefitTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  valueType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type BenefitResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Benefit"] = ResolversParentTypes["Benefit"]
+> = {
+  benefitRanks?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["BenefitRank"]>>>,
+    ParentType,
+    ContextType
+  >;
+  condition?: Resolver<
+    ResolversTypes["ConfigurableOperation"],
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  position?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["BenefitTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  valueType?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BenefitListResolvers<ContextType = any, ParentType extends ResolversParentTypes['BenefitList'] = ResolversParentTypes['BenefitList']> = {
-  items?: Resolver<Array<ResolversTypes['Benefit']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type BenefitListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BenefitList"] = ResolversParentTypes["BenefitList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Benefit"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BenefitRankResolvers<ContextType = any, ParentType extends ResolversParentTypes['BenefitRank'] = ResolversParentTypes['BenefitRank']> = {
-  benefit?: Resolver<ResolversTypes['Benefit'], ParentType, ContextType>;
-  benefitId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  rank?: Resolver<ResolversTypes['Rank'], ParentType, ContextType>;
-  rankId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type BenefitRankResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BenefitRank"] = ResolversParentTypes["BenefitRank"]
+> = {
+  benefit?: Resolver<ResolversTypes["Benefit"], ParentType, ContextType>;
+  benefitId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  rank?: Resolver<ResolversTypes["Rank"], ParentType, ContextType>;
+  rankId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BenefitTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['BenefitTranslation'] = ResolversParentTypes['BenefitTranslation']> = {
-  base?: Resolver<Maybe<ResolversTypes['Benefit']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<Maybe<ResolversTypes['LanguageCode']>, ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type BenefitTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BenefitTranslation"] = ResolversParentTypes["BenefitTranslation"]
+> = {
+  base?: Resolver<Maybe<ResolversTypes["Benefit"]>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    Maybe<ResolversTypes["LanguageCode"]>,
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BlogResolvers<ContextType = any, ParentType extends ResolversParentTypes['Blog'] = ResolversParentTypes['Blog']> = {
-  assets?: Resolver<Maybe<Array<Maybe<ResolversTypes['Asset']>>>, ParentType, ContextType>;
-  channels?: Resolver<Array<ResolversTypes['Channel']>, ParentType, ContextType>;
-  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  facetValues?: Resolver<Maybe<Array<Maybe<ResolversTypes['FacetValue']>>>, ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
-  startsAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['BlogTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type BlogResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Blog"] = ResolversParentTypes["Blog"]
+> = {
+  assets?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Asset"]>>>,
+    ParentType,
+    ContextType
+  >;
+  channels?: Resolver<
+    Array<ResolversTypes["Channel"]>,
+    ParentType,
+    ContextType
+  >;
+  content?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  facetValues?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["FacetValue"]>>>,
+    ParentType,
+    ContextType
+  >;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
+  startsAt?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["BlogTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BlogListResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogList'] = ResolversParentTypes['BlogList']> = {
-  items?: Resolver<Array<ResolversTypes['Blog']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type BlogListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BlogList"] = ResolversParentTypes["BlogList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Blog"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BlogTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogTranslation'] = ResolversParentTypes['BlogTranslation']> = {
-  base?: Resolver<ResolversTypes['Blog'], ParentType, ContextType>;
-  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+export type BlogTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BlogTranslation"] = ResolversParentTypes["BlogTranslation"]
+> = {
+  base?: Resolver<ResolversTypes["Blog"], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BooleanCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['BooleanCustomFieldConfig'] = ResolversParentTypes['BooleanCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type BooleanCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["BooleanCustomFieldConfig"] = ResolversParentTypes["BooleanCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ChannelResolvers<ContextType = any, ParentType extends ResolversParentTypes['Channel'] = ResolversParentTypes['Channel']> = {
-  availableCurrencyCodes?: Resolver<Array<ResolversTypes['CurrencyCode']>, ParentType, ContextType>;
-  availableLanguageCodes?: Resolver<Maybe<Array<ResolversTypes['LanguageCode']>>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  currencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  defaultCurrencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  defaultLanguageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  defaultShippingZone?: Resolver<Maybe<ResolversTypes['Zone']>, ParentType, ContextType>;
-  defaultTaxZone?: Resolver<Maybe<ResolversTypes['Zone']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  outOfStockThreshold?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  pricesIncludeTax?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  seller?: Resolver<Maybe<ResolversTypes['Seller']>, ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  trackInventory?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type ChannelResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Channel"] = ResolversParentTypes["Channel"]
+> = {
+  availableCurrencyCodes?: Resolver<
+    Array<ResolversTypes["CurrencyCode"]>,
+    ParentType,
+    ContextType
+  >;
+  availableLanguageCodes?: Resolver<
+    Maybe<Array<ResolversTypes["LanguageCode"]>>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  currencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  defaultCurrencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  defaultLanguageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  defaultShippingZone?: Resolver<
+    Maybe<ResolversTypes["Zone"]>,
+    ParentType,
+    ContextType
+  >;
+  defaultTaxZone?: Resolver<
+    Maybe<ResolversTypes["Zone"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  outOfStockThreshold?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  pricesIncludeTax?: Resolver<
+    ResolversTypes["Boolean"],
+    ParentType,
+    ContextType
+  >;
+  seller?: Resolver<Maybe<ResolversTypes["Seller"]>, ParentType, ContextType>;
+  token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  trackInventory?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CollectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Collection'] = ResolversParentTypes['Collection']> = {
-  assets?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType>;
-  breadcrumbs?: Resolver<Array<ResolversTypes['CollectionBreadcrumb']>, ParentType, ContextType>;
-  children?: Resolver<Maybe<Array<ResolversTypes['Collection']>>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  filters?: Resolver<Array<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<Maybe<ResolversTypes['LanguageCode']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  parent?: Resolver<Maybe<ResolversTypes['Collection']>, ParentType, ContextType>;
-  parentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  position?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  productVariants?: Resolver<ResolversTypes['ProductVariantList'], ParentType, ContextType, Partial<CollectionProductVariantsArgs>>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['CollectionTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type CollectionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"]
+> = {
+  assets?: Resolver<Array<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  breadcrumbs?: Resolver<
+    Array<ResolversTypes["CollectionBreadcrumb"]>,
+    ParentType,
+    ContextType
+  >;
+  children?: Resolver<
+    Maybe<Array<ResolversTypes["Collection"]>>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  filters?: Resolver<
+    Array<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    Maybe<ResolversTypes["LanguageCode"]>,
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  parent?: Resolver<
+    Maybe<ResolversTypes["Collection"]>,
+    ParentType,
+    ContextType
+  >;
+  parentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  position?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  productVariants?: Resolver<
+    ResolversTypes["ProductVariantList"],
+    ParentType,
+    ContextType,
+    Partial<CollectionProductVariantsArgs>
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["CollectionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CollectionBreadcrumbResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollectionBreadcrumb'] = ResolversParentTypes['CollectionBreadcrumb']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CollectionBreadcrumbResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CollectionBreadcrumb"] = ResolversParentTypes["CollectionBreadcrumb"]
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CollectionListResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollectionList'] = ResolversParentTypes['CollectionList']> = {
-  items?: Resolver<Array<ResolversTypes['Collection']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type CollectionListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CollectionList"] = ResolversParentTypes["CollectionList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["Collection"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CollectionResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollectionResult'] = ResolversParentTypes['CollectionResult']> = {
-  collection?: Resolver<ResolversTypes['Collection'], ParentType, ContextType>;
-  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type CollectionResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CollectionResult"] = ResolversParentTypes["CollectionResult"]
+> = {
+  collection?: Resolver<ResolversTypes["Collection"], ParentType, ContextType>;
+  count?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CollectionTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollectionTranslation'] = ResolversParentTypes['CollectionTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type CollectionTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CollectionTranslation"] = ResolversParentTypes["CollectionTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ConfigArgResolvers<ContextType = any, ParentType extends ResolversParentTypes['ConfigArg'] = ResolversParentTypes['ConfigArg']> = {
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type ConfigArgResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ConfigArg"] = ResolversParentTypes["ConfigArg"]
+> = {
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ConfigArgDefinitionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ConfigArgDefinition'] = ResolversParentTypes['ConfigArgDefinition']> = {
-  defaultValue?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  required?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type ConfigArgDefinitionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ConfigArgDefinition"] = ResolversParentTypes["ConfigArgDefinition"]
+> = {
+  defaultValue?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  required?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ConfigurableOperationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ConfigurableOperation'] = ResolversParentTypes['ConfigurableOperation']> = {
-  args?: Resolver<Array<ResolversTypes['ConfigArg']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type ConfigurableOperationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ConfigurableOperation"] = ResolversParentTypes["ConfigurableOperation"]
+> = {
+  args?: Resolver<Array<ResolversTypes["ConfigArg"]>, ParentType, ContextType>;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ConfigurableOperationDefinitionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ConfigurableOperationDefinition'] = ResolversParentTypes['ConfigurableOperationDefinition']> = {
-  args?: Resolver<Array<ResolversTypes['ConfigArgDefinition']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type ConfigurableOperationDefinitionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ConfigurableOperationDefinition"] = ResolversParentTypes["ConfigurableOperationDefinition"]
+> = {
+  args?: Resolver<
+    Array<ResolversTypes["ConfigArgDefinition"]>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CoordinateResolvers<ContextType = any, ParentType extends ResolversParentTypes['Coordinate'] = ResolversParentTypes['Coordinate']> = {
-  x?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  y?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+export type CoordinateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Coordinate"] = ResolversParentTypes["Coordinate"]
+> = {
+  x?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  y?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CountryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  parent?: Resolver<Maybe<ResolversTypes['Region']>, ParentType, ContextType>;
-  parentId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['RegionTranslation']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type CountryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Country"] = ResolversParentTypes["Country"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  parent?: Resolver<Maybe<ResolversTypes["Region"]>, ParentType, ContextType>;
+  parentId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["RegionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CountryListResolvers<ContextType = any, ParentType extends ResolversParentTypes['CountryList'] = ResolversParentTypes['CountryList']> = {
-  items?: Resolver<Array<ResolversTypes['Country']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type CountryListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CountryList"] = ResolversParentTypes["CountryList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Country"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CouponCodeExpiredErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['CouponCodeExpiredError'] = ResolversParentTypes['CouponCodeExpiredError']> = {
-  couponCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CouponCodeExpiredErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CouponCodeExpiredError"] = ResolversParentTypes["CouponCodeExpiredError"]
+> = {
+  couponCode?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CouponCodeInvalidErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['CouponCodeInvalidError'] = ResolversParentTypes['CouponCodeInvalidError']> = {
-  couponCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CouponCodeInvalidErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CouponCodeInvalidError"] = ResolversParentTypes["CouponCodeInvalidError"]
+> = {
+  couponCode?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CouponCodeLimitErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['CouponCodeLimitError'] = ResolversParentTypes['CouponCodeLimitError']> = {
-  couponCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  limit?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CouponCodeLimitErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CouponCodeLimitError"] = ResolversParentTypes["CouponCodeLimitError"]
+> = {
+  couponCode?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  limit?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CurrentUserResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrentUser'] = ResolversParentTypes['CurrentUser']> = {
-  channels?: Resolver<Array<ResolversTypes['CurrentUserChannel']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  identifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CurrentUserResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CurrentUser"] = ResolversParentTypes["CurrentUser"]
+> = {
+  channels?: Resolver<
+    Array<ResolversTypes["CurrentUserChannel"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  identifier?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CurrentUserChannelResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrentUserChannel'] = ResolversParentTypes['CurrentUserChannel']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  permissions?: Resolver<Array<ResolversTypes['Permission']>, ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type CurrentUserChannelResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CurrentUserChannel"] = ResolversParentTypes["CurrentUserChannel"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  permissions?: Resolver<
+    Array<ResolversTypes["Permission"]>,
+    ParentType,
+    ContextType
+  >;
+  token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CustomFieldResolvers<ContextType = any, ParentType extends ResolversParentTypes['CustomField'] = ResolversParentTypes['CustomField']> = {
-  __resolveType: TypeResolveFn<'BooleanCustomFieldConfig' | 'DateTimeCustomFieldConfig' | 'FloatCustomFieldConfig' | 'IntCustomFieldConfig' | 'LocaleStringCustomFieldConfig' | 'LocaleTextCustomFieldConfig' | 'RelationCustomFieldConfig' | 'StringCustomFieldConfig' | 'TextCustomFieldConfig', ParentType, ContextType>;
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type CustomFieldResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CustomField"] = ResolversParentTypes["CustomField"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "BooleanCustomFieldConfig"
+    | "DateTimeCustomFieldConfig"
+    | "FloatCustomFieldConfig"
+    | "IntCustomFieldConfig"
+    | "LocaleStringCustomFieldConfig"
+    | "LocaleTextCustomFieldConfig"
+    | "RelationCustomFieldConfig"
+    | "StringCustomFieldConfig"
+    | "TextCustomFieldConfig",
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
 };
 
-export type CustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['CustomFieldConfig'] = ResolversParentTypes['CustomFieldConfig']> = {
-  __resolveType: TypeResolveFn<'BooleanCustomFieldConfig' | 'DateTimeCustomFieldConfig' | 'FloatCustomFieldConfig' | 'IntCustomFieldConfig' | 'LocaleStringCustomFieldConfig' | 'LocaleTextCustomFieldConfig' | 'RelationCustomFieldConfig' | 'StringCustomFieldConfig' | 'TextCustomFieldConfig', ParentType, ContextType>;
+export type CustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CustomFieldConfig"] = ResolversParentTypes["CustomFieldConfig"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "BooleanCustomFieldConfig"
+    | "DateTimeCustomFieldConfig"
+    | "FloatCustomFieldConfig"
+    | "IntCustomFieldConfig"
+    | "LocaleStringCustomFieldConfig"
+    | "LocaleTextCustomFieldConfig"
+    | "RelationCustomFieldConfig"
+    | "StringCustomFieldConfig"
+    | "TextCustomFieldConfig",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type CustomerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Customer'] = ResolversParentTypes['Customer']> = {
-  addresses?: Resolver<Maybe<Array<ResolversTypes['Address']>>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['CustomerCustomFields']>, ParentType, ContextType>;
-  emailAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  orders?: Resolver<ResolversTypes['OrderList'], ParentType, ContextType, Partial<CustomerOrdersArgs>>;
-  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  rank?: Resolver<Maybe<ResolversTypes['Rank']>, ParentType, ContextType>;
-  rankId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+export type CustomerResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Customer"] = ResolversParentTypes["Customer"]
+> = {
+  addresses?: Resolver<
+    Maybe<Array<ResolversTypes["Address"]>>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["CustomerCustomFields"]>,
+    ParentType,
+    ContextType
+  >;
+  emailAddress?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  orders?: Resolver<
+    ResolversTypes["OrderList"],
+    ParentType,
+    ContextType,
+    Partial<CustomerOrdersArgs>
+  >;
+  phoneNumber?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  rank?: Resolver<Maybe<ResolversTypes["Rank"]>, ParentType, ContextType>;
+  rankId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CustomerCustomFieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['CustomerCustomFields'] = ResolversParentTypes['CustomerCustomFields']> = {
-  avatar?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  coinPoints?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  dateOfBirth?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  gender?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  memberPoints?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  unseenNoti?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+export type CustomerCustomFieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CustomerCustomFields"] = ResolversParentTypes["CustomerCustomFields"]
+> = {
+  avatar?: Resolver<Maybe<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  coinPoints?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  dateOfBirth?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  gender?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  memberPoints?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  unseenNoti?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CustomerGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['CustomerGroup'] = ResolversParentTypes['CustomerGroup']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  customers?: Resolver<ResolversTypes['CustomerList'], ParentType, ContextType, Partial<CustomerGroupCustomersArgs>>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type CustomerGroupResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CustomerGroup"] = ResolversParentTypes["CustomerGroup"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  customers?: Resolver<
+    ResolversTypes["CustomerList"],
+    ParentType,
+    ContextType,
+    Partial<CustomerGroupCustomersArgs>
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CustomerListResolvers<ContextType = any, ParentType extends ResolversParentTypes['CustomerList'] = ResolversParentTypes['CustomerList']> = {
-  items?: Resolver<Array<ResolversTypes['Customer']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type CustomerListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["CustomerList"] = ResolversParentTypes["CustomerList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Customer"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
-  name: 'DateTime';
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+  name: "DateTime";
 }
 
-export type DateTimeCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['DateTimeCustomFieldConfig'] = ResolversParentTypes['DateTimeCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  step?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type DateTimeCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["DateTimeCustomFieldConfig"] = ResolversParentTypes["DateTimeCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  step?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type DeletionResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeletionResponse'] = ResolversParentTypes['DeletionResponse']> = {
-  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  result?: Resolver<ResolversTypes['DeletionResult'], ParentType, ContextType>;
+export type DeletionResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["DeletionResponse"] = ResolversParentTypes["DeletionResponse"]
+> = {
+  message?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  result?: Resolver<ResolversTypes["DeletionResult"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type DeviceTokenResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeviceToken'] = ResolversParentTypes['DeviceToken']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+export type DeviceTokenResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["DeviceToken"] = ResolversParentTypes["DeviceToken"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type DiscountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Discount'] = ResolversParentTypes['Discount']> = {
-  adjustmentSource?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  amount?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  amountWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['AdjustmentType'], ParentType, ContextType>;
+export type DiscountResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Discount"] = ResolversParentTypes["Discount"]
+> = {
+  adjustmentSource?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  amount?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  amountWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["AdjustmentType"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type EmailAddressConflictErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['EmailAddressConflictError'] = ResolversParentTypes['EmailAddressConflictError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type EmailAddressConflictErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["EmailAddressConflictError"] = ResolversParentTypes["EmailAddressConflictError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ErrorResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['ErrorResult'] = ResolversParentTypes['ErrorResult']> = {
-  __resolveType: TypeResolveFn<'AlreadyLoggedInError' | 'CouponCodeExpiredError' | 'CouponCodeInvalidError' | 'CouponCodeLimitError' | 'EmailAddressConflictError' | 'GuestCheckoutError' | 'IdentifierChangeTokenExpiredError' | 'IdentifierChangeTokenInvalidError' | 'IneligiblePaymentMethodError' | 'IneligibleShippingMethodError' | 'InsufficientStockError' | 'InvalidCredentialsError' | 'MissingPasswordError' | 'NativeAuthStrategyError' | 'NegativeQuantityError' | 'NoActiveOrderError' | 'NotVerifiedError' | 'OrderLimitError' | 'OrderModificationError' | 'OrderPaymentStateError' | 'OrderStateTransitionError' | 'PasswordAlreadySetError' | 'PasswordResetTokenExpiredError' | 'PasswordResetTokenInvalidError' | 'PasswordValidationError' | 'PaymentDeclinedError' | 'PaymentFailedError' | 'VerificationTokenExpiredError' | 'VerificationTokenInvalidError', ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type ErrorResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ErrorResult"] = ResolversParentTypes["ErrorResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "AlreadyLoggedInError"
+    | "CouponCodeExpiredError"
+    | "CouponCodeInvalidError"
+    | "CouponCodeLimitError"
+    | "EmailAddressConflictError"
+    | "GuestCheckoutError"
+    | "IdentifierChangeTokenExpiredError"
+    | "IdentifierChangeTokenInvalidError"
+    | "IneligiblePaymentMethodError"
+    | "IneligibleShippingMethodError"
+    | "InsufficientStockError"
+    | "InvalidCredentialsError"
+    | "MissingPasswordError"
+    | "NativeAuthStrategyError"
+    | "NegativeQuantityError"
+    | "NoActiveOrderError"
+    | "NotVerifiedError"
+    | "OrderLimitError"
+    | "OrderModificationError"
+    | "OrderPaymentStateError"
+    | "OrderStateTransitionError"
+    | "PasswordAlreadySetError"
+    | "PasswordResetTokenExpiredError"
+    | "PasswordResetTokenInvalidError"
+    | "PasswordValidationError"
+    | "PaymentDeclinedError"
+    | "PaymentFailedError"
+    | "VerificationTokenExpiredError"
+    | "VerificationTokenInvalidError",
+    ParentType,
+    ContextType
+  >;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 };
 
-export type EventTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventType'] = ResolversParentTypes['EventType']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type EventTypeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["EventType"] = ResolversParentTypes["EventType"]
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ExchangePointResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExchangePoint'] = ResolversParentTypes['ExchangePoint']> = {
-  channelId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  currencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
+export type ExchangePointResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ExchangePoint"] = ResolversParentTypes["ExchangePoint"]
+> = {
+  channelId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  currencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetResolvers<ContextType = any, ParentType extends ResolversParentTypes['Facet'] = ResolversParentTypes['Facet']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['FacetTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  valueList?: Resolver<ResolversTypes['FacetValueList'], ParentType, ContextType, Partial<FacetValueListArgs>>;
-  values?: Resolver<Array<ResolversTypes['FacetValue']>, ParentType, ContextType>;
+export type FacetResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Facet"] = ResolversParentTypes["Facet"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["FacetTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  valueList?: Resolver<
+    ResolversTypes["FacetValueList"],
+    ParentType,
+    ContextType,
+    Partial<FacetValueListArgs>
+  >;
+  values?: Resolver<
+    Array<ResolversTypes["FacetValue"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetListResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetList'] = ResolversParentTypes['FacetList']> = {
-  items?: Resolver<Array<ResolversTypes['Facet']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type FacetListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetList"] = ResolversParentTypes["FacetList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Facet"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetTranslation'] = ResolversParentTypes['FacetTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type FacetTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetTranslation"] = ResolversParentTypes["FacetTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValue'] = ResolversParentTypes['FacetValue']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['FacetValueCustomFields']>, ParentType, ContextType>;
-  facet?: Resolver<ResolversTypes['Facet'], ParentType, ContextType>;
-  facetId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['FacetValueTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type FacetValueResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValue"] = ResolversParentTypes["FacetValue"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["FacetValueCustomFields"]>,
+    ParentType,
+    ContextType
+  >;
+  facet?: Resolver<ResolversTypes["Facet"], ParentType, ContextType>;
+  facetId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["FacetValueTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueCustomFieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValueCustomFields'] = ResolversParentTypes['FacetValueCustomFields']> = {
-  asset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type FacetValueCustomFieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValueCustomFields"] = ResolversParentTypes["FacetValueCustomFields"]
+> = {
+  asset?: Resolver<Maybe<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueListResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValueList'] = ResolversParentTypes['FacetValueList']> = {
-  items?: Resolver<Array<ResolversTypes['FacetValue']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type FacetValueListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValueList"] = ResolversParentTypes["FacetValueList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["FacetValue"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValueResult'] = ResolversParentTypes['FacetValueResult']> = {
-  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  facetValue?: Resolver<ResolversTypes['FacetValue'], ParentType, ContextType>;
+export type FacetValueResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValueResult"] = ResolversParentTypes["FacetValueResult"]
+> = {
+  count?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  facetValue?: Resolver<ResolversTypes["FacetValue"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValueTranslation'] = ResolversParentTypes['FacetValueTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['FacetValueTranslationCustomFields']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type FacetValueTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValueTranslation"] = ResolversParentTypes["FacetValueTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["FacetValueTranslationCustomFields"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FacetValueTranslationCustomFieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FacetValueTranslationCustomFields'] = ResolversParentTypes['FacetValueTranslationCustomFields']> = {
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type FacetValueTranslationCustomFieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FacetValueTranslationCustomFields"] = ResolversParentTypes["FacetValueTranslationCustomFields"]
+> = {
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FavoriteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Favorite'] = ResolversParentTypes['Favorite']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType>;
-  customerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  productVariant?: Resolver<ResolversTypes['ProductVariant'], ParentType, ContextType>;
-  productVariantId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type FavoriteResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Favorite"] = ResolversParentTypes["Favorite"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customer?: Resolver<ResolversTypes["Customer"], ParentType, ContextType>;
+  customerId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  productVariant?: Resolver<
+    ResolversTypes["ProductVariant"],
+    ParentType,
+    ContextType
+  >;
+  productVariantId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FavoriteListResolvers<ContextType = any, ParentType extends ResolversParentTypes['FavoriteList'] = ResolversParentTypes['FavoriteList']> = {
-  items?: Resolver<Array<ResolversTypes['Favorite']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type FavoriteListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FavoriteList"] = ResolversParentTypes["FavoriteList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Favorite"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FieldResolvers<ContextType = any, ParentType extends ResolversParentTypes['Field'] = ResolversParentTypes['Field']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type FieldResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Field"] = ResolversParentTypes["Field"]
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FloatCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['FloatCustomFieldConfig'] = ResolversParentTypes['FloatCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  step?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type FloatCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FloatCustomFieldConfig"] = ResolversParentTypes["FloatCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  step?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FulfillmentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Fulfillment'] = ResolversParentTypes['Fulfillment']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lines?: Resolver<Array<ResolversTypes['FulfillmentLine']>, ParentType, ContextType>;
-  method?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  summary?: Resolver<Array<ResolversTypes['FulfillmentLine']>, ParentType, ContextType>;
-  trackingCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type FulfillmentResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Fulfillment"] = ResolversParentTypes["Fulfillment"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lines?: Resolver<
+    Array<ResolversTypes["FulfillmentLine"]>,
+    ParentType,
+    ContextType
+  >;
+  method?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  summary?: Resolver<
+    Array<ResolversTypes["FulfillmentLine"]>,
+    ParentType,
+    ContextType
+  >;
+  trackingCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type FulfillmentLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['FulfillmentLine'] = ResolversParentTypes['FulfillmentLine']> = {
-  fulfillment?: Resolver<ResolversTypes['Fulfillment'], ParentType, ContextType>;
-  fulfillmentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  orderLine?: Resolver<ResolversTypes['OrderLine'], ParentType, ContextType>;
-  orderLineId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type FulfillmentLineResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["FulfillmentLine"] = ResolversParentTypes["FulfillmentLine"]
+> = {
+  fulfillment?: Resolver<
+    ResolversTypes["Fulfillment"],
+    ParentType,
+    ContextType
+  >;
+  fulfillmentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  orderLine?: Resolver<ResolversTypes["OrderLine"], ParentType, ContextType>;
+  orderLineId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type GuestCheckoutErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['GuestCheckoutError'] = ResolversParentTypes['GuestCheckoutError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  errorDetail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type GuestCheckoutErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["GuestCheckoutError"] = ResolversParentTypes["GuestCheckoutError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  errorDetail?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type HistoryEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['HistoryEntry'] = ResolversParentTypes['HistoryEntry']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  data?: Resolver<ResolversTypes['JSON'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['HistoryEntryType'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type HistoryEntryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["HistoryEntry"] = ResolversParentTypes["HistoryEntry"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  data?: Resolver<ResolversTypes["JSON"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["HistoryEntryType"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type HistoryEntryListResolvers<ContextType = any, ParentType extends ResolversParentTypes['HistoryEntryList'] = ResolversParentTypes['HistoryEntryList']> = {
-  items?: Resolver<Array<ResolversTypes['HistoryEntry']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type HistoryEntryListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["HistoryEntryList"] = ResolversParentTypes["HistoryEntryList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["HistoryEntry"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IdentifierChangeTokenExpiredErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['IdentifierChangeTokenExpiredError'] = ResolversParentTypes['IdentifierChangeTokenExpiredError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type IdentifierChangeTokenExpiredErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["IdentifierChangeTokenExpiredError"] = ResolversParentTypes["IdentifierChangeTokenExpiredError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IdentifierChangeTokenInvalidErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['IdentifierChangeTokenInvalidError'] = ResolversParentTypes['IdentifierChangeTokenInvalidError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type IdentifierChangeTokenInvalidErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["IdentifierChangeTokenInvalidError"] = ResolversParentTypes["IdentifierChangeTokenInvalidError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IneligiblePaymentMethodErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['IneligiblePaymentMethodError'] = ResolversParentTypes['IneligiblePaymentMethodError']> = {
-  eligibilityCheckerMessage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type IneligiblePaymentMethodErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["IneligiblePaymentMethodError"] = ResolversParentTypes["IneligiblePaymentMethodError"]
+> = {
+  eligibilityCheckerMessage?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IneligibleShippingMethodErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['IneligibleShippingMethodError'] = ResolversParentTypes['IneligibleShippingMethodError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type IneligibleShippingMethodErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["IneligibleShippingMethodError"] = ResolversParentTypes["IneligibleShippingMethodError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type InsufficientStockErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['InsufficientStockError'] = ResolversParentTypes['InsufficientStockError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  order?: Resolver<ResolversTypes['Order'], ParentType, ContextType>;
-  quantityAvailable?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+export type InsufficientStockErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["InsufficientStockError"] = ResolversParentTypes["InsufficientStockError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  order?: Resolver<ResolversTypes["Order"], ParentType, ContextType>;
+  quantityAvailable?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IntCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['IntCustomFieldConfig'] = ResolversParentTypes['IntCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  step?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type IntCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["IntCustomFieldConfig"] = ResolversParentTypes["IntCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  step?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type InvalidCredentialsErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['InvalidCredentialsError'] = ResolversParentTypes['InvalidCredentialsError']> = {
-  authenticationError?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type InvalidCredentialsErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["InvalidCredentialsError"] = ResolversParentTypes["InvalidCredentialsError"]
+> = {
+  authenticationError?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
-  name: 'JSON';
+export interface JsonScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["JSON"], any> {
+  name: "JSON";
 }
 
-export type LocaleStringCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['LocaleStringCustomFieldConfig'] = ResolversParentTypes['LocaleStringCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  length?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  pattern?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type LocaleStringCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["LocaleStringCustomFieldConfig"] = ResolversParentTypes["LocaleStringCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  length?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  pattern?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type LocaleTextCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['LocaleTextCustomFieldConfig'] = ResolversParentTypes['LocaleTextCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+export type LocaleTextCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["LocaleTextCustomFieldConfig"] = ResolversParentTypes["LocaleTextCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type LocalizedStringResolvers<ContextType = any, ParentType extends ResolversParentTypes['LocalizedString'] = ResolversParentTypes['LocalizedString']> = {
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type LocalizedStringResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["LocalizedString"] = ResolversParentTypes["LocalizedString"]
+> = {
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MissingPasswordErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['MissingPasswordError'] = ResolversParentTypes['MissingPasswordError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type MissingPasswordErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["MissingPasswordError"] = ResolversParentTypes["MissingPasswordError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface MoneyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Money'], any> {
-  name: 'Money';
+export interface MoneyScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["Money"], any> {
+  name: "Money";
 }
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addDeviceToken?: Resolver<Maybe<ResolversTypes['DeviceToken']>, ParentType, ContextType, RequireFields<MutationAddDeviceTokenArgs, 'token'>>;
-  addItemToOrder?: Resolver<ResolversTypes['UpdateOrderItemsResult'], ParentType, ContextType, RequireFields<MutationAddItemToOrderArgs, 'productVariantId' | 'quantity'>>;
-  addPaymentToOrder?: Resolver<ResolversTypes['AddPaymentToOrderResult'], ParentType, ContextType, RequireFields<MutationAddPaymentToOrderArgs, 'input'>>;
-  adjustOrderLine?: Resolver<ResolversTypes['UpdateOrderItemsResult'], ParentType, ContextType, RequireFields<MutationAdjustOrderLineArgs, 'orderLineId' | 'quantity'>>;
-  applyCouponCode?: Resolver<ResolversTypes['ApplyCouponCodeResult'], ParentType, ContextType, RequireFields<MutationApplyCouponCodeArgs, 'couponCode'>>;
-  authenticate?: Resolver<ResolversTypes['AuthenticationResult'], ParentType, ContextType, RequireFields<MutationAuthenticateArgs, 'input'>>;
-  createCustomerAddress?: Resolver<ResolversTypes['Address'], ParentType, ContextType, RequireFields<MutationCreateCustomerAddressArgs, 'input'>>;
-  deleteCustomerAddress?: Resolver<ResolversTypes['Success'], ParentType, ContextType, RequireFields<MutationDeleteCustomerAddressArgs, 'id'>>;
-  exchangePointToVariant?: Resolver<Maybe<ResolversTypes['Promotion']>, ParentType, ContextType, RequireFields<MutationExchangePointToVariantArgs, 'productVariantId'>>;
-  login?: Resolver<ResolversTypes['NativeAuthenticationResult'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'password' | 'username'>>;
-  logout?: Resolver<ResolversTypes['Success'], ParentType, ContextType>;
-  maskAsRead?: Resolver<Maybe<ResolversTypes['Success']>, ParentType, ContextType, Partial<MutationMaskAsReadArgs>>;
-  refreshCustomerVerification?: Resolver<ResolversTypes['RefreshCustomerVerificationResult'], ParentType, ContextType, RequireFields<MutationRefreshCustomerVerificationArgs, 'emailAddress'>>;
-  registerCustomerAccount?: Resolver<ResolversTypes['RegisterCustomerAccountResult'], ParentType, ContextType, RequireFields<MutationRegisterCustomerAccountArgs, 'input'>>;
-  removeAllOrderLines?: Resolver<ResolversTypes['RemoveOrderItemsResult'], ParentType, ContextType>;
-  removeCouponCode?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationRemoveCouponCodeArgs, 'couponCode'>>;
-  removeOrderLine?: Resolver<ResolversTypes['RemoveOrderItemsResult'], ParentType, ContextType, RequireFields<MutationRemoveOrderLineArgs, 'orderLineId'>>;
-  requestPasswordReset?: Resolver<Maybe<ResolversTypes['RequestPasswordResetResult']>, ParentType, ContextType, RequireFields<MutationRequestPasswordResetArgs, 'emailAddress'>>;
-  requestUpdateCustomerEmailAddress?: Resolver<ResolversTypes['RequestUpdateCustomerEmailAddressResult'], ParentType, ContextType, RequireFields<MutationRequestUpdateCustomerEmailAddressArgs, 'newEmailAddress' | 'password'>>;
-  resetPassword?: Resolver<ResolversTypes['ResetPasswordResult'], ParentType, ContextType, RequireFields<MutationResetPasswordArgs, 'password' | 'token'>>;
-  setCustomerForOrder?: Resolver<ResolversTypes['SetCustomerForOrderResult'], ParentType, ContextType, RequireFields<MutationSetCustomerForOrderArgs, 'input'>>;
-  setOrderBillingAddress?: Resolver<ResolversTypes['ActiveOrderResult'], ParentType, ContextType, RequireFields<MutationSetOrderBillingAddressArgs, 'input'>>;
-  setOrderCustomFields?: Resolver<ResolversTypes['ActiveOrderResult'], ParentType, ContextType, RequireFields<MutationSetOrderCustomFieldsArgs, 'input'>>;
-  setOrderShippingAddress?: Resolver<ResolversTypes['ActiveOrderResult'], ParentType, ContextType, RequireFields<MutationSetOrderShippingAddressArgs, 'input'>>;
-  setOrderShippingMethod?: Resolver<ResolversTypes['SetOrderShippingMethodResult'], ParentType, ContextType, RequireFields<MutationSetOrderShippingMethodArgs, 'shippingMethodId'>>;
-  submitProductReview?: Resolver<ResolversTypes['ProductReview'], ParentType, ContextType, RequireFields<MutationSubmitProductReviewArgs, 'input'>>;
-  submitQuestionAnswer?: Resolver<ResolversTypes['QuestionAnswer'], ParentType, ContextType, RequireFields<MutationSubmitQuestionAnswerArgs, 'input'>>;
-  toggleFavorite?: Resolver<ResolversTypes['Success'], ParentType, ContextType, RequireFields<MutationToggleFavoriteArgs, 'productVariantId'>>;
-  transitionOrderToState?: Resolver<Maybe<ResolversTypes['TransitionOrderToStateResult']>, ParentType, ContextType, RequireFields<MutationTransitionOrderToStateArgs, 'state'>>;
-  updateCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationUpdateCustomerArgs, 'input'>>;
-  updateCustomerAddress?: Resolver<ResolversTypes['Address'], ParentType, ContextType, RequireFields<MutationUpdateCustomerAddressArgs, 'input'>>;
-  updateCustomerEmailAddress?: Resolver<ResolversTypes['UpdateCustomerEmailAddressResult'], ParentType, ContextType, RequireFields<MutationUpdateCustomerEmailAddressArgs, 'token'>>;
-  updateCustomerPassword?: Resolver<ResolversTypes['UpdateCustomerPasswordResult'], ParentType, ContextType, RequireFields<MutationUpdateCustomerPasswordArgs, 'currentPassword' | 'newPassword'>>;
-  verifyCustomerAccount?: Resolver<ResolversTypes['VerifyCustomerAccountResult'], ParentType, ContextType, RequireFields<MutationVerifyCustomerAccountArgs, 'token'>>;
-  voteOnReview?: Resolver<ResolversTypes['ProductReview'], ParentType, ContextType, RequireFields<MutationVoteOnReviewArgs, 'id' | 'vote'>>;
-};
-
-export type NativeAuthStrategyErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['NativeAuthStrategyError'] = ResolversParentTypes['NativeAuthStrategyError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NativeAuthenticationResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['NativeAuthenticationResult'] = ResolversParentTypes['NativeAuthenticationResult']> = {
-  __resolveType: TypeResolveFn<'CurrentUser' | 'InvalidCredentialsError' | 'NativeAuthStrategyError' | 'NotVerifiedError', ParentType, ContextType>;
-};
-
-export type NegativeQuantityErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['NegativeQuantityError'] = ResolversParentTypes['NegativeQuantityError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NoActiveOrderErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['NoActiveOrderError'] = ResolversParentTypes['NoActiveOrderError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = {
-  __resolveType: TypeResolveFn<'Address' | 'Asset' | 'AuthenticationMethod' | 'Benefit' | 'BenefitRank' | 'BenefitTranslation' | 'Blog' | 'BlogTranslation' | 'Channel' | 'Collection' | 'Country' | 'Customer' | 'CustomerGroup' | 'DeviceToken' | 'ExchangePoint' | 'Facet' | 'FacetValue' | 'Favorite' | 'Fulfillment' | 'HistoryEntry' | 'Notification' | 'NotificationAutoTemplate' | 'Order' | 'OrderLine' | 'Payment' | 'PaymentMethod' | 'Product' | 'ProductOption' | 'ProductOptionGroup' | 'ProductReview' | 'ProductVariant' | 'ProductVariantPoint' | 'Promotion' | 'Province' | 'QuestionAnswer' | 'Rank' | 'RankTranslation' | 'Refund' | 'Role' | 'Seller' | 'ShippingMethod' | 'Surcharge' | 'Tag' | 'TaxCategory' | 'TaxRate' | 'User' | 'Zone', ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-};
-
-export type NotVerifiedErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['NotVerifiedError'] = ResolversParentTypes['NotVerifiedError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NotificationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Notification'] = ResolversParentTypes['Notification']> = {
-  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  conditions?: Resolver<Array<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  event?: Resolver<Maybe<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  isAuto?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  link?: Resolver<Maybe<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['NotificationTranslation']>, ParentType, ContextType>;
-  unSeen?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NotificationAutoTemplateResolvers<ContextType = any, ParentType extends ResolversParentTypes['NotificationAutoTemplate'] = ResolversParentTypes['NotificationAutoTemplate']> = {
-  bodyTemplate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  conditions?: Resolver<Array<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  eventType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  link?: Resolver<Maybe<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  titleTemplate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['NotificationAutoTemplateTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NotificationAutoTemplateTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['NotificationAutoTemplateTranslation'] = ResolversParentTypes['NotificationAutoTemplateTranslation']> = {
-  bodyTemplate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  titleTemplate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NotificationListResolvers<ContextType = any, ParentType extends ResolversParentTypes['NotificationList'] = ResolversParentTypes['NotificationList']> = {
-  items?: Resolver<Array<ResolversTypes['Notification']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NotificationTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['NotificationTranslation'] = ResolversParentTypes['NotificationTranslation']> = {
-  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = {
-  active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  billingAddress?: Resolver<Maybe<ResolversTypes['OrderAddress']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  couponCodes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  currencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['OrderCustomFields']>, ParentType, ContextType>;
-  customer?: Resolver<Maybe<ResolversTypes['Customer']>, ParentType, ContextType>;
-  discounts?: Resolver<Array<ResolversTypes['Discount']>, ParentType, ContextType>;
-  fulfillments?: Resolver<Maybe<Array<ResolversTypes['Fulfillment']>>, ParentType, ContextType>;
-  history?: Resolver<ResolversTypes['HistoryEntryList'], ParentType, ContextType, Partial<OrderHistoryArgs>>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lines?: Resolver<Array<ResolversTypes['OrderLine']>, ParentType, ContextType>;
-  orderPlacedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  payments?: Resolver<Maybe<Array<ResolversTypes['Payment']>>, ParentType, ContextType>;
-  promotions?: Resolver<Array<ResolversTypes['Promotion']>, ParentType, ContextType>;
-  shipping?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  shippingAddress?: Resolver<Maybe<ResolversTypes['OrderAddress']>, ParentType, ContextType>;
-  shippingLines?: Resolver<Array<ResolversTypes['ShippingLine']>, ParentType, ContextType>;
-  shippingWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  subTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  subTotalWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  surcharges?: Resolver<Array<ResolversTypes['Surcharge']>, ParentType, ContextType>;
-  taxSummary?: Resolver<Array<ResolversTypes['OrderTaxSummary']>, ParentType, ContextType>;
-  total?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  totalQuantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  totalWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['OrderType'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderAddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderAddress'] = ResolversParentTypes['OrderAddress']> = {
-  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  company?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  countryCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  fullName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  postalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  province?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  streetLine1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  streetLine2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderCustomFieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderCustomFields'] = ResolversParentTypes['OrderCustomFields']> = {
-  note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderLimitErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderLimitError'] = ResolversParentTypes['OrderLimitError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  maxItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderLine'] = ResolversParentTypes['OrderLine']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  discountedLinePrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discountedLinePriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discountedUnitPrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discountedUnitPriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discounts?: Resolver<Array<ResolversTypes['Discount']>, ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  fulfillmentLines?: Resolver<Maybe<Array<ResolversTypes['FulfillmentLine']>>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  linePrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  linePriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  lineTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  order?: Resolver<ResolversTypes['Order'], ParentType, ContextType>;
-  orderPlacedQuantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  productVariant?: Resolver<ResolversTypes['ProductVariant'], ParentType, ContextType>;
-  proratedLinePrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  proratedLinePriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  proratedUnitPrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  proratedUnitPriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  taxLines?: Resolver<Array<ResolversTypes['TaxLine']>, ParentType, ContextType>;
-  taxRate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  unitPrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  unitPriceChangeSinceAdded?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  unitPriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  unitPriceWithTaxChangeSinceAdded?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderListResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderList'] = ResolversParentTypes['OrderList']> = {
-  items?: Resolver<Array<ResolversTypes['Order']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderModificationErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderModificationError'] = ResolversParentTypes['OrderModificationError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderPaymentStateErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderPaymentStateError'] = ResolversParentTypes['OrderPaymentStateError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderStateTransitionErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderStateTransitionError'] = ResolversParentTypes['OrderStateTransitionError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  fromState?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  toState?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  transitionError?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type OrderTaxSummaryResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrderTaxSummary'] = ResolversParentTypes['OrderTaxSummary']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  taxBase?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  taxRate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  taxTotal?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaginatedListResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaginatedList'] = ResolversParentTypes['PaginatedList']> = {
-  __resolveType: TypeResolveFn<'AssetList' | 'BenefitList' | 'BlogList' | 'CollectionList' | 'CountryList' | 'CustomerList' | 'FacetList' | 'FacetValueList' | 'FavoriteList' | 'HistoryEntryList' | 'NotificationList' | 'OrderList' | 'ProductList' | 'ProductReviewList' | 'ProductVariantList' | 'PromotionList' | 'ProvinceList' | 'QuestionAnswerList' | 'RankList' | 'RoleList' | 'ShippingMethodList' | 'TagList' | 'TaxRateList', ParentType, ContextType>;
-  items?: Resolver<Array<ResolversTypes['Node']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-};
-
-export type PasswordAlreadySetErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PasswordAlreadySetError'] = ResolversParentTypes['PasswordAlreadySetError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PasswordResetTokenExpiredErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PasswordResetTokenExpiredError'] = ResolversParentTypes['PasswordResetTokenExpiredError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PasswordResetTokenInvalidErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PasswordResetTokenInvalidError'] = ResolversParentTypes['PasswordResetTokenInvalidError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PasswordValidationErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PasswordValidationError'] = ResolversParentTypes['PasswordValidationError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  validationErrorMessage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Payment'] = ResolversParentTypes['Payment']> = {
-  amount?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  errorMessage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  method?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  refunds?: Resolver<Array<ResolversTypes['Refund']>, ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  transactionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentDeclinedErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaymentDeclinedError'] = ResolversParentTypes['PaymentDeclinedError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  paymentErrorMessage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentFailedErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaymentFailedError'] = ResolversParentTypes['PaymentFailedError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  paymentErrorMessage?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentMethodResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaymentMethod'] = ResolversParentTypes['PaymentMethod']> = {
-  checker?: Resolver<Maybe<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  handler?: Resolver<ResolversTypes['ConfigurableOperation'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['PaymentMethodTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentMethodQuoteResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaymentMethodQuote'] = ResolversParentTypes['PaymentMethodQuote']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  eligibilityMessage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  isEligible?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PaymentMethodTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PaymentMethodTranslation'] = ResolversParentTypes['PaymentMethodTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PriceRangeResolvers<ContextType = any, ParentType extends ResolversParentTypes['PriceRange'] = ResolversParentTypes['PriceRange']> = {
-  max?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  min?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
-  assets?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType>;
-  collections?: Resolver<Array<ResolversTypes['Collection']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  facetValues?: Resolver<Array<ResolversTypes['FacetValue']>, ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  optionGroups?: Resolver<Array<ResolversTypes['ProductOptionGroup']>, ParentType, ContextType>;
-  reviewCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  reviewRating?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  reviews?: Resolver<ResolversTypes['ProductReviewList'], ParentType, ContextType, Partial<ProductReviewsArgs>>;
-  reviewsHistogram?: Resolver<Array<ResolversTypes['ProductReviewHistogramItem']>, ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['ProductTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  variantList?: Resolver<ResolversTypes['ProductVariantList'], ParentType, ContextType, Partial<ProductVariantListArgs>>;
-  variants?: Resolver<Array<ResolversTypes['ProductVariant']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductListResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductList'] = ResolversParentTypes['ProductList']> = {
-  items?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductOptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductOption'] = ResolversParentTypes['ProductOption']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  group?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType>;
-  groupId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['ProductOptionTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductOptionGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductOptionGroup'] = ResolversParentTypes['ProductOptionGroup']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  options?: Resolver<Array<ResolversTypes['ProductOption']>, ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['ProductOptionGroupTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductOptionGroupTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductOptionGroupTranslation'] = ResolversParentTypes['ProductOptionGroupTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductOptionTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductOptionTranslation'] = ResolversParentTypes['ProductOptionTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductReview'] = ResolversParentTypes['ProductReview']> = {
-  authorLocation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authorName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  downvotes?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  product?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
-  productVariant?: Resolver<Maybe<ResolversTypes['ProductVariant']>, ParentType, ContextType>;
-  rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  response?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  responseCreatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  summary?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  upvotes?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductReviewHistogramItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductReviewHistogramItem'] = ResolversParentTypes['ProductReviewHistogramItem']> = {
-  bin?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  frequency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductReviewListResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductReviewList'] = ResolversParentTypes['ProductReviewList']> = {
-  items?: Resolver<Array<ResolversTypes['ProductReview']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductTranslation'] = ResolversParentTypes['ProductTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductVariantResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductVariant'] = ResolversParentTypes['ProductVariant']> = {
-  assets?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  currencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['ProductVariantCustomFields']>, ParentType, ContextType>;
-  discountAmount?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  discountPercent?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  facetValues?: Resolver<Array<ResolversTypes['FacetValue']>, ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  options?: Resolver<Array<ResolversTypes['ProductOption']>, ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  priceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  product?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
-  productId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  sku?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  stockLevel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  taxCategory?: Resolver<ResolversTypes['TaxCategory'], ParentType, ContextType>;
-  taxRateApplied?: Resolver<ResolversTypes['TaxRate'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['ProductVariantTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductVariantCustomFieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductVariantCustomFields'] = ResolversParentTypes['ProductVariantCustomFields']> = {
-  barcode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  rrp?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductVariantListResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductVariantList'] = ResolversParentTypes['ProductVariantList']> = {
-  items?: Resolver<Array<ResolversTypes['ProductVariant']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductVariantPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductVariantPoint'] = ResolversParentTypes['ProductVariantPoint']> = {
-  channelId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  point?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  variant?: Resolver<Maybe<ResolversTypes['ProductVariant']>, ParentType, ContextType>;
-  variantId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProductVariantTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductVariantTranslation'] = ResolversParentTypes['ProductVariantTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PromotionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Promotion'] = ResolversParentTypes['Promotion']> = {
-  actions?: Resolver<Array<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  conditions?: Resolver<Array<ResolversTypes['ConfigurableOperation']>, ParentType, ContextType>;
-  couponCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  endsAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  perCustomerUsageLimit?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  startsAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['PromotionTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  usageLimit?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PromotionListResolvers<ContextType = any, ParentType extends ResolversParentTypes['PromotionList'] = ResolversParentTypes['PromotionList']> = {
-  items?: Resolver<Array<ResolversTypes['Promotion']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PromotionTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PromotionTranslation'] = ResolversParentTypes['PromotionTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProvinceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Province'] = ResolversParentTypes['Province']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  parent?: Resolver<Maybe<ResolversTypes['Region']>, ParentType, ContextType>;
-  parentId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['RegionTranslation']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ProvinceListResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProvinceList'] = ResolversParentTypes['ProvinceList']> = {
-  items?: Resolver<Array<ResolversTypes['Province']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  activeChannel?: Resolver<ResolversTypes['Channel'], ParentType, ContextType>;
-  activeCustomer?: Resolver<Maybe<ResolversTypes['Customer']>, ParentType, ContextType>;
-  activeOrder?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType>;
-  availableCountries?: Resolver<Array<ResolversTypes['Country']>, ParentType, ContextType>;
-  benefit?: Resolver<Maybe<ResolversTypes['Benefit']>, ParentType, ContextType, RequireFields<QueryBenefitArgs, 'id'>>;
-  benefitConditions?: Resolver<Array<ResolversTypes['ConfigurableOperationDefinition']>, ParentType, ContextType>;
-  benefitPromotions?: Resolver<Maybe<ResolversTypes['PromotionList']>, ParentType, ContextType, RequireFields<QueryBenefitPromotionsArgs, 'options'>>;
-  benefits?: Resolver<ResolversTypes['BenefitList'], ParentType, ContextType, Partial<QueryBenefitsArgs>>;
-  blog?: Resolver<Maybe<ResolversTypes['Blog']>, ParentType, ContextType, RequireFields<QueryBlogArgs, 'id'>>;
-  blogs?: Resolver<ResolversTypes['BlogList'], ParentType, ContextType, Partial<QueryBlogsArgs>>;
-  collection?: Resolver<Maybe<ResolversTypes['Collection']>, ParentType, ContextType, Partial<QueryCollectionArgs>>;
-  collections?: Resolver<ResolversTypes['CollectionList'], ParentType, ContextType, Partial<QueryCollectionsArgs>>;
-  countFavorite?: Resolver<Maybe<ResolversTypes['Total']>, ParentType, ContextType, RequireFields<QueryCountFavoriteArgs, 'productVariantId'>>;
-  eligiblePaymentMethods?: Resolver<Array<ResolversTypes['PaymentMethodQuote']>, ParentType, ContextType>;
-  eligibleShippingMethods?: Resolver<Array<ResolversTypes['ShippingMethodQuote']>, ParentType, ContextType>;
-  exchangePoints?: Resolver<Array<ResolversTypes['ExchangePoint']>, ParentType, ContextType>;
-  facet?: Resolver<Maybe<ResolversTypes['Facet']>, ParentType, ContextType, RequireFields<QueryFacetArgs, 'id'>>;
-  facets?: Resolver<ResolversTypes['FacetList'], ParentType, ContextType, Partial<QueryFacetsArgs>>;
-  favorites?: Resolver<ResolversTypes['FavoriteList'], ParentType, ContextType, Partial<QueryFavoritesArgs>>;
-  me?: Resolver<Maybe<ResolversTypes['CurrentUser']>, ParentType, ContextType>;
-  nextOrderStates?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  notification?: Resolver<Maybe<ResolversTypes['Notification']>, ParentType, ContextType, RequireFields<QueryNotificationArgs, 'id'>>;
-  notifications?: Resolver<ResolversTypes['NotificationList'], ParentType, ContextType, Partial<QueryNotificationsArgs>>;
-  order?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<QueryOrderArgs, 'id'>>;
-  orderByCode?: Resolver<Maybe<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<QueryOrderByCodeArgs, 'code'>>;
-  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, Partial<QueryProductArgs>>;
-  productVariantPoints?: Resolver<Array<ResolversTypes['ProductVariantPoint']>, ParentType, ContextType>;
-  products?: Resolver<ResolversTypes['ProductList'], ParentType, ContextType, Partial<QueryProductsArgs>>;
-  questionAnswer?: Resolver<Maybe<ResolversTypes['QuestionAnswer']>, ParentType, ContextType, RequireFields<QueryQuestionAnswerArgs, 'id'>>;
-  questionAnswers?: Resolver<ResolversTypes['QuestionAnswerList'], ParentType, ContextType, Partial<QueryQuestionAnswersArgs>>;
-  rank?: Resolver<Maybe<ResolversTypes['Rank']>, ParentType, ContextType, RequireFields<QueryRankArgs, 'id'>>;
-  ranks?: Resolver<ResolversTypes['RankList'], ParentType, ContextType, Partial<QueryRanksArgs>>;
-  search?: Resolver<ResolversTypes['SearchResponse'], ParentType, ContextType, RequireFields<QuerySearchArgs, 'input'>>;
-};
-
-export type QuestionAnswerResolvers<ContextType = any, ParentType extends ResolversParentTypes['QuestionAnswer'] = ResolversParentTypes['QuestionAnswer']> = {
-  admin?: Resolver<Maybe<ResolversTypes['Admin']>, ParentType, ContextType>;
-  adminId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  answers?: Resolver<Maybe<Array<Maybe<ResolversTypes['QuestionAnswer']>>>, ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customer?: Resolver<Maybe<ResolversTypes['Customer']>, ParentType, ContextType>;
-  customerId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  productVariant?: Resolver<ResolversTypes['ProductVariant'], ParentType, ContextType>;
-  productVariantId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  replied?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type QuestionAnswerListResolvers<ContextType = any, ParentType extends ResolversParentTypes['QuestionAnswerList'] = ResolversParentTypes['QuestionAnswerList']> = {
-  items?: Resolver<Array<ResolversTypes['QuestionAnswer']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RankResolvers<ContextType = any, ParentType extends ResolversParentTypes['Rank'] = ResolversParentTypes['Rank']> = {
-  assets?: Resolver<Maybe<Array<Maybe<ResolversTypes['Asset']>>>, ParentType, ContextType>;
-  channels?: Resolver<Array<ResolversTypes['Channel']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  featuredAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  requiredPoint?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['RankTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RankListResolvers<ContextType = any, ParentType extends ResolversParentTypes['RankList'] = ResolversParentTypes['RankList']> = {
-  items?: Resolver<Array<ResolversTypes['Rank']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RankTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['RankTranslation'] = ResolversParentTypes['RankTranslation']> = {
-  base?: Resolver<ResolversTypes['Rank'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RefreshCustomerVerificationResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RefreshCustomerVerificationResult'] = ResolversParentTypes['RefreshCustomerVerificationResult']> = {
-  __resolveType: TypeResolveFn<'NativeAuthStrategyError' | 'Success', ParentType, ContextType>;
-};
-
-export type RefundResolvers<ContextType = any, ParentType extends ResolversParentTypes['Refund'] = ResolversParentTypes['Refund']> = {
-  adjustment?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  items?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  lines?: Resolver<Array<ResolversTypes['RefundLine']>, ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  method?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  paymentId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  reason?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  shipping?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  total?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  transactionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RefundLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['RefundLine'] = ResolversParentTypes['RefundLine']> = {
-  orderLine?: Resolver<ResolversTypes['OrderLine'], ParentType, ContextType>;
-  orderLineId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  refund?: Resolver<ResolversTypes['Refund'], ParentType, ContextType>;
-  refundId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RegionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Region'] = ResolversParentTypes['Region']> = {
-  __resolveType: TypeResolveFn<'Country' | 'Province', ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  parent?: Resolver<Maybe<ResolversTypes['Region']>, ParentType, ContextType>;
-  parentId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['RegionTranslation']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-};
-
-export type RegionTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegionTranslation'] = ResolversParentTypes['RegionTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RegisterCustomerAccountResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegisterCustomerAccountResult'] = ResolversParentTypes['RegisterCustomerAccountResult']> = {
-  __resolveType: TypeResolveFn<'MissingPasswordError' | 'NativeAuthStrategyError' | 'PasswordValidationError' | 'Success', ParentType, ContextType>;
-};
-
-export type RelationCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['RelationCustomFieldConfig'] = ResolversParentTypes['RelationCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  entity?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  scalarFields?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RemoveOrderItemsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoveOrderItemsResult'] = ResolversParentTypes['RemoveOrderItemsResult']> = {
-  __resolveType: TypeResolveFn<'Order' | 'OrderModificationError', ParentType, ContextType>;
-};
-
-export type RequestPasswordResetResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RequestPasswordResetResult'] = ResolversParentTypes['RequestPasswordResetResult']> = {
-  __resolveType: TypeResolveFn<'NativeAuthStrategyError' | 'Success', ParentType, ContextType>;
-};
-
-export type RequestUpdateCustomerEmailAddressResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['RequestUpdateCustomerEmailAddressResult'] = ResolversParentTypes['RequestUpdateCustomerEmailAddressResult']> = {
-  __resolveType: TypeResolveFn<'EmailAddressConflictError' | 'InvalidCredentialsError' | 'NativeAuthStrategyError' | 'Success', ParentType, ContextType>;
-};
-
-export type ResetPasswordResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['ResetPasswordResult'] = ResolversParentTypes['ResetPasswordResult']> = {
-  __resolveType: TypeResolveFn<'CurrentUser' | 'NativeAuthStrategyError' | 'NotVerifiedError' | 'PasswordResetTokenExpiredError' | 'PasswordResetTokenInvalidError' | 'PasswordValidationError', ParentType, ContextType>;
-};
-
-export type RoleResolvers<ContextType = any, ParentType extends ResolversParentTypes['Role'] = ResolversParentTypes['Role']> = {
-  channels?: Resolver<Array<ResolversTypes['Channel']>, ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  permissions?: Resolver<Array<ResolversTypes['Permission']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type RoleListResolvers<ContextType = any, ParentType extends ResolversParentTypes['RoleList'] = ResolversParentTypes['RoleList']> = {
-  items?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SearchReindexResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchReindexResponse'] = ResolversParentTypes['SearchReindexResponse']> = {
-  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SearchResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResponse'] = ResolversParentTypes['SearchResponse']> = {
-  collections?: Resolver<Array<ResolversTypes['CollectionResult']>, ParentType, ContextType>;
-  facetValues?: Resolver<Array<ResolversTypes['FacetValueResult']>, ParentType, ContextType>;
-  items?: Resolver<Array<ResolversTypes['SearchResult']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SearchResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResult'] = ResolversParentTypes['SearchResult']> = {
-  collectionIds?: Resolver<Array<ResolversTypes['ID']>, ParentType, ContextType>;
-  currencyCode?: Resolver<ResolversTypes['CurrencyCode'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  facetIds?: Resolver<Array<ResolversTypes['ID']>, ParentType, ContextType>;
-  facetValueIds?: Resolver<Array<ResolversTypes['ID']>, ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['SearchResultPrice'], ParentType, ContextType>;
-  priceWithTax?: Resolver<ResolversTypes['SearchResultPrice'], ParentType, ContextType>;
-  productAsset?: Resolver<Maybe<ResolversTypes['SearchResultAsset']>, ParentType, ContextType>;
-  productId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  productName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  productVariantAsset?: Resolver<Maybe<ResolversTypes['SearchResultAsset']>, ParentType, ContextType>;
-  productVariantId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  productVariantName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  score?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  sku?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SearchResultAssetResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResultAsset'] = ResolversParentTypes['SearchResultAsset']> = {
-  focalPoint?: Resolver<Maybe<ResolversTypes['Coordinate']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  preview?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SearchResultPriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['SearchResultPrice'] = ResolversParentTypes['SearchResultPrice']> = {
-  __resolveType: TypeResolveFn<'PriceRange' | 'SinglePrice', ParentType, ContextType>;
-};
-
-export type SellerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Seller'] = ResolversParentTypes['Seller']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SetCustomerForOrderResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['SetCustomerForOrderResult'] = ResolversParentTypes['SetCustomerForOrderResult']> = {
-  __resolveType: TypeResolveFn<'AlreadyLoggedInError' | 'EmailAddressConflictError' | 'GuestCheckoutError' | 'NoActiveOrderError' | 'Order', ParentType, ContextType>;
-};
-
-export type SetOrderShippingMethodResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['SetOrderShippingMethodResult'] = ResolversParentTypes['SetOrderShippingMethodResult']> = {
-  __resolveType: TypeResolveFn<'IneligibleShippingMethodError' | 'NoActiveOrderError' | 'Order' | 'OrderModificationError', ParentType, ContextType>;
-};
-
-export type ShippingLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShippingLine'] = ResolversParentTypes['ShippingLine']> = {
-  discountedPrice?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discountedPriceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  discounts?: Resolver<Array<ResolversTypes['Discount']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  priceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  shippingMethod?: Resolver<ResolversTypes['ShippingMethod'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ShippingMethodResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShippingMethod'] = ResolversParentTypes['ShippingMethod']> = {
-  calculator?: Resolver<ResolversTypes['ConfigurableOperation'], ParentType, ContextType>;
-  checker?: Resolver<ResolversTypes['ConfigurableOperation'], ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  fulfillmentHandlerCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  translations?: Resolver<Array<ResolversTypes['ShippingMethodTranslation']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ShippingMethodListResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShippingMethodList'] = ResolversParentTypes['ShippingMethodList']> = {
-  items?: Resolver<Array<ResolversTypes['ShippingMethod']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ShippingMethodQuoteResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShippingMethodQuote'] = ResolversParentTypes['ShippingMethodQuote']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  priceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ShippingMethodTranslationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShippingMethodTranslation'] = ResolversParentTypes['ShippingMethodTranslation']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  languageCode?: Resolver<ResolversTypes['LanguageCode'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SinglePriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['SinglePrice'] = ResolversParentTypes['SinglePrice']> = {
-  value?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type StringCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['StringCustomFieldConfig'] = ResolversParentTypes['StringCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  length?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  options?: Resolver<Maybe<Array<ResolversTypes['StringFieldOption']>>, ParentType, ContextType>;
-  pattern?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type StringFieldOptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['StringFieldOption'] = ResolversParentTypes['StringFieldOption']> = {
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SuccessResolvers<ContextType = any, ParentType extends ResolversParentTypes['Success'] = ResolversParentTypes['Success']> = {
-  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type SurchargeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Surcharge'] = ResolversParentTypes['Surcharge']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  priceWithTax?: Resolver<ResolversTypes['Money'], ParentType, ContextType>;
-  sku?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  taxLines?: Resolver<Array<ResolversTypes['TaxLine']>, ParentType, ContextType>;
-  taxRate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TagResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tag'] = ResolversParentTypes['Tag']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TagListResolvers<ContextType = any, ParentType extends ResolversParentTypes['TagList'] = ResolversParentTypes['TagList']> = {
-  items?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TaxCategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['TaxCategory'] = ResolversParentTypes['TaxCategory']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  isDefault?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TaxLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['TaxLine'] = ResolversParentTypes['TaxLine']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  taxRate?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TaxRateResolvers<ContextType = any, ParentType extends ResolversParentTypes['TaxRate'] = ResolversParentTypes['TaxRate']> = {
-  category?: Resolver<ResolversTypes['TaxCategory'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  customerGroup?: Resolver<Maybe<ResolversTypes['CustomerGroup']>, ParentType, ContextType>;
-  enabled?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  value?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  zone?: Resolver<ResolversTypes['Zone'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TaxRateListResolvers<ContextType = any, ParentType extends ResolversParentTypes['TaxRateList'] = ResolversParentTypes['TaxRateList']> = {
-  items?: Resolver<Array<ResolversTypes['TaxRate']>, ParentType, ContextType>;
-  totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TextCustomFieldConfigResolvers<ContextType = any, ParentType extends ResolversParentTypes['TextCustomFieldConfig'] = ResolversParentTypes['TextCustomFieldConfig']> = {
-  description?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  internal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  label?: Resolver<Maybe<Array<ResolversTypes['LocalizedString']>>, ParentType, ContextType>;
-  list?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  nullable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  readonly?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  ui?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TotalResolvers<ContextType = any, ParentType extends ResolversParentTypes['Total'] = ResolversParentTypes['Total']> = {
-  total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type TransitionOrderToStateResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['TransitionOrderToStateResult'] = ResolversParentTypes['TransitionOrderToStateResult']> = {
-  __resolveType: TypeResolveFn<'Order' | 'OrderStateTransitionError', ParentType, ContextType>;
-};
-
-export type UpdateCustomerEmailAddressResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateCustomerEmailAddressResult'] = ResolversParentTypes['UpdateCustomerEmailAddressResult']> = {
-  __resolveType: TypeResolveFn<'IdentifierChangeTokenExpiredError' | 'IdentifierChangeTokenInvalidError' | 'NativeAuthStrategyError' | 'Success', ParentType, ContextType>;
-};
-
-export type UpdateCustomerPasswordResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateCustomerPasswordResult'] = ResolversParentTypes['UpdateCustomerPasswordResult']> = {
-  __resolveType: TypeResolveFn<'InvalidCredentialsError' | 'NativeAuthStrategyError' | 'PasswordValidationError' | 'Success', ParentType, ContextType>;
-};
-
-export type UpdateOrderItemsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateOrderItemsResult'] = ResolversParentTypes['UpdateOrderItemsResult']> = {
-  __resolveType: TypeResolveFn<'InsufficientStockError' | 'NegativeQuantityError' | 'Order' | 'OrderLimitError' | 'OrderModificationError', ParentType, ContextType>;
-};
-
-export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
-  name: 'Upload';
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
+> = {
+  addDeviceToken?: Resolver<
+    Maybe<ResolversTypes["DeviceToken"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddDeviceTokenArgs, "token">
+  >;
+  addItemToOrder?: Resolver<
+    ResolversTypes["UpdateOrderItemsResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddItemToOrderArgs, "productVariantId" | "quantity">
+  >;
+  addPaymentToOrder?: Resolver<
+    ResolversTypes["AddPaymentToOrderResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddPaymentToOrderArgs, "input">
+  >;
+  adjustOrderLine?: Resolver<
+    ResolversTypes["UpdateOrderItemsResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAdjustOrderLineArgs, "orderLineId" | "quantity">
+  >;
+  applyCouponCode?: Resolver<
+    ResolversTypes["ApplyCouponCodeResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationApplyCouponCodeArgs, "couponCode">
+  >;
+  authenticate?: Resolver<
+    ResolversTypes["AuthenticationResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAuthenticateArgs, "input">
+  >;
+  createCustomerAddress?: Resolver<
+    ResolversTypes["Address"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateCustomerAddressArgs, "input">
+  >;
+  deleteCustomerAddress?: Resolver<
+    ResolversTypes["Success"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteCustomerAddressArgs, "id">
+  >;
+  exchangePointToVariant?: Resolver<
+    Maybe<ResolversTypes["Promotion"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationExchangePointToVariantArgs, "productVariantId">
+  >;
+  login?: Resolver<
+    ResolversTypes["NativeAuthenticationResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationLoginArgs, "password" | "username">
+  >;
+  logout?: Resolver<ResolversTypes["Success"], ParentType, ContextType>;
+  maskAsRead?: Resolver<
+    Maybe<ResolversTypes["Success"]>,
+    ParentType,
+    ContextType,
+    Partial<MutationMaskAsReadArgs>
+  >;
+  refreshCustomerVerification?: Resolver<
+    ResolversTypes["RefreshCustomerVerificationResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRefreshCustomerVerificationArgs, "emailAddress">
+  >;
+  registerCustomerAccount?: Resolver<
+    ResolversTypes["RegisterCustomerAccountResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRegisterCustomerAccountArgs, "input">
+  >;
+  removeAllOrderLines?: Resolver<
+    ResolversTypes["RemoveOrderItemsResult"],
+    ParentType,
+    ContextType
+  >;
+  removeCouponCode?: Resolver<
+    Maybe<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemoveCouponCodeArgs, "couponCode">
+  >;
+  removeOrderLine?: Resolver<
+    ResolversTypes["RemoveOrderItemsResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemoveOrderLineArgs, "orderLineId">
+  >;
+  requestPasswordReset?: Resolver<
+    Maybe<ResolversTypes["RequestPasswordResetResult"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRequestPasswordResetArgs, "emailAddress">
+  >;
+  requestUpdateCustomerEmailAddress?: Resolver<
+    ResolversTypes["RequestUpdateCustomerEmailAddressResult"],
+    ParentType,
+    ContextType,
+    RequireFields<
+      MutationRequestUpdateCustomerEmailAddressArgs,
+      "newEmailAddress" | "password"
+    >
+  >;
+  resetPassword?: Resolver<
+    ResolversTypes["ResetPasswordResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationResetPasswordArgs, "password" | "token">
+  >;
+  setCustomerForOrder?: Resolver<
+    ResolversTypes["SetCustomerForOrderResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetCustomerForOrderArgs, "input">
+  >;
+  setOrderBillingAddress?: Resolver<
+    ResolversTypes["ActiveOrderResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetOrderBillingAddressArgs, "input">
+  >;
+  setOrderCustomFields?: Resolver<
+    ResolversTypes["ActiveOrderResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetOrderCustomFieldsArgs, "input">
+  >;
+  setOrderShippingAddress?: Resolver<
+    ResolversTypes["ActiveOrderResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetOrderShippingAddressArgs, "input">
+  >;
+  setOrderShippingMethod?: Resolver<
+    ResolversTypes["SetOrderShippingMethodResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSetOrderShippingMethodArgs, "shippingMethodId">
+  >;
+  submitProductReview?: Resolver<
+    ResolversTypes["ProductReview"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSubmitProductReviewArgs, "input">
+  >;
+  submitQuestionAnswer?: Resolver<
+    ResolversTypes["QuestionAnswer"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationSubmitQuestionAnswerArgs, "input">
+  >;
+  toggleFavorite?: Resolver<
+    ResolversTypes["Success"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationToggleFavoriteArgs, "productVariantId">
+  >;
+  transitionOrderToState?: Resolver<
+    Maybe<ResolversTypes["TransitionOrderToStateResult"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationTransitionOrderToStateArgs, "state">
+  >;
+  updateCustomer?: Resolver<
+    ResolversTypes["Customer"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateCustomerArgs, "input">
+  >;
+  updateCustomerAddress?: Resolver<
+    ResolversTypes["Address"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateCustomerAddressArgs, "input">
+  >;
+  updateCustomerEmailAddress?: Resolver<
+    ResolversTypes["UpdateCustomerEmailAddressResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateCustomerEmailAddressArgs, "token">
+  >;
+  updateCustomerPassword?: Resolver<
+    ResolversTypes["UpdateCustomerPasswordResult"],
+    ParentType,
+    ContextType,
+    RequireFields<
+      MutationUpdateCustomerPasswordArgs,
+      "currentPassword" | "newPassword"
+    >
+  >;
+  verifyCustomerAccount?: Resolver<
+    ResolversTypes["VerifyCustomerAccountResult"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationVerifyCustomerAccountArgs, "token">
+  >;
+  voteOnReview?: Resolver<
+    ResolversTypes["ProductReview"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationVoteOnReviewArgs, "id" | "vote">
+  >;
+};
+
+export type NativeAuthStrategyErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NativeAuthStrategyError"] = ResolversParentTypes["NativeAuthStrategyError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NativeAuthenticationResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NativeAuthenticationResult"] = ResolversParentTypes["NativeAuthenticationResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "CurrentUser"
+    | "InvalidCredentialsError"
+    | "NativeAuthStrategyError"
+    | "NotVerifiedError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type NegativeQuantityErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NegativeQuantityError"] = ResolversParentTypes["NegativeQuantityError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NoActiveOrderErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NoActiveOrderError"] = ResolversParentTypes["NoActiveOrderError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NodeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "Address"
+    | "Asset"
+    | "AuthenticationMethod"
+    | "Benefit"
+    | "BenefitRank"
+    | "BenefitTranslation"
+    | "Blog"
+    | "BlogTranslation"
+    | "Channel"
+    | "Collection"
+    | "Country"
+    | "Customer"
+    | "CustomerGroup"
+    | "DeviceToken"
+    | "ExchangePoint"
+    | "Facet"
+    | "FacetValue"
+    | "Favorite"
+    | "Fulfillment"
+    | "HistoryEntry"
+    | "Notification"
+    | "NotificationAutoTemplate"
+    | "Order"
+    | "OrderLine"
+    | "Payment"
+    | "PaymentMethod"
+    | "Product"
+    | "ProductOption"
+    | "ProductOptionGroup"
+    | "ProductReview"
+    | "ProductVariant"
+    | "ProductVariantPoint"
+    | "Promotion"
+    | "Province"
+    | "QuestionAnswer"
+    | "Rank"
+    | "RankTranslation"
+    | "Refund"
+    | "Role"
+    | "Seller"
+    | "ShippingMethod"
+    | "Surcharge"
+    | "Tag"
+    | "TaxCategory"
+    | "TaxRate"
+    | "User"
+    | "Zone",
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+};
+
+export type NotVerifiedErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NotVerifiedError"] = ResolversParentTypes["NotVerifiedError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NotificationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Notification"] = ResolversParentTypes["Notification"]
+> = {
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  conditions?: Resolver<
+    Array<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  content?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  event?: Resolver<
+    Maybe<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  isAuto?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  link?: Resolver<
+    Maybe<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["NotificationTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  unSeen?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NotificationAutoTemplateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NotificationAutoTemplate"] = ResolversParentTypes["NotificationAutoTemplate"]
+> = {
+  bodyTemplate?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  conditions?: Resolver<
+    Array<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  eventType?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  link?: Resolver<
+    Maybe<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  titleTemplate?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["NotificationAutoTemplateTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NotificationAutoTemplateTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NotificationAutoTemplateTranslation"] = ResolversParentTypes["NotificationAutoTemplateTranslation"]
+> = {
+  bodyTemplate?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  titleTemplate?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NotificationListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NotificationList"] = ResolversParentTypes["NotificationList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["Notification"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type NotificationTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["NotificationTranslation"] = ResolversParentTypes["NotificationTranslation"]
+> = {
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  content?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Order"] = ResolversParentTypes["Order"]
+> = {
+  active?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  billingAddress?: Resolver<
+    Maybe<ResolversTypes["OrderAddress"]>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  couponCodes?: Resolver<
+    Array<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  currencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["OrderCustomFields"]>,
+    ParentType,
+    ContextType
+  >;
+  customer?: Resolver<
+    Maybe<ResolversTypes["Customer"]>,
+    ParentType,
+    ContextType
+  >;
+  discounts?: Resolver<
+    Array<ResolversTypes["Discount"]>,
+    ParentType,
+    ContextType
+  >;
+  fulfillments?: Resolver<
+    Maybe<Array<ResolversTypes["Fulfillment"]>>,
+    ParentType,
+    ContextType
+  >;
+  history?: Resolver<
+    ResolversTypes["HistoryEntryList"],
+    ParentType,
+    ContextType,
+    Partial<OrderHistoryArgs>
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lines?: Resolver<Array<ResolversTypes["OrderLine"]>, ParentType, ContextType>;
+  orderPlacedAt?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  payments?: Resolver<
+    Maybe<Array<ResolversTypes["Payment"]>>,
+    ParentType,
+    ContextType
+  >;
+  promotions?: Resolver<
+    Array<ResolversTypes["Promotion"]>,
+    ParentType,
+    ContextType
+  >;
+  shipping?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  shippingAddress?: Resolver<
+    Maybe<ResolversTypes["OrderAddress"]>,
+    ParentType,
+    ContextType
+  >;
+  shippingLines?: Resolver<
+    Array<ResolversTypes["ShippingLine"]>,
+    ParentType,
+    ContextType
+  >;
+  shippingWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  subTotal?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  subTotalWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  surcharges?: Resolver<
+    Array<ResolversTypes["Surcharge"]>,
+    ParentType,
+    ContextType
+  >;
+  taxSummary?: Resolver<
+    Array<ResolversTypes["OrderTaxSummary"]>,
+    ParentType,
+    ContextType
+  >;
+  total?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  totalQuantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  totalWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes["OrderType"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderAddressResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderAddress"] = ResolversParentTypes["OrderAddress"]
+> = {
+  city?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  countryCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  fullName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  phoneNumber?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  postalCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  province?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  streetLine1?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  streetLine2?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderCustomFieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderCustomFields"] = ResolversParentTypes["OrderCustomFields"]
+> = {
+  note?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderLimitErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderLimitError"] = ResolversParentTypes["OrderLimitError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  maxItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderLineResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderLine"] = ResolversParentTypes["OrderLine"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  discountedLinePrice?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  discountedLinePriceWithTax?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  discountedUnitPrice?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  discountedUnitPriceWithTax?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  discounts?: Resolver<
+    Array<ResolversTypes["Discount"]>,
+    ParentType,
+    ContextType
+  >;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  fulfillmentLines?: Resolver<
+    Maybe<Array<ResolversTypes["FulfillmentLine"]>>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  linePrice?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  linePriceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  lineTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  order?: Resolver<ResolversTypes["Order"], ParentType, ContextType>;
+  orderPlacedQuantity?: Resolver<
+    ResolversTypes["Int"],
+    ParentType,
+    ContextType
+  >;
+  productVariant?: Resolver<
+    ResolversTypes["ProductVariant"],
+    ParentType,
+    ContextType
+  >;
+  proratedLinePrice?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  proratedLinePriceWithTax?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  proratedUnitPrice?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  proratedUnitPriceWithTax?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  taxLines?: Resolver<
+    Array<ResolversTypes["TaxLine"]>,
+    ParentType,
+    ContextType
+  >;
+  taxRate?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  unitPrice?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  unitPriceChangeSinceAdded?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  unitPriceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  unitPriceWithTaxChangeSinceAdded?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderList"] = ResolversParentTypes["OrderList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Order"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderModificationErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderModificationError"] = ResolversParentTypes["OrderModificationError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderPaymentStateErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderPaymentStateError"] = ResolversParentTypes["OrderPaymentStateError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderStateTransitionErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderStateTransitionError"] = ResolversParentTypes["OrderStateTransitionError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  fromState?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  toState?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  transitionError?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderTaxSummaryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["OrderTaxSummary"] = ResolversParentTypes["OrderTaxSummary"]
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  taxBase?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  taxRate?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  taxTotal?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaginatedListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaginatedList"] = ResolversParentTypes["PaginatedList"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "AssetList"
+    | "BenefitList"
+    | "BlogList"
+    | "CollectionList"
+    | "CountryList"
+    | "CustomerList"
+    | "FacetList"
+    | "FacetValueList"
+    | "FavoriteList"
+    | "HistoryEntryList"
+    | "NotificationList"
+    | "OrderList"
+    | "ProductList"
+    | "ProductReviewList"
+    | "ProductVariantList"
+    | "PromotionList"
+    | "ProvinceList"
+    | "QuestionAnswerList"
+    | "RankList"
+    | "RoleList"
+    | "ShippingMethodList"
+    | "TagList"
+    | "TaxRateList",
+    ParentType,
+    ContextType
+  >;
+  items?: Resolver<Array<ResolversTypes["Node"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+};
+
+export type PasswordAlreadySetErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PasswordAlreadySetError"] = ResolversParentTypes["PasswordAlreadySetError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PasswordResetTokenExpiredErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PasswordResetTokenExpiredError"] = ResolversParentTypes["PasswordResetTokenExpiredError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PasswordResetTokenInvalidErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PasswordResetTokenInvalidError"] = ResolversParentTypes["PasswordResetTokenInvalidError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PasswordValidationErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PasswordValidationError"] = ResolversParentTypes["PasswordValidationError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  validationErrorMessage?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Payment"] = ResolversParentTypes["Payment"]
+> = {
+  amount?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  errorMessage?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  method?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  refunds?: Resolver<Array<ResolversTypes["Refund"]>, ParentType, ContextType>;
+  state?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  transactionId?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentDeclinedErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaymentDeclinedError"] = ResolversParentTypes["PaymentDeclinedError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  paymentErrorMessage?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentFailedErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaymentFailedError"] = ResolversParentTypes["PaymentFailedError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  paymentErrorMessage?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentMethodResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaymentMethod"] = ResolversParentTypes["PaymentMethod"]
+> = {
+  checker?: Resolver<
+    Maybe<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  handler?: Resolver<
+    ResolversTypes["ConfigurableOperation"],
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["PaymentMethodTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentMethodQuoteResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaymentMethodQuote"] = ResolversParentTypes["PaymentMethodQuote"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  eligibilityMessage?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  isEligible?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PaymentMethodTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PaymentMethodTranslation"] = ResolversParentTypes["PaymentMethodTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PriceRangeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PriceRange"] = ResolversParentTypes["PriceRange"]
+> = {
+  max?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  min?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Product"] = ResolversParentTypes["Product"]
+> = {
+  assets?: Resolver<Array<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  collections?: Resolver<
+    Array<ResolversTypes["Collection"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  facetValues?: Resolver<
+    Array<ResolversTypes["FacetValue"]>,
+    ParentType,
+    ContextType
+  >;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  optionGroups?: Resolver<
+    Array<ResolversTypes["ProductOptionGroup"]>,
+    ParentType,
+    ContextType
+  >;
+  reviewCount?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  reviewRating?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  reviews?: Resolver<
+    ResolversTypes["ProductReviewList"],
+    ParentType,
+    ContextType,
+    Partial<ProductReviewsArgs>
+  >;
+  reviewsHistogram?: Resolver<
+    Array<ResolversTypes["ProductReviewHistogramItem"]>,
+    ParentType,
+    ContextType
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["ProductTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  variantList?: Resolver<
+    ResolversTypes["ProductVariantList"],
+    ParentType,
+    ContextType,
+    Partial<ProductVariantListArgs>
+  >;
+  variants?: Resolver<
+    Array<ResolversTypes["ProductVariant"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductList"] = ResolversParentTypes["ProductList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Product"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductOptionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductOption"] = ResolversParentTypes["ProductOption"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  group?: Resolver<
+    ResolversTypes["ProductOptionGroup"],
+    ParentType,
+    ContextType
+  >;
+  groupId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["ProductOptionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductOptionGroupResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductOptionGroup"] = ResolversParentTypes["ProductOptionGroup"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  options?: Resolver<
+    Array<ResolversTypes["ProductOption"]>,
+    ParentType,
+    ContextType
+  >;
+  translations?: Resolver<
+    Array<ResolversTypes["ProductOptionGroupTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductOptionGroupTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductOptionGroupTranslation"] = ResolversParentTypes["ProductOptionGroupTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductOptionTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductOptionTranslation"] = ResolversParentTypes["ProductOptionTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductReviewResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductReview"] = ResolversParentTypes["ProductReview"]
+> = {
+  authorLocation?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  authorName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  downvotes?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  product?: Resolver<ResolversTypes["Product"], ParentType, ContextType>;
+  productVariant?: Resolver<
+    Maybe<ResolversTypes["ProductVariant"]>,
+    ParentType,
+    ContextType
+  >;
+  rating?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  response?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  responseCreatedAt?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  state?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  summary?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  upvotes?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductReviewHistogramItemResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductReviewHistogramItem"] = ResolversParentTypes["ProductReviewHistogramItem"]
+> = {
+  bin?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  frequency?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductReviewListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductReviewList"] = ResolversParentTypes["ProductReviewList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["ProductReview"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductTranslation"] = ResolversParentTypes["ProductTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductVariant"] = ResolversParentTypes["ProductVariant"]
+> = {
+  assets?: Resolver<Array<ResolversTypes["Asset"]>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  currencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["ProductVariantCustomFields"]>,
+    ParentType,
+    ContextType
+  >;
+  discountAmount?: Resolver<
+    Maybe<ResolversTypes["Float"]>,
+    ParentType,
+    ContextType
+  >;
+  discountPercent?: Resolver<
+    Maybe<ResolversTypes["Float"]>,
+    ParentType,
+    ContextType
+  >;
+  facetValues?: Resolver<
+    Array<ResolversTypes["FacetValue"]>,
+    ParentType,
+    ContextType
+  >;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  options?: Resolver<
+    Array<ResolversTypes["ProductOption"]>,
+    ParentType,
+    ContextType
+  >;
+  price?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  priceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  product?: Resolver<ResolversTypes["Product"], ParentType, ContextType>;
+  productId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  sku?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  stockLevel?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  taxCategory?: Resolver<
+    ResolversTypes["TaxCategory"],
+    ParentType,
+    ContextType
+  >;
+  taxRateApplied?: Resolver<ResolversTypes["TaxRate"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["ProductVariantTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantCustomFieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductVariantCustomFields"] = ResolversParentTypes["ProductVariantCustomFields"]
+> = {
+  barcode?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  rrp?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductVariantList"] = ResolversParentTypes["ProductVariantList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["ProductVariant"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantPointResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductVariantPoint"] = ResolversParentTypes["ProductVariantPoint"]
+> = {
+  channelId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  point?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  variant?: Resolver<
+    Maybe<ResolversTypes["ProductVariant"]>,
+    ParentType,
+    ContextType
+  >;
+  variantId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProductVariantTranslation"] = ResolversParentTypes["ProductVariantTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PromotionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Promotion"] = ResolversParentTypes["Promotion"]
+> = {
+  actions?: Resolver<
+    Array<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  conditions?: Resolver<
+    Array<ResolversTypes["ConfigurableOperation"]>,
+    ParentType,
+    ContextType
+  >;
+  couponCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  endsAt?: Resolver<Maybe<ResolversTypes["DateTime"]>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  perCustomerUsageLimit?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  startsAt?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  translations?: Resolver<
+    Array<ResolversTypes["PromotionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  usageLimit?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PromotionListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PromotionList"] = ResolversParentTypes["PromotionList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Promotion"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PromotionTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PromotionTranslation"] = ResolversParentTypes["PromotionTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProvinceResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Province"] = ResolversParentTypes["Province"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  parent?: Resolver<Maybe<ResolversTypes["Region"]>, ParentType, ContextType>;
+  parentId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["RegionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProvinceListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ProvinceList"] = ResolversParentTypes["ProvinceList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Province"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QueryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
+> = {
+  activeChannel?: Resolver<ResolversTypes["Channel"], ParentType, ContextType>;
+  activeCustomer?: Resolver<
+    Maybe<ResolversTypes["Customer"]>,
+    ParentType,
+    ContextType
+  >;
+  activeOrder?: Resolver<
+    Maybe<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType
+  >;
+  availableCountries?: Resolver<
+    Array<ResolversTypes["Country"]>,
+    ParentType,
+    ContextType
+  >;
+  benefit?: Resolver<
+    Maybe<ResolversTypes["Benefit"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryBenefitArgs, "id">
+  >;
+  benefitConditions?: Resolver<
+    Array<ResolversTypes["ConfigurableOperationDefinition"]>,
+    ParentType,
+    ContextType
+  >;
+  benefitPromotions?: Resolver<
+    Maybe<ResolversTypes["PromotionList"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryBenefitPromotionsArgs, "options">
+  >;
+  benefits?: Resolver<
+    ResolversTypes["BenefitList"],
+    ParentType,
+    ContextType,
+    Partial<QueryBenefitsArgs>
+  >;
+  blog?: Resolver<
+    Maybe<ResolversTypes["Blog"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryBlogArgs, "id">
+  >;
+  blogs?: Resolver<
+    ResolversTypes["BlogList"],
+    ParentType,
+    ContextType,
+    Partial<QueryBlogsArgs>
+  >;
+  collection?: Resolver<
+    Maybe<ResolversTypes["Collection"]>,
+    ParentType,
+    ContextType,
+    Partial<QueryCollectionArgs>
+  >;
+  collections?: Resolver<
+    ResolversTypes["CollectionList"],
+    ParentType,
+    ContextType,
+    Partial<QueryCollectionsArgs>
+  >;
+  countFavorite?: Resolver<
+    Maybe<ResolversTypes["Total"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryCountFavoriteArgs, "productVariantId">
+  >;
+  eligiblePaymentMethods?: Resolver<
+    Array<ResolversTypes["PaymentMethodQuote"]>,
+    ParentType,
+    ContextType
+  >;
+  eligibleShippingMethods?: Resolver<
+    Array<ResolversTypes["ShippingMethodQuote"]>,
+    ParentType,
+    ContextType
+  >;
+  exchangePoints?: Resolver<
+    Array<ResolversTypes["ExchangePoint"]>,
+    ParentType,
+    ContextType
+  >;
+  facet?: Resolver<
+    Maybe<ResolversTypes["Facet"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryFacetArgs, "id">
+  >;
+  facets?: Resolver<
+    ResolversTypes["FacetList"],
+    ParentType,
+    ContextType,
+    Partial<QueryFacetsArgs>
+  >;
+  favorites?: Resolver<
+    ResolversTypes["FavoriteList"],
+    ParentType,
+    ContextType,
+    Partial<QueryFavoritesArgs>
+  >;
+  me?: Resolver<Maybe<ResolversTypes["CurrentUser"]>, ParentType, ContextType>;
+  nextOrderStates?: Resolver<
+    Array<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  notification?: Resolver<
+    Maybe<ResolversTypes["Notification"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryNotificationArgs, "id">
+  >;
+  notifications?: Resolver<
+    ResolversTypes["NotificationList"],
+    ParentType,
+    ContextType,
+    Partial<QueryNotificationsArgs>
+  >;
+  order?: Resolver<
+    Maybe<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryOrderArgs, "id">
+  >;
+  orderByCode?: Resolver<
+    Maybe<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryOrderByCodeArgs, "code">
+  >;
+  product?: Resolver<
+    Maybe<ResolversTypes["Product"]>,
+    ParentType,
+    ContextType,
+    Partial<QueryProductArgs>
+  >;
+  productVariantPoints?: Resolver<
+    Array<ResolversTypes["ProductVariantPoint"]>,
+    ParentType,
+    ContextType
+  >;
+  products?: Resolver<
+    ResolversTypes["ProductList"],
+    ParentType,
+    ContextType,
+    Partial<QueryProductsArgs>
+  >;
+  questionAnswer?: Resolver<
+    Maybe<ResolversTypes["QuestionAnswer"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryQuestionAnswerArgs, "id">
+  >;
+  questionAnswers?: Resolver<
+    ResolversTypes["QuestionAnswerList"],
+    ParentType,
+    ContextType,
+    Partial<QueryQuestionAnswersArgs>
+  >;
+  rank?: Resolver<
+    Maybe<ResolversTypes["Rank"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryRankArgs, "id">
+  >;
+  ranks?: Resolver<
+    ResolversTypes["RankList"],
+    ParentType,
+    ContextType,
+    Partial<QueryRanksArgs>
+  >;
+  search?: Resolver<
+    ResolversTypes["SearchResponse"],
+    ParentType,
+    ContextType,
+    RequireFields<QuerySearchArgs, "input">
+  >;
+};
+
+export type QuestionAnswerResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["QuestionAnswer"] = ResolversParentTypes["QuestionAnswer"]
+> = {
+  admin?: Resolver<Maybe<ResolversTypes["Admin"]>, ParentType, ContextType>;
+  adminId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  answers?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["QuestionAnswer"]>>>,
+    ParentType,
+    ContextType
+  >;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customer?: Resolver<
+    Maybe<ResolversTypes["Customer"]>,
+    ParentType,
+    ContextType
+  >;
+  customerId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  productVariant?: Resolver<
+    ResolversTypes["ProductVariant"],
+    ParentType,
+    ContextType
+  >;
+  productVariantId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  replied?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QuestionAnswerListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["QuestionAnswerList"] = ResolversParentTypes["QuestionAnswerList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["QuestionAnswer"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RankResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Rank"] = ResolversParentTypes["Rank"]
+> = {
+  assets?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Asset"]>>>,
+    ParentType,
+    ContextType
+  >;
+  channels?: Resolver<
+    Array<ResolversTypes["Channel"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  featuredAsset?: Resolver<
+    Maybe<ResolversTypes["Asset"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  requiredPoint?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["RankTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RankListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RankList"] = ResolversParentTypes["RankList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Rank"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RankTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RankTranslation"] = ResolversParentTypes["RankTranslation"]
+> = {
+  base?: Resolver<ResolversTypes["Rank"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RefreshCustomerVerificationResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RefreshCustomerVerificationResult"] = ResolversParentTypes["RefreshCustomerVerificationResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "NativeAuthStrategyError" | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type RefundResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Refund"] = ResolversParentTypes["Refund"]
+> = {
+  adjustment?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  items?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  lines?: Resolver<
+    Array<ResolversTypes["RefundLine"]>,
+    ParentType,
+    ContextType
+  >;
+  metadata?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  method?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  paymentId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  reason?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  shipping?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  total?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  transactionId?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RefundLineResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RefundLine"] = ResolversParentTypes["RefundLine"]
+> = {
+  orderLine?: Resolver<ResolversTypes["OrderLine"], ParentType, ContextType>;
+  orderLineId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  refund?: Resolver<ResolversTypes["Refund"], ParentType, ContextType>;
+  refundId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RegionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Region"] = ResolversParentTypes["Region"]
+> = {
+  __resolveType: TypeResolveFn<"Country" | "Province", ParentType, ContextType>;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  parent?: Resolver<Maybe<ResolversTypes["Region"]>, ParentType, ContextType>;
+  parentId?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["RegionTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+};
+
+export type RegionTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RegionTranslation"] = ResolversParentTypes["RegionTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RegisterCustomerAccountResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RegisterCustomerAccountResult"] = ResolversParentTypes["RegisterCustomerAccountResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "MissingPasswordError"
+    | "NativeAuthStrategyError"
+    | "PasswordValidationError"
+    | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type RelationCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RelationCustomFieldConfig"] = ResolversParentTypes["RelationCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  entity?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  scalarFields?: Resolver<
+    Array<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RemoveOrderItemsResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RemoveOrderItemsResult"] = ResolversParentTypes["RemoveOrderItemsResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "Order" | "OrderModificationError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type RequestPasswordResetResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RequestPasswordResetResult"] = ResolversParentTypes["RequestPasswordResetResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "NativeAuthStrategyError" | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type RequestUpdateCustomerEmailAddressResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RequestUpdateCustomerEmailAddressResult"] = ResolversParentTypes["RequestUpdateCustomerEmailAddressResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "EmailAddressConflictError"
+    | "InvalidCredentialsError"
+    | "NativeAuthStrategyError"
+    | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type ResetPasswordResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ResetPasswordResult"] = ResolversParentTypes["ResetPasswordResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "CurrentUser"
+    | "NativeAuthStrategyError"
+    | "NotVerifiedError"
+    | "PasswordResetTokenExpiredError"
+    | "PasswordResetTokenInvalidError"
+    | "PasswordValidationError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type RoleResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Role"] = ResolversParentTypes["Role"]
+> = {
+  channels?: Resolver<
+    Array<ResolversTypes["Channel"]>,
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  permissions?: Resolver<
+    Array<ResolversTypes["Permission"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RoleListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RoleList"] = ResolversParentTypes["RoleList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Role"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SearchReindexResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SearchReindexResponse"] = ResolversParentTypes["SearchReindexResponse"]
+> = {
+  success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SearchResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SearchResponse"] = ResolversParentTypes["SearchResponse"]
+> = {
+  collections?: Resolver<
+    Array<ResolversTypes["CollectionResult"]>,
+    ParentType,
+    ContextType
+  >;
+  facetValues?: Resolver<
+    Array<ResolversTypes["FacetValueResult"]>,
+    ParentType,
+    ContextType
+  >;
+  items?: Resolver<
+    Array<ResolversTypes["SearchResult"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SearchResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SearchResult"] = ResolversParentTypes["SearchResult"]
+> = {
+  collectionIds?: Resolver<
+    Array<ResolversTypes["ID"]>,
+    ParentType,
+    ContextType
+  >;
+  currencyCode?: Resolver<
+    ResolversTypes["CurrencyCode"],
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  facetIds?: Resolver<Array<ResolversTypes["ID"]>, ParentType, ContextType>;
+  facetValueIds?: Resolver<
+    Array<ResolversTypes["ID"]>,
+    ParentType,
+    ContextType
+  >;
+  price?: Resolver<
+    ResolversTypes["SearchResultPrice"],
+    ParentType,
+    ContextType
+  >;
+  priceWithTax?: Resolver<
+    ResolversTypes["SearchResultPrice"],
+    ParentType,
+    ContextType
+  >;
+  productAsset?: Resolver<
+    Maybe<ResolversTypes["SearchResultAsset"]>,
+    ParentType,
+    ContextType
+  >;
+  productId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  productName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  productVariantAsset?: Resolver<
+    Maybe<ResolversTypes["SearchResultAsset"]>,
+    ParentType,
+    ContextType
+  >;
+  productVariantId?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  productVariantName?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  score?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  sku?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SearchResultAssetResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SearchResultAsset"] = ResolversParentTypes["SearchResultAsset"]
+> = {
+  focalPoint?: Resolver<
+    Maybe<ResolversTypes["Coordinate"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  preview?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SearchResultPriceResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SearchResultPrice"] = ResolversParentTypes["SearchResultPrice"]
+> = {
+  __resolveType: TypeResolveFn<
+    "PriceRange" | "SinglePrice",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type SellerResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Seller"] = ResolversParentTypes["Seller"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SetCustomerForOrderResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SetCustomerForOrderResult"] = ResolversParentTypes["SetCustomerForOrderResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "AlreadyLoggedInError"
+    | "EmailAddressConflictError"
+    | "GuestCheckoutError"
+    | "NoActiveOrderError"
+    | "Order",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type SetOrderShippingMethodResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SetOrderShippingMethodResult"] = ResolversParentTypes["SetOrderShippingMethodResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "IneligibleShippingMethodError"
+    | "NoActiveOrderError"
+    | "Order"
+    | "OrderModificationError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type ShippingLineResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ShippingLine"] = ResolversParentTypes["ShippingLine"]
+> = {
+  discountedPrice?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  discountedPriceWithTax?: Resolver<
+    ResolversTypes["Money"],
+    ParentType,
+    ContextType
+  >;
+  discounts?: Resolver<
+    Array<ResolversTypes["Discount"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  priceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  shippingMethod?: Resolver<
+    ResolversTypes["ShippingMethod"],
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ShippingMethodResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ShippingMethod"] = ResolversParentTypes["ShippingMethod"]
+> = {
+  calculator?: Resolver<
+    ResolversTypes["ConfigurableOperation"],
+    ParentType,
+    ContextType
+  >;
+  checker?: Resolver<
+    ResolversTypes["ConfigurableOperation"],
+    ParentType,
+    ContextType
+  >;
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  fulfillmentHandlerCode?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  translations?: Resolver<
+    Array<ResolversTypes["ShippingMethodTranslation"]>,
+    ParentType,
+    ContextType
+  >;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ShippingMethodListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ShippingMethodList"] = ResolversParentTypes["ShippingMethodList"]
+> = {
+  items?: Resolver<
+    Array<ResolversTypes["ShippingMethod"]>,
+    ParentType,
+    ContextType
+  >;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ShippingMethodQuoteResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ShippingMethodQuote"] = ResolversParentTypes["ShippingMethodQuote"]
+> = {
+  code?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  priceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ShippingMethodTranslationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["ShippingMethodTranslation"] = ResolversParentTypes["ShippingMethodTranslation"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languageCode?: Resolver<
+    ResolversTypes["LanguageCode"],
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SinglePriceResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["SinglePrice"] = ResolversParentTypes["SinglePrice"]
+> = {
+  value?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type StringCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["StringCustomFieldConfig"] = ResolversParentTypes["StringCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  length?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  options?: Resolver<
+    Maybe<Array<ResolversTypes["StringFieldOption"]>>,
+    ParentType,
+    ContextType
+  >;
+  pattern?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type StringFieldOptionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["StringFieldOption"] = ResolversParentTypes["StringFieldOption"]
+> = {
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SuccessResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Success"] = ResolversParentTypes["Success"]
+> = {
+  success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SurchargeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Surcharge"] = ResolversParentTypes["Surcharge"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  priceWithTax?: Resolver<ResolversTypes["Money"], ParentType, ContextType>;
+  sku?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  taxLines?: Resolver<
+    Array<ResolversTypes["TaxLine"]>,
+    ParentType,
+    ContextType
+  >;
+  taxRate?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TagResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Tag"] = ResolversParentTypes["Tag"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TagListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TagList"] = ResolversParentTypes["TagList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["Tag"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TaxCategoryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TaxCategory"] = ResolversParentTypes["TaxCategory"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  isDefault?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TaxLineResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TaxLine"] = ResolversParentTypes["TaxLine"]
+> = {
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  taxRate?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TaxRateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TaxRate"] = ResolversParentTypes["TaxRate"]
+> = {
+  category?: Resolver<ResolversTypes["TaxCategory"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  customerGroup?: Resolver<
+    Maybe<ResolversTypes["CustomerGroup"]>,
+    ParentType,
+    ContextType
+  >;
+  enabled?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  zone?: Resolver<ResolversTypes["Zone"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TaxRateListResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TaxRateList"] = ResolversParentTypes["TaxRateList"]
+> = {
+  items?: Resolver<Array<ResolversTypes["TaxRate"]>, ParentType, ContextType>;
+  totalItems?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TextCustomFieldConfigResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TextCustomFieldConfig"] = ResolversParentTypes["TextCustomFieldConfig"]
+> = {
+  description?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  internal?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  label?: Resolver<
+    Maybe<Array<ResolversTypes["LocalizedString"]>>,
+    ParentType,
+    ContextType
+  >;
+  list?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nullable?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  readonly?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  ui?: Resolver<Maybe<ResolversTypes["JSON"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TotalResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Total"] = ResolversParentTypes["Total"]
+> = {
+  total?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TransitionOrderToStateResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["TransitionOrderToStateResult"] = ResolversParentTypes["TransitionOrderToStateResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    "Order" | "OrderStateTransitionError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateCustomerEmailAddressResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["UpdateCustomerEmailAddressResult"] = ResolversParentTypes["UpdateCustomerEmailAddressResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "IdentifierChangeTokenExpiredError"
+    | "IdentifierChangeTokenInvalidError"
+    | "NativeAuthStrategyError"
+    | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateCustomerPasswordResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["UpdateCustomerPasswordResult"] = ResolversParentTypes["UpdateCustomerPasswordResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "InvalidCredentialsError"
+    | "NativeAuthStrategyError"
+    | "PasswordValidationError"
+    | "Success",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateOrderItemsResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["UpdateOrderItemsResult"] = ResolversParentTypes["UpdateOrderItemsResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "InsufficientStockError"
+    | "NegativeQuantityError"
+    | "Order"
+    | "OrderLimitError"
+    | "OrderModificationError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export interface UploadScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["Upload"], any> {
+  name: "Upload";
 }
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  authenticationMethods?: Resolver<Array<ResolversTypes['AuthenticationMethod']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  identifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  lastLogin?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  roles?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+export type UserResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
+> = {
+  authenticationMethods?: Resolver<
+    Array<ResolversTypes["AuthenticationMethod"]>,
+    ParentType,
+    ContextType
+  >;
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  identifier?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  lastLogin?: Resolver<
+    Maybe<ResolversTypes["DateTime"]>,
+    ParentType,
+    ContextType
+  >;
+  roles?: Resolver<Array<ResolversTypes["Role"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  verified?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type VerificationTokenExpiredErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['VerificationTokenExpiredError'] = ResolversParentTypes['VerificationTokenExpiredError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type VerificationTokenExpiredErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["VerificationTokenExpiredError"] = ResolversParentTypes["VerificationTokenExpiredError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type VerificationTokenInvalidErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['VerificationTokenInvalidError'] = ResolversParentTypes['VerificationTokenInvalidError']> = {
-  errorCode?: Resolver<ResolversTypes['ErrorCode'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type VerificationTokenInvalidErrorResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["VerificationTokenInvalidError"] = ResolversParentTypes["VerificationTokenInvalidError"]
+> = {
+  errorCode?: Resolver<ResolversTypes["ErrorCode"], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type VerifyCustomerAccountResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['VerifyCustomerAccountResult'] = ResolversParentTypes['VerifyCustomerAccountResult']> = {
-  __resolveType: TypeResolveFn<'CurrentUser' | 'MissingPasswordError' | 'NativeAuthStrategyError' | 'PasswordAlreadySetError' | 'PasswordValidationError' | 'VerificationTokenExpiredError' | 'VerificationTokenInvalidError', ParentType, ContextType>;
+export type VerifyCustomerAccountResultResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["VerifyCustomerAccountResult"] = ResolversParentTypes["VerifyCustomerAccountResult"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "CurrentUser"
+    | "MissingPasswordError"
+    | "NativeAuthStrategyError"
+    | "PasswordAlreadySetError"
+    | "PasswordValidationError"
+    | "VerificationTokenExpiredError"
+    | "VerificationTokenInvalidError",
+    ParentType,
+    ContextType
+  >;
 };
 
-export type ZoneResolvers<ContextType = any, ParentType extends ResolversParentTypes['Zone'] = ResolversParentTypes['Zone']> = {
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  customFields?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  members?: Resolver<Array<ResolversTypes['Region']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+export type ZoneResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Zone"] = ResolversParentTypes["Zone"]
+> = {
+  createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+  customFields?: Resolver<
+    Maybe<ResolversTypes["JSON"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  members?: Resolver<Array<ResolversTypes["Region"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -6879,4 +9626,3 @@ export type Resolvers<ContextType = any> = {
   VerifyCustomerAccountResult?: VerifyCustomerAccountResultResolvers<ContextType>;
   Zone?: ZoneResolvers<ContextType>;
 };
-

@@ -17,8 +17,7 @@ const client = new ApolloClient({
 
 function App(): React.JSX.Element {
 
-  const {data, loading, error} = useGetProductListQuery();
-  console.log("data, loading, error", data, loading, error);
+
 
   useEffect(() => {
     if (Platform.OS == "android") {

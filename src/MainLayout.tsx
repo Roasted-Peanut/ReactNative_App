@@ -7,13 +7,16 @@ import AppNavigation from "./navigation/AppNavigator";
 import RouteKey from "./navigation/RouteKey";
 import { getAppStackState, getLoadingIndicator } from "./redux/selectors";
 import { useGetPokemonByNameQuery } from "./redux/slices";
+import { useGetProductListQuery } from "./graphql/queries/__generated__/graphql";
 
 function MainLayout() {
+  const {data, loading, error} = useGetProductListQuery();
+  console.log("data, loading, error", data, loading, error);
   const appState = useSelector(getAppStackState);
   const appStateRef = useRef(AppState.currentState);
   const showGlobalIndicator = useSelector(getLoadingIndicator);
 
-  const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
+  // const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
 
   const handleAppState = useCallback(() => {
     AppState.addEventListener("change", (nextAppState) => {

@@ -13,6 +13,7 @@
     "android-run-debug-product": "react-native run-android --mode=prodDebug --appIdSuffix=prod",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write 'src/**/*.{js,ts,tsx}'",
+    "prettier-out-src": "prettier --write App.tsx",
     "start": "react-native start",
     "test": "jest",
     "prepare": "husky",

@@ -10,7 +10,7 @@ import { useGetPokemonByNameQuery } from "./redux/slices";
 import { useGetProductListQuery } from "./graphql/queries/__generated__/graphql";
 
 function MainLayout() {
-  const {data, loading, error} = useGetProductListQuery();
+  const { data, loading, error } = useGetProductListQuery();
   console.log("data, loading, error", data, loading, error);
   const appState = useSelector(getAppStackState);
   const appStateRef = useRef(AppState.currentState);
